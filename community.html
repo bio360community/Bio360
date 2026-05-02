@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community — Bio360</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --violet: #5170FF; --violet-light: #A8B4FF; --violet-dim: #2a3a99;
+  --mint: #00E5B0; --dark: #0D0F2B; --darker: #080A1E;
+  --surface: #131529; --surface2: #1a1d3a; --text: #F5F5FF;
+  --muted: #8890BB; --border: rgba(81,112,255,0.15);
+  --gold: #FFB547; --silver: #A8B4FF; --bronze: #FF7EB3;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Poppins',sans-serif;background:var(--darker);color:var(--text);overflow-x:hidden;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;}
+.orb1{width:400px;height:400px;background:rgba(81,112,255,0.1);top:-80px;right:-80px;}
+.orb2{width:300px;height:300px;background:rgba(0,229,176,0.06);bottom:10%;left:-60px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(8,10,30,0.8);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border);}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo img{height:34px;width:34px;border-radius:50%;object-fit:cover;background:white;padding:2px;}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--text);}
+#userDisplay{font-size:13px;color:var(--mint);font-weight:500;display:none;}
+.btn-sm{padding:7px 16px;border-radius:100px;font-size:13px;font-weight:500;border:none;cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;}
+.btn-violet{background:var(--violet);color:white;}
+.btn-violet:hover{background:var(--violet-dim);}
+.btn-outline{background:transparent;color:var(--muted);border:0.5px solid var(--border);}
+.btn-outline:hover{border-color:var(--violet);color:var(--text);}
+
+/* LAYOUT */
+.layout{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:5.5rem 1.5rem 3rem;display:grid;grid-template-columns:280px 1fr 260px;gap:1.5rem;}
+@media(max-width:1024px){.layout{grid-template-columns:1fr;}}
+
+/* SIDEBAR */
+.sidebar-card{background:var(--surface);border:0.5px solid var(--border);border-radius:18px;padding:1.25rem;margin-bottom:1rem;}
+.sidebar-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:1rem;display:flex;align-items:center;gap:6px;}
+
+/* STREAK CARD */
+.streak-display{text-align:center;padding:0.5rem 0;}
+.streak-num{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:var(--gold);line-height:1;}
+.streak-label{font-size:11px;color:var(--muted);margin-top:4px;}
+.streak-days{display:flex;gap:6px;justify-content:center;margin-top:1rem;}
+.day-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;border:0.5px solid var(--border);}
+.day-dot.done{background:var(--gold);color:#000;border-color:var(--gold);}
+.day-dot.today{background:rgba(255,181,71,0.2);color:var(--gold);border-color:var(--gold);}
+.day-dot.miss{background:var(--surface2);color:var(--muted);}
+
+/* NAV TABS */
+.tab-bar{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.tab-btn{padding:7px 16px;border-radius:100px;font-size:12px;font-weight:500;border:0.5px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;}
+.tab-btn.active{background:var(--violet);color:white;border-color:var(--violet);}
+
+/* POST COMPOSER */
+.composer{background:var(--surface);border:0.5px solid var(--border);border-radius:18px;padding:1.25rem;margin-bottom:1.25rem;}
+.composer-top{display:flex;gap:10px;align-items:flex-start;}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;}
+.composer textarea{flex:1;background:var(--surface2);border:0.5px solid var(--border);border-radius:12px;padding:10px 14px;color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;resize:none;outline:none;min-height:80px;transition:border-color 0.2s;}
+.composer textarea:focus{border-color:rgba(81,112,255,0.4);}
+.composer textarea::placeholder{color:var(--muted);}
+.composer-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-left:46px;}
+.post-types{display:flex;gap:6px;}
+.type-btn{padding:5px 12px;border-radius:100px;font-size:11px;font-weight:500;border:0.5px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;}
+.type-btn.selected{border-color:var(--violet);color:var(--violet-light);background:rgba(81,112,255,0.1);}
+.post-submit{background:var(--violet);color:white;border:none;border-radius:100px;padding:8px 20px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;}
+.post-submit:hover{background:var(--violet-dim);}
+
+/* FEED */
+.post-card{background:var(--surface);border:0.5px solid var(--border);border-radius:18px;padding:1.25rem;margin-bottom:1rem;transition:border-color 0.2s;}
+.post-card:hover{border-color:rgba(81,112,255,0.3);}
+.post-header{display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;}
+.post-user{font-size:13px;font-weight:600;color:var(--text);}
+.post-time{font-size:11px;color:var(--muted);}
+.post-type-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;margin-left:auto;}
+.tag-idea{background:rgba(0,229,176,0.1);color:var(--mint);}
+.tag-photo{background:rgba(255,181,71,0.1);color:var(--gold);}
+.tag-blog{background:rgba(81,112,255,0.1);color:var(--violet-light);}
+.tag-question{background:rgba(255,126,179,0.1);color:#FF7EB3;}
+.post-content{font-size:13px;color:var(--text);line-height:1.7;margin-bottom:0.75rem;}
+.post-img{width:100%;border-radius:12px;margin-bottom:0.75rem;max-height:300px;object-fit:cover;}
+.post-actions{display:flex;gap:12px;}
+.action-btn{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:'Poppins',sans-serif;padding:5px 10px;border-radius:8px;transition:all 0.2s;}
+.action-btn:hover{color:var(--text);background:rgba(255,255,255,0.05);}
+.action-btn.liked{color:var(--violet-light);}
+
+/* LEADERBOARD */
+.lb-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--border);}
+.lb-row:last-child{border:none;}
+.lb-rank{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;width:24px;text-align:center;flex-shrink:0;}
+.rank-1{color:var(--gold);}
+.rank-2{color:var(--silver);}
+.rank-3{color:var(--bronze);}
+.rank-n{color:var(--muted);}
+.lb-name{font-size:13px;font-weight:500;color:var(--text);flex:1;}
+.lb-score{font-size:12px;color:var(--mint);font-weight:600;}
+.lb-streak{font-size:11px;color:var(--gold);}
+
+/* QUIZ SECTION */
+.quiz-card{background:var(--surface);border:0.5px solid rgba(0,229,176,0.2);border-radius:18px;padding:1.5rem;margin-bottom:1.25rem;position:relative;overflow:hidden;}
+.quiz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--violet),var(--mint));}
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;}
+.quiz-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.quiz-meta{font-size:11px;color:var(--muted);}
+.quiz-q{font-size:14px;color:var(--text);line-height:1.6;margin-bottom:1rem;font-weight:500;}
+.quiz-source{font-size:10px;color:var(--violet-light);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.75rem;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem;}
+.quiz-opt{padding:10px 14px;border-radius:10px;border:0.5px solid var(--border);background:transparent;color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;cursor:pointer;text-align:left;transition:all 0.2s;}
+.quiz-opt:hover:not(:disabled){border-color:rgba(81,112,255,0.4);background:rgba(81,112,255,0.08);}
+.quiz-opt.correct{border-color:var(--mint);background:rgba(0,229,176,0.1);color:var(--mint);}
+.quiz-opt.wrong{border-color:#FF6B6B;background:rgba(255,107,107,0.1);color:#FF6B6B;}
+.quiz-opt.reveal{border-color:var(--mint);background:rgba(0,229,176,0.05);color:var(--muted);}
+.quiz-explain{font-size:12px;color:var(--muted);background:var(--surface2);border-radius:10px;padding:10px 14px;line-height:1.6;display:none;}
+.quiz-explain.show{display:block;}
+.quiz-progress{display:flex;gap:4px;margin-bottom:1rem;}
+.q-dot{height:4px;flex:1;border-radius:4px;background:var(--surface2);}
+.q-dot.done{background:var(--mint);}
+.q-dot.current{background:var(--violet);}
+.score-display{text-align:center;padding:1rem 0;}
+.score-num{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;color:var(--mint);}
+.score-sub{font-size:13px;color:var(--muted);margin-top:4px;}
+.next-btn{background:var(--violet);color:white;border:none;border-radius:100px;padding:10px 24px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Poppins',sans-serif;width:100%;margin-top:0.75rem;transition:all 0.2s;}
+.next-btn:hover{background:var(--violet-dim);}
+
+/* AUTH MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);display:none;}
+.modal-overlay.show{display:flex;}
+.modal{background:var(--surface);border:0.5px solid rgba(81,112,255,0.3);border-radius:24px;padding:2rem;width:90%;max-width:400px;position:relative;}
+.modal h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.5rem;}
+.modal p{font-size:13px;color:var(--muted);margin-bottom:1.5rem;}
+.modal input{width:100%;background:var(--surface2);border:0.5px solid var(--border);border-radius:12px;padding:11px 16px;color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;outline:none;margin-bottom:10px;transition:border-color 0.2s;}
+.modal input:focus{border-color:rgba(81,112,255,0.5);}
+.modal input::placeholder{color:var(--muted);}
+.modal-btn{width:100%;background:var(--violet);color:white;border:none;border-radius:100px;padding:12px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Poppins',sans-serif;margin-bottom:8px;transition:all 0.2s;}
+.modal-btn:hover{background:var(--violet-dim);}
+.modal-anon{width:100%;background:transparent;color:var(--muted);border:0.5px solid var(--border);border-radius:100px;padding:12px;font-size:13px;cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;}
+.modal-anon:hover{border-color:var(--violet);color:var(--text);}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;}
+.modal-switch{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;cursor:pointer;}
+.modal-switch span{color:var(--violet-light);}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:3rem 1rem;color:var(--muted);}
+.empty-icon{font-size:2.5rem;margin-bottom:0.75rem;}
+.empty p{font-size:14px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--surface);border:0.5px solid var(--mint);border-radius:100px;padding:10px 24px;font-size:13px;color:var(--mint);z-index:300;transition:transform 0.3s;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+@media(max-width:768px){
+  .layout{padding:4.5rem 1rem 2rem;}
+  nav .nav-links{display:none;}
+  .composer-bottom{padding-left:0;flex-direction:column;gap:8px;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">
+    <img src="logo.png" alt="Bio360">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#resources">Resources</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="community.html" class="active" style="color:var(--text)">Community</a></li>
+  </ul>
+  <div class="nav-right">
+    <span id="userDisplay"></span>
+    <button class="btn-sm btn-outline" id="logoutBtn" style="display:none" onclick="logout()">Logout</button>
+    <button class="btn-sm btn-violet" id="loginBtn" onclick="showAuth()">Sign In</button>
+  </div>
+</nav>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <button class="modal-close" onclick="hideAuth()">✕</button>
+    <h2 id="authTitle">Join Bio360</h2>
+    <p id="authSub">Connect with life science students across Kerala</p>
+    <input type="text" id="authUsername" placeholder="Display name (optional)" maxlength="30">
+    <input type="email" id="authEmail" placeholder="Email address">
+    <input type="password" id="authPassword" placeholder="Password (min 6 chars)">
+    <button class="modal-btn" id="authSubmit" onclick="handleAuth()">Create Account</button>
+    <button class="modal-anon" onclick="joinAnonymous()">👤 Join Anonymously</button>
+    <p class="modal-switch" id="authSwitch" onclick="toggleAuthMode()">Already have an account? <span>Sign in</span></p>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- LEFT SIDEBAR -->
+  <div class="left-sidebar">
+
+    <!-- Streak -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">🔥 Study Streak</div>
+      <div class="streak-display">
+        <div class="streak-num" id="streakNum">0</div>
+        <div class="streak-label">day streak</div>
+        <div class="streak-days" id="streakDays"></div>
+        <p style="font-size:11px;color:var(--muted);margin-top:10px;" id="streakMsg">Complete today's quiz to start your streak!</p>
+      </div>
+    </div>
+
+    <!-- User stats -->
+    <div class="sidebar-card" id="userStats" style="display:none">
+      <div class="sidebar-title">📊 Your Stats</div>
+      <div style="display:flex;flex-direction:column;gap:8px;" id="statsContent"></div>
+    </div>
+
+    <!-- Nav -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">📌 Navigate</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <button onclick="showTab('feed')" class="tab-btn active" id="nav-feed" style="text-align:left;border-radius:10px;">📢 Community Feed</button>
+        <button onclick="showTab('quiz')" class="tab-btn" id="nav-quiz" style="text-align:left;border-radius:10px;">🧪 Daily Quiz</button>
+        <button onclick="showTab('leaderboard')" class="tab-btn" id="nav-lb" style="text-align:left;border-radius:10px;">🏆 Leaderboard</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+
+    <!-- FEED TAB -->
+    <div id="tab-feed">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="filterFeed('all',this)">All Posts</button>
+        <button class="tab-btn" onclick="filterFeed('idea',this)">💡 Ideas</button>
+        <button class="tab-btn" onclick="filterFeed('photo',this)">📸 Lab Photos</button>
+        <button class="tab-btn" onclick="filterFeed('blog',this)">✍️ Blog</button>
+        <button class="tab-btn" onclick="filterFeed('question',this)">❓ Questions</button>
+      </div>
+
+      <!-- Composer -->
+      <div class="composer" id="composer">
+        <div class="composer-top">
+          <div class="avatar" id="composerAvatar" style="background:var(--violet);">?</div>
+          <textarea id="postText" placeholder="Share your ideas, lab photos, questions... Sign in to post!"></textarea>
+        </div>
+        <div class="composer-bottom">
+          <div class="post-types">
+            <button class="type-btn selected" onclick="selectType('idea',this)">💡 Idea</button>
+            <button class="type-btn" onclick="selectType('photo',this)">📸 Photo</button>
+            <button class="type-btn" onclick="selectType('blog',this)">✍️ Blog</button>
+            <button class="type-btn" onclick="selectType('question',this)">❓ Question</button>
+          </div>
+          <button class="post-submit" onclick="submitPost()">Post →</button>
+        </div>
+      </div>
+
+      <div id="feedContainer">
+        <div class="empty"><div class="empty-icon">🧬</div><p>Loading posts...</p></div>
+      </div>
+    </div>
+
+    <!-- QUIZ TAB -->
+    <div id="tab-quiz" style="display:none">
+      <div class="quiz-card" id="quizCard">
+        <div class="quiz-header">
+          <div>
+            <div class="quiz-title">🧪 Daily Quiz</div>
+            <div class="quiz-meta" id="quizMeta">5 questions · CSIR NET + GATE BT</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:11px;color:var(--muted);">Score</div>
+            <div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--mint);" id="scoreDisplay">0/0</div>
+          </div>
+        </div>
+        <div class="quiz-progress" id="quizProgress"></div>
+        <div id="quizContent"></div>
+      </div>
+    </div>
+
+    <!-- LEADERBOARD TAB -->
+    <div id="tab-leaderboard" style="display:none">
+      <div class="sidebar-card" style="margin-bottom:1rem;">
+        <div class="sidebar-title">🏆 Entrance Prep Leaderboard</div>
+        <div class="tab-bar" style="margin-bottom:1rem;">
+          <button class="tab-btn active" onclick="filterLB('weekly',this)">This Week</button>
+          <button class="tab-btn" onclick="filterLB('alltime',this)">All Time</button>
+          <button class="tab-btn" onclick="filterLB('streak',this)">🔥 Streaks</button>
+        </div>
+        <div id="leaderboardContainer"></div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-title">📊 Your Rank</div>
+        <div id="userRankDisplay" style="text-align:center;padding:1rem 0;color:var(--muted);font-size:13px;">Sign in to see your rank</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDEBAR -->
+  <div class="right-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">🏆 Top This Week</div>
+      <div id="miniLeaderboard"></div>
+    </div>
+    <div class="sidebar-card">
+      <div class="sidebar-title">📢 Quick Join</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <a href="#" style="text-decoration:none;display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(37,211,102,0.1);border:0.5px solid rgba(37,211,102,0.2);border-radius:10px;color:#25D366;font-size:13px;">
+          <span>💬</span> WhatsApp Group
+        </a>
+        <a href="#" style="text-decoration:none;display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(40,167,229,0.1);border:0.5px solid rgba(40,167,229,0.2);border-radius:10px;color:#28a7e5;font-size:13px;">
+          <span>✈️</span> Telegram Channel
+        </a>
+        <a href="https://www.instagram.com" target="_blank" style="text-decoration:none;display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(193,53,132,0.1);border:0.5px solid rgba(193,53,132,0.2);border-radius:10px;color:#C13584;font-size:13px;">
+          <span>📸</span> Instagram
+        </a>
+      </div>
+    </div>
+    <div class="sidebar-card">
+      <div class="sidebar-title">📅 Exam Dates</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;">
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border);">
+          <span style="color:var(--text);">CSIR NET</span><span style="color:var(--mint);">June 2025</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border);">
+          <span style="color:var(--text);">GATE BT</span><span style="color:var(--violet-light);">Feb 2026</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border);">
+          <span style="color:var(--text);">DBT-JRF</span><span style="color:var(--gold);">Oct 2025</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;">
+          <span style="color:var(--text);">ICMR-JRF</span><span style="color:#FF7EB3;">Jul 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── SUPABASE ───────────────────────────────────────────────
+const { createClient } = supabase;
+const sb = createClient(
+  'https://rsrezjpvrqjalcewfwqu.supabase.co',
+  'sb_publishable_35MtkTFpRRz1P_WE4Ud1Fw_SoEkBuO_'
+);
+
+// ─── STATE ──────────────────────────────────────────────────
+let currentUser = null;
+let currentProfile = null;
+let authMode = 'signup';
+let selectedType = 'idea';
+let currentFilter = 'all';
+let quizState = { questions:[], current:0, score:0, answered:false, done:false };
+
+// ─── QUIZ DATA ───────────────────────────────────────────────
+const allQuestions = [
+  { q:"Which enzyme catalyzes the conversion of pyruvate to acetyl-CoA?", opts:["Pyruvate kinase","Pyruvate dehydrogenase","Pyruvate carboxylase","Lactate dehydrogenase"], ans:1, exp:"Pyruvate dehydrogenase complex (PDC) converts pyruvate to acetyl-CoA, CO₂, and NADH — linking glycolysis to the TCA cycle.", src:"CSIR NET Life Science" },
+  { q:"The Watson-Crick model of DNA describes which type of helix?", opts:["Left-handed parallel","Right-handed antiparallel","Left-handed antiparallel","Right-handed parallel"], ans:1, exp:"B-DNA (Watson-Crick) is a right-handed double helix with antiparallel strands held by hydrogen bonds between complementary bases.", src:"GATE BT" },
+  { q:"Which of the following is NOT a component of the lac operon?", opts:["Promoter","Operator","Attenuator","Structural genes (lacZ, lacY, lacA)"], ans:2, exp:"The attenuator is a regulatory element found in the trp operon (amino acid biosynthesis), not the lac operon.", src:"CSIR NET Life Science" },
+  { q:"PCR requires which thermostable DNA polymerase?", opts:["Klenow fragment","T4 DNA polymerase","Taq polymerase","DNA polymerase I"], ans:2, exp:"Taq polymerase (from Thermus aquaticus) is thermostable — it survives the denaturation step at 94-95°C without inactivation.", src:"GATE BT" },
+  { q:"Which technique separates proteins based on molecular weight under denaturing conditions?", opts:["Native PAGE","SDS-PAGE","2D electrophoresis","Isoelectric focusing"], ans:1, exp:"SDS-PAGE uses sodium dodecyl sulfate to denature proteins and give them uniform negative charge, so migration depends only on size.", src:"CSIR NET Life Science" },
+  { q:"The Km value of an enzyme represents:", opts:["Maximum reaction velocity","Substrate concentration at half-Vmax","Enzyme-substrate affinity constant","Inhibitor concentration"], ans:1, exp:"Km (Michaelis constant) is the substrate concentration at which reaction velocity = Vmax/2. Lower Km = higher affinity.", src:"CSIR NET Life Science" },
+  { q:"CRISPR-Cas9 creates double strand breaks using:", opts:["HNH and RuvC domains","RecA and RecBCD","MRN complex","Ku70/Ku80 heterodimer"], ans:0, exp:"Cas9 has two nuclease domains: HNH (cleaves the strand complementary to gRNA) and RuvC (cleaves the non-complementary strand).", src:"GATE BT" },
+  { q:"Which organelle is the site of beta-oxidation of fatty acids?", opts:["Smooth ER","Cytoplasm","Mitochondria","Peroxisomes"], ans:2, exp:"Beta-oxidation primarily occurs in the mitochondrial matrix. In plants and some organisms, it also occurs in peroxisomes.", src:"CSIR NET Life Science" },
+  { q:"The Southern blotting technique is used to detect:", opts:["mRNA","Proteins","DNA sequences","Lipids"], ans:2, exp:"Southern blotting (Edwin Southern, 1975) detects specific DNA sequences using labeled probes after gel electrophoresis and transfer to membrane.", src:"GATE BT" },
+  { q:"Which cell cycle checkpoint is monitored by p53?", opts:["G1/S checkpoint","S phase checkpoint","G2/M checkpoint","Both G1/S and G2/M"], ans:3, exp:"p53 is activated by DNA damage and can halt the cell cycle at both G1/S (preventing replication of damaged DNA) and G2/M checkpoints.", src:"CSIR NET Life Science" },
+  { q:"The Ames test is used to detect:", opts:["Carcinogens","Mutagens","Pathogens","Teratogens"], ans:1, exp:"The Ames test uses Salmonella typhimurium histidine auxotrophs to detect mutagenic potential of chemicals. Mutagens cause reversion to His+.", src:"GATE BT" },
+  { q:"Ribosomes in prokaryotes are:", opts:["80S","70S","60S","40S"], ans:1, exp:"Prokaryotic ribosomes are 70S (50S + 30S subunits). Eukaryotic ribosomes are 80S (60S + 40S subunits).", src:"CSIR NET Life Science" },
+  { q:"Which hormone is produced by beta cells of the islets of Langerhans?", opts:["Glucagon","Somatostatin","Insulin","Cortisol"], ans:2, exp:"Beta (β) cells secrete insulin in response to high blood glucose. Alpha cells secrete glucagon; delta cells secrete somatostatin.", src:"GATE BT" },
+  { q:"The process of programmed cell death is called:", opts:["Necrosis","Autophagy","Apoptosis","Senescence"], ans:2, exp:"Apoptosis is programmed cell death — an ordered, energy-dependent process. It differs from necrosis (uncontrolled death due to injury).", src:"CSIR NET Life Science" },
+  { q:"Which technique is used to determine protein-DNA interactions?", opts:["Western blot","EMSA (Electrophoretic Mobility Shift Assay)","Northern blot","ELISA"], ans:1, exp:"EMSA/gel shift assay detects protein-DNA binding — a protein-DNA complex migrates slower than free DNA on a native gel.", src:"GATE BT" },
+];
+
+function getDailyQuestions() {
+  const seed = new Date().toDateString();
+  let hash = 0;
+  for (let c of seed) hash = (hash * 31 + c.charCodeAt(0)) % allQuestions.length;
+  const shuffled = [...allQuestions];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = (hash + i * 7) % (i + 1);
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, 5);
+}
+
+// ─── AUTH ────────────────────────────────────────────────────
+function showAuth() { document.getElementById('authModal').classList.add('show'); }
+function hideAuth() { document.getElementById('authModal').classList.remove('show'); }
+
+function toggleAuthMode() {
+  authMode = authMode === 'signup' ? 'login' : 'signup';
+  document.getElementById('authTitle').textContent = authMode === 'signup' ? 'Join Bio360' : 'Welcome back';
+  document.getElementById('authSub').textContent = authMode === 'signup' ? 'Connect with life science students across Kerala' : 'Sign in to your Bio360 account';
+  document.getElementById('authSubmit').textContent = authMode === 'signup' ? 'Create Account' : 'Sign In';
+  document.getElementById('authSwitch').innerHTML = authMode === 'signup' ? 'Already have an account? <span>Sign in</span>' : "Don't have an account? <span>Sign up</span>";
+  document.getElementById('authUsername').style.display = authMode === 'signup' ? 'block' : 'none';
+}
+
+async function handleAuth() {
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value.trim();
+  const username = document.getElementById('authUsername').value.trim() || 'Bio360 Student';
+  if (!email || !password) return showToast('Please fill in email and password');
+  if (authMode === 'signup') {
+    const { data, error } = await sb.auth.signUp({ email, password, options: { data: { username, is_anonymous: false } } });
+    if (error) return showToast('Error: ' + error.message);
+    showToast('✅ Account created! Check email to verify.');
+    hideAuth();
+  } else {
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) return showToast('Error: ' + error.message);
+    hideAuth();
+    showToast('👋 Welcome back!');
+  }
+}
+
+async function joinAnonymous() {
+  const username = document.getElementById('authUsername').value.trim() || 'Anonymous Scientist';
+  const randomEmail = `anon_${Math.random().toString(36).slice(2)}@bio360.temp`;
+  const randomPass = Math.random().toString(36).slice(2) + 'Aa1!';
+  const { data, error } = await sb.auth.signUp({ email: randomEmail, password: randomPass, options: { data: { username, is_anonymous: true } } });
+  if (error) { showToast('Joining anonymously...'); setLocalAnon(username); hideAuth(); return; }
+  hideAuth();
+  showToast('👤 Joined anonymously!');
+}
+
+function setLocalAnon(name) {
+  currentUser = { id: 'local_' + Date.now(), email: 'anon' };
+  currentProfile = { username: name || 'Anonymous Scientist', is_anonymous: true, score: 0, streak: 0 };
+  updateNavUser();
+}
+
+async function logout() {
+  await sb.auth.signOut();
+  currentUser = null; currentProfile = null;
+  updateNavUser();
+  loadFeed();
+  showToast('Logged out');
+}
+
+function updateNavUser() {
+  const display = document.getElementById('userDisplay');
+  const loginBtn = document.getElementById('loginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const stats = document.getElementById('userStats');
+  if (currentUser) {
+    display.style.display = 'block';
+    display.textContent = '👤 ' + (currentProfile?.username || 'Student');
+    loginBtn.style.display = 'none';
+    logoutBtn.style.display = 'block';
+    stats.style.display = 'block';
+    updateUserStats();
+    const av = document.getElementById('composerAvatar');
+    av.textContent = (currentProfile?.username || 'S')[0].toUpperCase();
+  } else {
+    display.style.display = 'none';
+    loginBtn.style.display = 'block';
+    logoutBtn.style.display = 'none';
+    stats.style.display = 'none';
+  }
+}
+
+function updateUserStats() {
+  const c = document.getElementById('statsContent');
+  const score = currentProfile?.total_score || 0;
+  const streak = currentProfile?.streak || 0;
+  const posts = currentProfile?.post_count || 0;
+  c.innerHTML = `
+    <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid var(--border)"><span style="color:var(--muted)">Quiz Score</span><span style="color:var(--mint);font-weight:600">${score} pts</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid var(--border)"><span style="color:var(--muted)">Streak</span><span style="color:var(--gold);font-weight:600">${streak} 🔥</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0"><span style="color:var(--muted)">Posts</span><span style="color:var(--violet-light);font-weight:600">${posts}</span></div>`;
+}
+
+// ─── FEED ────────────────────────────────────────────────────
+let allPosts = [];
+
+async function loadFeed() {
+  const container = document.getElementById('feedContainer');
+  try {
+    const { data, error } = await sb.from('posts').select('*').order('created_at', { ascending: false }).limit(30);
+    if (error || !data) { renderLocalPosts(); return; }
+    allPosts = data;
+    renderFeed(data);
+  } catch { renderLocalPosts(); }
+}
+
+function renderLocalPosts() {
+  allPosts = [
+    { id:1, username:'Sufail (Founder)', content:'Welcome to Bio360 Community! 🧬 Share your ideas, lab photos, questions — this is your space. Kerala\'s first life science student community is live!', type:'idea', created_at: new Date().toISOString(), likes:5 },
+    { id:2, username:'Bio360 Team', content:'Daily Quiz is now live! Complete 5 questions every day to build your streak and climb the leaderboard. CSIR NET & GATE BT questions updated daily 🏆', type:'blog', created_at: new Date().toISOString(), likes:8 },
+    { id:3, username:'Anonymous Scientist', content:'Anyone preparing for CSIR NET June 2025? Let\'s form a study group! Drop a comment below 👇', type:'question', created_at: new Date().toISOString(), likes:3 },
+  ];
+  renderFeed(allPosts);
+}
+
+function renderFeed(posts) {
+  const container = document.getElementById('feedContainer');
+  const filtered = currentFilter === 'all' ? posts : posts.filter(p => p.type === currentFilter);
+  if (!filtered.length) {
+    container.innerHTML = `<div class="empty"><div class="empty-icon">🔬</div><p>No posts yet in this category. Be the first to post!</p></div>`;
+    return;
+  }
+  container.innerHTML = filtered.map(p => `
+    <div class="post-card">
+      <div class="post-header">
+        <div class="avatar" style="background:${stringToColor(p.username||'A')};font-size:13px;">${(p.username||'A')[0].toUpperCase()}</div>
+        <div>
+          <div class="post-user">${p.username || 'Anonymous'}</div>
+          <div class="post-time">${timeAgo(p.created_at)}</div>
+        </div>
+        <span class="post-type-tag tag-${p.type||'idea'}">${typeLabel(p.type)}</span>
+      </div>
+      ${p.image_url ? `<img class="post-img" src="${p.image_url}" alt="post">` : ''}
+      <div class="post-content">${p.content}</div>
+      <div class="post-actions">
+        <button class="action-btn" onclick="likePost(${p.id},this)">❤️ ${p.likes||0}</button>
+        <button class="action-btn">💬 Comment</button>
+        <button class="action-btn">🔗 Share</button>
+      </div>
+    </div>`).join('');
+}
+
+function filterFeed(type, btn) {
+  currentFilter = type;
+  document.querySelectorAll('#tab-feed .tab-bar .tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFeed(allPosts);
+}
+
+async function submitPost() {
+  if (!currentUser) { showToast('Sign in to post!'); showAuth(); return; }
+  const text = document.getElementById('postText').value.trim();
+  if (!text) return showToast('Write something first!');
+  const post = { content: text, type: selectedType, username: currentProfile?.username || 'Student', user_id: currentUser.id, likes: 0, created_at: new Date().toISOString() };
+  try {
+    const { data, error } = await sb.from('posts').insert([post]).select();
+    if (!error && data) { allPosts.unshift(data[0]); }
+    else { allPosts.unshift({...post, id: Date.now()}); }
+  } catch { allPosts.unshift({...post, id: Date.now()}); }
+  document.getElementById('postText').value = '';
+  renderFeed(allPosts);
+  showToast('✅ Posted!');
+}
+
+function likePost(id, btn) {
+  const post = allPosts.find(p => p.id === id);
+  if (post) { post.likes = (post.likes||0) + 1; btn.textContent = '❤️ ' + post.likes; }
+  try { sb.from('posts').update({ likes: post.likes }).eq('id', id); } catch {}
+}
+
+function selectType(type, btn) {
+  selectedType = type;
+  document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+// ─── QUIZ ────────────────────────────────────────────────────
+function initQuiz() {
+  const today = new Date().toDateString();
+  const saved = localStorage.getItem('bio360_quiz_' + today);
+  if (saved) {
+    const s = JSON.parse(saved);
+    if (s.done) { showQuizResult(s.score, s.total); return; }
+  }
+  quizState = { questions: getDailyQuestions(), current: 0, score: 0, answered: false, done: false };
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = quizState.questions[quizState.current];
+  const total = quizState.questions.length;
+  document.getElementById('scoreDisplay').textContent = `${quizState.score}/${quizState.current}`;
+  // Progress dots
+  document.getElementById('quizProgress').innerHTML = quizState.questions.map((_,i) =>
+    `<div class="q-dot ${i < quizState.current ? 'done' : i === quizState.current ? 'current' : ''}"></div>`).join('');
+  document.getElementById('quizContent').innerHTML = `
+    <div class="quiz-source">${q.src} • Q${quizState.current+1} of ${total}</div>
+    <div class="quiz-q">${q.q}</div>
+    <div class="quiz-options">
+      ${q.opts.map((o,i) => `<button class="quiz-opt" onclick="answerQuiz(${i},this)">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+    </div>
+    <div class="quiz-explain" id="quizExplain">💡 ${q.exp}</div>
+    <button class="next-btn" id="nextBtn" style="display:none" onclick="nextQuestion()">${quizState.current+1 < total ? 'Next Question →' : 'See Results 🏆'}</button>`;
+}
+
+function answerQuiz(idx, btn) {
+  if (quizState.answered) return;
+  quizState.answered = true;
+  const q = quizState.questions[quizState.current];
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach((o,i) => {
+    o.disabled = true;
+    if (i === q.ans) o.classList.add('correct');
+    else if (i === idx && idx !== q.ans) o.classList.add('wrong');
+  });
+  if (idx === q.ans) quizState.score++;
+  document.getElementById('quizExplain').classList.add('show');
+  document.getElementById('nextBtn').style.display = 'block';
+  document.getElementById('scoreDisplay').textContent = `${quizState.score}/${quizState.current+1}`;
+}
+
+function nextQuestion() {
+  quizState.current++;
+  quizState.answered = false;
+  if (quizState.current >= quizState.questions.length) {
+    quizState.done = true;
+    const today = new Date().toDateString();
+    localStorage.setItem('bio360_quiz_' + today, JSON.stringify({ done:true, score:quizState.score, total:quizState.questions.length }));
+    updateStreak();
+    saveQuizScore(quizState.score);
+    showQuizResult(quizState.score, quizState.questions.length);
+  } else {
+    renderQuestion();
+  }
+}
+
+function showQuizResult(score, total) {
+  const pct = Math.round(score/total*100);
+  const msg = pct >= 80 ? '🎉 Excellent!' : pct >= 60 ? '👍 Good job!' : '📚 Keep studying!';
+  document.getElementById('quizContent').innerHTML = `
+    <div class="score-display">
+      <div class="score-num">${score}/${total}</div>
+      <div class="score-sub">${msg} ${pct}% correct</div>
+      <div style="margin-top:1rem;font-size:12px;color:var(--muted);">Come back tomorrow for new questions!</div>
+      <div style="margin-top:0.5rem;font-size:13px;color:var(--gold);">🔥 Streak updated!</div>
+    </div>`;
+  document.getElementById('quizProgress').innerHTML = Array(total).fill('<div class="q-dot done"></div>').join('');
+  document.getElementById('scoreDisplay').textContent = `${score}/${total}`;
+}
+
+async function saveQuizScore(score) {
+  if (!currentUser) return;
+  try {
+    const pts = score * 10;
+    await sb.from('profiles').upsert({ user_id: currentUser.id, username: currentProfile?.username || 'Student', total_score: (currentProfile?.total_score||0) + pts, streak: getStreak(), updated_at: new Date().toISOString() });
+  } catch {}
+}
+
+// ─── STREAK ─────────────────────────────────────────────────
+function getStreak() {
+  const history = JSON.parse(localStorage.getItem('bio360_streak_history') || '[]');
+  const today = new Date().toDateString();
+  if (!history.includes(today)) history.push(today);
+  localStorage.setItem('bio360_streak_history', JSON.stringify(history.slice(-30)));
+  let streak = 0;
+  const d = new Date();
+  while (true) {
+    if (history.includes(d.toDateString())) { streak++; d.setDate(d.getDate()-1); }
+    else break;
+  }
+  return streak;
+}
+
+function updateStreak() {
+  const history = JSON.parse(localStorage.getItem('bio360_streak_history') || '[]');
+  const today = new Date().toDateString();
+  if (!history.includes(today)) { history.push(today); localStorage.setItem('bio360_streak_history', JSON.stringify(history.slice(-30))); }
+  renderStreakUI();
+}
+
+function renderStreakUI() {
+  const streak = getStreak();
+  document.getElementById('streakNum').textContent = streak;
+  const days = ['M','T','W','T','F','S','S'];
+  const today = new Date().getDay();
+  const history = JSON.parse(localStorage.getItem('bio360_streak_history') || '[]');
+  const html = days.map((d,i) => {
+    const date = new Date(); date.setDate(date.getDate() - ((today - i + 7) % 7));
+    const done = history.includes(date.toDateString());
+    const isToday = i === today % 7;
+    return `<div class="day-dot ${done?'done':isToday?'today':'miss'}">${d}</div>`;
+  }).join('');
+  document.getElementById('streakDays').innerHTML = html;
+  const hasDoneToday = history.includes(new Date().toDateString());
+  document.getElementById('streakMsg').textContent = hasDoneToday ? `🎯 Today's quiz done! ${streak} day streak!` : "Complete today's quiz to continue your streak!";
+}
+
+// ─── LEADERBOARD ─────────────────────────────────────────────
+async function loadLeaderboard() {
+  try {
+    const { data } = await sb.from('profiles').select('*').order('total_score', { ascending:false }).limit(10);
+    if (data && data.length) { renderLeaderboard(data); renderMiniLB(data); return; }
+  } catch {}
+  const mock = [
+    { username:'Sufail', total_score:150, streak:5 },
+    { username:'Ijlal Muneer', total_score:120, streak:3 },
+    { username:'Anonymous Scientist', total_score:90, streak:2 },
+    { username:'BioStudent_KL', total_score:70, streak:1 },
+    { username:'LifeSciLover', total_score:50, streak:1 },
+  ];
+  renderLeaderboard(mock);
+  renderMiniLB(mock);
+}
+
+function renderLeaderboard(data) {
+  const medals = ['🥇','🥈','🥉'];
+  const rankClass = ['rank-1','rank-2','rank-3'];
+  document.getElementById('leaderboardContainer').innerHTML = data.map((u,i) => `
+    <div class="lb-row">
+      <div class="lb-rank ${rankClass[i]||'rank-n'}">${medals[i]||i+1}</div>
+      <div class="avatar" style="background:${stringToColor(u.username)};width:28px;height:28px;font-size:11px;">${u.username[0].toUpperCase()}</div>
+      <div class="lb-name">${u.username}</div>
+      <div style="text-align:right">
+        <div class="lb-score">${u.total_score||0} pts</div>
+        <div class="lb-streak">${u.streak||0} 🔥</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderMiniLB(data) {
+  const medals = ['🥇','🥈','🥉'];
+  document.getElementById('miniLeaderboard').innerHTML = data.slice(0,5).map((u,i) => `
+    <div class="lb-row">
+      <div class="lb-rank ${['rank-1','rank-2','rank-3'][i]||'rank-n'}">${medals[i]||i+1}</div>
+      <div class="lb-name" style="font-size:12px;">${u.username}</div>
+      <div class="lb-score" style="font-size:11px;">${u.total_score||0}pts</div>
+    </div>`).join('');
+}
+
+function filterLB(type, btn) {
+  document.querySelectorAll('#tab-leaderboard .tab-bar .tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  loadLeaderboard();
+}
+
+// ─── TABS ────────────────────────────────────────────────────
+function showTab(tab) {
+  ['feed','quiz','leaderboard'].forEach(t => {
+    document.getElementById('tab-'+t).style.display = t===tab ? 'block' : 'none';
+    const nb = document.getElementById('nav-'+t.replace('leaderboard','lb'));
+    if (nb) nb.classList.toggle('active', t===tab);
+  });
+  if (tab==='quiz') initQuiz();
+  if (tab==='leaderboard') loadLeaderboard();
+}
+
+// ─── UTILS ──────────────────────────────────────────────────
+function timeAgo(iso) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff/60000);
+  if (m<1) return 'just now';
+  if (m<60) return m+'m ago';
+  if (m<1440) return Math.floor(m/60)+'h ago';
+  return Math.floor(m/1440)+'d ago';
+}
+
+function typeLabel(t) {
+  return {idea:'💡 Idea',photo:'📸 Photo',blog:'✍️ Blog',question:'❓ Question'}[t] || '💡 Idea';
+}
+
+function stringToColor(str='A') {
+  let h = 0; for (let c of str) h = (h*31+c.charCodeAt(0))%360;
+  return `hsl(${h},60%,35%)`;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ─── INIT ────────────────────────────────────────────────────
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (session?.user) {
+    currentUser = session.user;
+    const meta = session.user.user_metadata;
+    currentProfile = { username: meta?.username || 'Bio360 Student', is_anonymous: meta?.is_anonymous || false, total_score: 0, streak: getStreak() };
+    try {
+      const { data } = await sb.from('profiles').select('*').eq('user_id', currentUser.id).single();
+      if (data) currentProfile = {...currentProfile, ...data};
+    } catch {}
+    updateNavUser();
+  }
+});
+
+// Boot
+loadFeed();
+loadLeaderboard();
+renderStreakUI();
+</script>
+</body>
+</html>
