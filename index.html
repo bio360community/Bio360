@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bio360 — Learn. Skill. Connect. Repeat.</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --violet: #5170FF;
+    --violet-light: #A8B4FF;
+    --violet-dim: #2a3a99;
+    --mint: #00E5B0;
+    --dark: #0D0F2B;
+    --darker: #080A1E;
+    --surface: #131529;
+    --surface2: #1a1d3a;
+    --text: #F5F5FF;
+    --muted: #8890BB;
+    --border: rgba(81,112,255,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--darker);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+
+  /* GLOW ORBS */
+  .orb {
+    position: fixed; border-radius: 50%;
+    filter: blur(120px); pointer-events: none; z-index: 0;
+  }
+  .orb1 { width: 500px; height: 500px; background: rgba(81,112,255,0.12); top: -100px; right: -100px; }
+  .orb2 { width: 400px; height: 400px; background: rgba(0,229,176,0.07); bottom: 10%; left: -80px; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(8,10,30,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 20px;
+    color: var(--text); text-decoration: none;
+  }
+  .logo-mark {
+    height: 36px; width: 36px;
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
+    background: white;
+    padding: 3px;
+  }
+  .logo-text { display: none; }
+  .logo span { color: var(--mint); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 14px; font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--violet);
+    color: white; border: none; cursor: pointer;
+    padding: 8px 20px; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--violet-dim); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(81,112,255,0.12);
+    border: 0.5px solid rgba(81,112,255,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px; color: var(--violet-light);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--mint);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 7vw, 6rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero h1 .accent { color: var(--violet); }
+  .hero h1 .accent2 { color: var(--mint); }
+
+  .hero-sub {
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-tagline {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 3rem;
+    animation: fadeUp 0.6s 0.25s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--violet);
+    color: white; border: none; cursor: pointer;
+    padding: 14px 32px; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    transition: all 0.2s; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--violet-dim); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(81,112,255,0.3); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text); cursor: pointer;
+    padding: 14px 32px; border-radius: 100px;
+    border: 0.5px solid rgba(255,255,255,0.2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 400;
+    transition: all 0.2s; text-decoration: none;
+  }
+  .btn-secondary:hover { border-color: var(--violet); color: var(--violet-light); transform: translateY(-2px); }
+
+  .hero-stat-row {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .hero-stat { text-align: center; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem; font-weight: 800;
+    color: var(--text);
+  }
+  .stat-num span { color: var(--mint); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* SCROLL LINE */
+  .scroll-hint {
+    position: absolute; bottom: 2rem;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: var(--muted); font-size: 11px; letter-spacing: 0.1em;
+    animation: fadeUp 0.6s 0.6s ease both;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--violet), transparent);
+    animation: scrollDown 1.5s ease infinite;
+  }
+  @keyframes scrollDown {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative; z-index: 1;
+    padding: 5rem 2rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--violet-light);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800; line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    color: var(--muted); font-size: 1.05rem;
+    max-width: 540px; font-weight: 300;
+    margin-bottom: 3rem;
+  }
+
+  /* PILLARS */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .pillar-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .pillar-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--violet), var(--mint));
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .pillar-card:hover { transform: translateY(-4px); border-color: rgba(81,112,255,0.35); }
+  .pillar-card:hover::before { opacity: 1; }
+
+  .pillar-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.15em; color: var(--violet-light);
+    margin-bottom: 1.25rem;
+  }
+  .pillar-icon {
+    font-size: 28px; margin-bottom: 1rem;
+    display: block;
+  }
+  .pillar-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem; font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .pillar-desc { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+  /* RESOURCES */
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .resource-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 16px; padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 8px;
+    transition: transform 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  .resource-card:hover { transform: translateY(-3px); border-color: rgba(81,112,255,0.35); }
+  .resource-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: rgba(81,112,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .resource-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
+  .resource-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .resource-tag {
+    font-size: 10px; font-weight: 600;
+    padding: 3px 10px; border-radius: 100px;
+    background: rgba(0,229,176,0.1);
+    color: var(--mint); align-self: flex-start;
+    margin-top: auto;
+  }
+
+  /* BLOG PREVIEW */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .blog-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 20px; padding: 1.75rem;
+    transition: transform 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  .blog-card:hover { transform: translateY(-3px); border-color: rgba(81,112,255,0.35); }
+  .blog-cat {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--violet-light);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .blog-cat::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--violet-light);
+  }
+  .blog-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 0.75rem; line-height: 1.3;
+  }
+  .blog-excerpt { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 1.25rem; }
+  .blog-read {
+    font-size: 13px; color: var(--violet-light);
+    display: flex; align-items: center; gap: 6px;
+    font-weight: 500;
+  }
+  .blog-read::after { content: '→'; transition: transform 0.2s; }
+  .blog-card:hover .blog-read::after { transform: translateX(4px); }
+
+  /* JOIN */
+  .join-section {
+    position: relative; z-index: 1;
+    padding: 5rem 2rem;
+  }
+  .join-inner {
+    max-width: 800px; margin: 0 auto;
+    background: var(--surface);
+    border: 0.5px solid rgba(81,112,255,0.2);
+    border-radius: 28px; padding: 4rem 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .join-inner::before {
+    content: '';
+    position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
+    width: 400px; height: 400px; border-radius: 50%;
+    background: rgba(81,112,255,0.06);
+    filter: blur(60px); pointer-events: none;
+  }
+  .join-inner h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800; margin-bottom: 1rem;
+    position: relative;
+  }
+  .join-inner p {
+    color: var(--muted); font-size: 1rem;
+    max-width: 480px; margin: 0 auto 2.5rem;
+    font-weight: 300; position: relative;
+  }
+  .join-platforms {
+    display: flex; gap: 12px; justify-content: center;
+    flex-wrap: wrap; position: relative;
+  }
+  .join-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .join-wa { background: rgba(37,211,102,0.15); color: #25D366; border: 0.5px solid rgba(37,211,102,0.2); }
+  .join-wa:hover { background: rgba(37,211,102,0.25); transform: translateY(-2px); }
+  .join-tg { background: rgba(40,167,229,0.12); color: #28a7e5; border: 0.5px solid rgba(40,167,229,0.2); }
+  .join-tg:hover { background: rgba(40,167,229,0.22); transform: translateY(-2px); }
+  .join-ig { background: rgba(193,53,132,0.12); color: #C13584; border: 0.5px solid rgba(193,53,132,0.2); }
+  .join-ig:hover { background: rgba(193,53,132,0.22); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    position: relative; z-index: 1;
+    border-top: 0.5px solid var(--border);
+    padding: 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .footer-brand {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 800;
+    color: var(--muted);
+  }
+  .footer-brand span { color: var(--mint); }
+  .footer-copy { font-size: 12px; color: var(--muted); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+
+  /* DIVIDER */
+  .full-divider {
+    position: relative; z-index: 1;
+    height: 0.5px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    nav .nav-links { display: none; }
+    .hero-stat-row { gap: 2rem; }
+    .join-inner { padding: 2.5rem 1.5rem; }
+    section { padding: 3.5rem 1.25rem; }
+    .hero { padding: 7rem 1.25rem 3rem; overflow-x: hidden; }
+    .hero h1 { font-size: clamp(1.8rem, 10vw, 3rem); word-break: break-word; }
+    .pillars-grid { grid-template-columns: 1fr 1fr; }
+    .resources-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <img class="logo-mark" src="logo.png" alt="Bio360">
+    <span class="logo-text">Bio<span>360</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#community">Community</a></li>
+  </ul>
+  <a href="#community" class="nav-cta">Join Free →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Kerala's Life Science Community — Now Live
+  </div>
+  <h1>
+    Kerala's <span class="accent2">first</span><br>
+    <span class="accent">life science</span><br>
+    community.
+  </h1>
+  <p class="hero-sub">Study materials, PYQs, skill courses, and a network of BSc Life Science students across Kerala — built by students, for students.</p>
+  <p class="hero-tagline">Learn. Skill. Connect. Repeat.</p>
+  <div class="hero-actions">
+    <a href="#community" class="btn-primary">Join the Community →</a>
+    <a href="#resources" class="btn-secondary">Browse Resources</a>
+  </div>
+  <div class="hero-stat-row">
+    <div class="hero-stat">
+      <div class="stat-num">4<span>+</span></div>
+      <div class="stat-label">Kerala Universities</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Free Resources</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Student Network</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- PILLARS -->
+<section id="about">
+  <p class="section-label">What we do</p>
+  <h2 class="section-title">360° support for<br>every BSc student</h2>
+  <p class="section-sub">From semester one to post-graduation, Bio360 covers every angle of your life science journey.</p>
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <p class="pillar-num">01 — LEARN</p>
+      <span class="pillar-icon">📚</span>
+      <p class="pillar-name">Study Resources</p>
+      <p class="pillar-desc">PYQs, notes, and syllabus guides for MG, Calicut, Kerala, and Kannur University students.</p>
+    </div>
+    <div class="pillar-card">
+      <p class="pillar-num">02 — SKILL UP</p>
+      <span class="pillar-icon">🛠️</span>
+      <p class="pillar-name">Skill Courses</p>
+      <p class="pillar-desc">Bioinformatics, R programming, science communication, and lab technique workshops — all free.</p>
+    </div>
+    <div class="pillar-card">
+      <p class="pillar-num">03 — CONNECT</p>
+      <span class="pillar-icon">🔗</span>
+      <p class="pillar-name">Peer Network</p>
+      <p class="pillar-desc">Students, mentors, alumni, and researchers across Kerala — all connected through Bio360.</p>
+    </div>
+    <div class="pillar-card">
+      <p class="pillar-num">04 — LAUNCH</p>
+      <span class="pillar-icon">🚀</span>
+      <p class="pillar-name">Career Prep</p>
+      <p class="pillar-desc">CSIR NET, GATE BT, DBT-JRF roadmaps, internship listings, and research opportunity updates.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <p class="section-label">Resources</p>
+  <h2 class="section-title">Everything you need.<br>Always free.</h2>
+  <p class="section-sub">Organised by university, semester, and subject — so you find what you need in seconds.</p>
+
+  <!-- PYQ SUBJECT CARDS -->
+  <div style="margin-bottom:2rem;">
+
+    <!-- Drive banner -->
+    <a href="https://drive.google.com/drive/folders/1F4NCr5iCbTk4teawWwTMBolucW_RKrfn" target="_blank" style="text-decoration:none;display:block;margin-bottom:1.5rem;">
+      <div style="background:var(--surface);border:0.5px solid rgba(81,112,255,0.3);border-radius:16px;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(81,112,255,0.6)'" onmouseout="this.style.borderColor='rgba(81,112,255,0.3)'">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(81,112,255,0.15);display:flex;align-items:center;justify-content:center;font-size:20px;">📁</div>
+          <div>
+            <p style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Bio360 PYQ Drive</p>
+            <p style="font-size:12px;color:var(--muted);">Microbiology · Biochemistry · Biotechnology · Botany · Zoology & more</p>
+          </div>
+        </div>
+        <span style="font-size:13px;font-weight:500;color:var(--violet-light);white-space:nowrap;">Open Google Drive →</span>
+      </div>
+    </a>
+
+    <p style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;margin-bottom:1rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;">Browse by subject</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+
+      <a href="https://drive.google.com/drive/folders/12ucbZf2ouq_brNXTxPKaasamr7VeuUkl?usp=drive_link" target="_blank" style="text-decoration:none;">
+        <div class="resource-card">
+          <div class="resource-icon">🦠</div>
+          <p class="resource-name">Microbiology</p>
+          <p class="resource-desc">PYQs & study material</p>
+          <span class="resource-tag">Drive →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/drive/folders/1SPiVMDs-NciGVc1PiXX07hSVKIeDxNaK?usp=drive_link" target="_blank" style="text-decoration:none;">
+        <div class="resource-card">
+          <div class="resource-icon">⚗️</div>
+          <p class="resource-name">Biochemistry</p>
+          <p class="resource-desc">PYQs & study material</p>
+          <span class="resource-tag">Drive →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/drive/folders/1jZ59qQrfI2rZvRn82eaK31Iw7gemJ5p8?usp=drive_link" target="_blank" style="text-decoration:none;">
+        <div class="resource-card">
+          <div class="resource-icon">🧬</div>
+          <p class="resource-name">Biotechnology</p>
+          <p class="resource-desc">PYQs & study material</p>
+          <span class="resource-tag">Drive →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/drive/folders/1qwBD-vAGg8L9ds9smvFXF9gxv0g8YMAi?usp=drive_link" target="_blank" style="text-decoration:none;">
+        <div class="resource-card">
+          <div class="resource-icon">🌿</div>
+          <p class="resource-name">Botany</p>
+          <p class="resource-desc">PYQs & study material</p>
+          <span class="resource-tag">Drive →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/drive/folders/1wBawK-UhRsSNAfO-7ncWudkZz6f-83ZT?usp=drive_link" target="_blank" style="text-decoration:none;">
+        <div class="resource-card">
+          <div class="resource-icon">🐾</div>
+          <p class="resource-name">Zoology</p>
+          <p class="resource-desc">PYQs & study material</p>
+          <span class="resource-tag">Drive →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/drive/folders/1Vzkzk3r6q8ehJLJVtmc871mGxLEyq65I?usp=drive_link" target="_blank" style="text-decoration:none;">
+        <div class="resource-card">
+          <div class="resource-icon">🔬</div>
+          <p class="resource-name">Molecular Biology</p>
+          <p class="resource-desc">PYQs & study material</p>
+          <span class="resource-tag">Drive →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/drive/folders/19SneK-U_j87i-U_XCtjOdcOhpvMKpnCv?usp=drive_link" target="_blank" style="text-decoration:none;">
+        <div class="resource-card">
+          <div class="resource-icon">🧫</div>
+          <p class="resource-name">Genetics</p>
+          <p class="resource-desc">PYQs & study material</p>
+          <span class="resource-tag">Drive →</span>
+        </div>
+      </a>
+
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;">* More subjects coming soon. Send us your notes to contribute!</p>
+  </div>
+
+  <div style="height:0.5px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:0 0 2.5rem;"></div>
+
+  <!-- SKILL COURSES -->
+  <p class="section-label" style="margin-bottom:1rem;">🛠️ Skill Courses</p>
+  <div class="resources-grid" style="margin-bottom:2.5rem;">
+    <a href="https://www.youtube.com/playlist?list=PLpSOMAcxEB_jUKMvdl8rHqNiZXFIrtd5G" target="_blank" style="text-decoration:none;">
+      <div class="resource-card">
+        <div class="resource-icon">🐍</div>
+        <p class="resource-name">Bioinformatics in Python</p>
+        <p class="resource-desc">Learn Python for biological data analysis from scratch.</p>
+        <span class="resource-tag" style="background:rgba(255,80,80,0.12);color:#ff6b6b;">▶ YouTube Playlist</span>
+      </div>
+    </a>
+    <a href="https://youtu.be/1Q6_LRZwZrc?si=9DYICKLqUrGuOUUR" target="_blank" style="text-decoration:none;">
+      <div class="resource-card">
+        <div class="resource-icon">📊</div>
+        <p class="resource-name">Biostatistics</p>
+        <p class="resource-desc">Statistical methods essential for life science research.</p>
+        <span class="resource-tag" style="background:rgba(255,80,80,0.12);color:#ff6b6b;">▶ YouTube Video</span>
+      </div>
+    </a>
+    <div class="resource-card">
+      <div class="resource-icon">🎙️</div>
+      <p class="resource-name">Workshop Recordings</p>
+      <p class="resource-desc">Recorded skill sessions — watch anytime, at your own pace.</p>
+      <span class="resource-tag">Coming Soon</span>
+    </div>
+  </div>
+
+  <div style="height:0.5px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:0 0 2.5rem;"></div>
+
+  <!-- STUDY GUIDE -->
+  <p class="section-label" style="margin-bottom:1rem;">📚 Study Guide — Curated Courses</p>
+  <div class="resources-grid" style="margin-bottom:2.5rem;">
+    <a href="https://youtube.com/playlist?list=PLHwKfdxKlXSu5-JEZUDxxBcQp3Ky--nzc&si=d252hH5dGtor_OvC" target="_blank" style="text-decoration:none;">
+      <div class="resource-card">
+        <div class="resource-icon">🦠</div>
+        <p class="resource-name">Course 1 — Microbiology</p>
+        <p class="resource-desc">Complete microbiology playlist for BSc students.</p>
+        <span class="resource-tag" style="background:rgba(255,80,80,0.12);color:#ff6b6b;">▶ YouTube Playlist</span>
+      </div>
+    </a>
+    <a href="https://youtube.com/playlist?list=PLHwKfdxKlXSsIe5_OYMCYCad9RTpNYPC5&si=p0xJzeLMTLXzaDAb" target="_blank" style="text-decoration:none;">
+      <div class="resource-card">
+        <div class="resource-icon">🧫</div>
+        <p class="resource-name">Course 2 — Genetics</p>
+        <p class="resource-desc">Fundamentals of genetics and heredity explained.</p>
+        <span class="resource-tag" style="background:rgba(255,80,80,0.12);color:#ff6b6b;">▶ YouTube Playlist</span>
+      </div>
+    </a>
+    <a href="https://youtube.com/playlist?list=PLHwKfdxKlXSve-2LLvWhFSiYz2Z6r1kQS&si=1b88kwD8Lgj_HvlY" target="_blank" style="text-decoration:none;">
+      <div class="resource-card">
+        <div class="resource-icon">🔬</div>
+        <p class="resource-name">Course 3 — Molecular Biology</p>
+        <p class="resource-desc">DNA, RNA, protein synthesis and gene expression.</p>
+        <span class="resource-tag" style="background:rgba(255,80,80,0.12);color:#ff6b6b;">▶ YouTube Playlist</span>
+      </div>
+    </a>
+    <a href="https://www.youtube.com/playlist?list=PLofUF3n0fywERF2hUt2wA959VbMPzLW-K" target="_blank" style="text-decoration:none;">
+      <div class="resource-card">
+        <div class="resource-icon">⚗️</div>
+        <p class="resource-name">Course 4 — Biochemistry Metabolism</p>
+        <p class="resource-desc">Metabolic pathways, enzymes and biochemical reactions.</p>
+        <span class="resource-tag" style="background:rgba(255,80,80,0.12);color:#ff6b6b;">▶ YouTube Playlist</span>
+      </div>
+    </a>
+  </div>
+
+  <div style="height:0.5px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:0 0 2.5rem;"></div>
+
+  <!-- ENTRANCE ROADMAP -->
+  <p class="section-label" style="margin-bottom:1rem;">🚀 Entrance Exam Roadmaps</p>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <div class="resource-icon">🏆</div>
+      <p class="resource-name">CSIR NET Life Science</p>
+      <p class="resource-desc">Subject-wise strategy, timeline & free resources for CSIR NET.</p>
+      <span class="resource-tag">Guide Coming Soon</span>
+    </div>
+    <div class="resource-card">
+      <div class="resource-icon">⚙️</div>
+      <p class="resource-name">GATE Biotechnology</p>
+      <p class="resource-desc">Topic priority, mock test plan & GATE BT prep roadmap.</p>
+      <span class="resource-tag">Guide Coming Soon</span>
+    </div>
+    <div class="resource-card">
+      <div class="resource-icon">🧬</div>
+      <p class="resource-name">DBT-JRF</p>
+      <p class="resource-desc">Eligibility, pattern & preparation strategy for DBT-JRF.</p>
+      <span class="resource-tag">Guide Coming Soon</span>
+    </div>
+    <div class="resource-card">
+      <div class="resource-icon">🌍</div>
+      <p class="resource-name">TOEFL / IELTS</p>
+      <p class="resource-desc">For students targeting international PhD programs.</p>
+      <span class="resource-tag">Guide Coming Soon</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- BIO360 AI CHATBOT -->
+<div style="position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2rem 5rem;">
+  <div style="height:0.5px;background:linear-gradient(to right,transparent,var(--border),transparent);margin-bottom:3rem;"></div>
+  <p class="section-label">🤖 Bio360 AI Guide</p>
+  <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.75rem);font-weight:800;margin-bottom:0.75rem;line-height:1.1;">Ask anything about your<br><span style="color:var(--violet);">life science</span> journey</h2>
+  <p style="color:var(--muted);font-size:1rem;font-weight:300;margin-bottom:2rem;max-width:500px;">Career guidance, entrance exam advice, latest innovations, internship tips — powered by AI.</p>
+
+  <div style="background:var(--surface);border:0.5px solid rgba(81,112,255,0.25);border-radius:24px;overflow:hidden;">
+    <!-- Chat header -->
+    <div style="padding:1rem 1.5rem;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:10px;">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--mint));display:flex;align-items:center;justify-content:center;font-size:16px;">🧬</div>
+      <div>
+        <p style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);">Bio360 AI Guide</p>
+        <p style="font-size:11px;color:var(--mint);">● Online</p>
+      </div>
+    </div>
+
+    <!-- Quick prompts -->
+    <div style="padding:1.25rem 1.5rem 0;display:flex;gap:8px;flex-wrap:wrap;" id="quickPrompts">
+      <button onclick="askBot(this.textContent)" style="background:rgba(81,112,255,0.1);border:0.5px solid rgba(81,112,255,0.25);border-radius:100px;padding:6px 14px;font-size:12px;color:var(--violet-light);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;" onmouseover="this.style.background='rgba(81,112,255,0.2)'" onmouseout="this.style.background='rgba(81,112,255,0.1)'">Which entrance exam suits me?</button>
+      <button onclick="askBot(this.textContent)" style="background:rgba(81,112,255,0.1);border:0.5px solid rgba(81,112,255,0.25);border-radius:100px;padding:6px 14px;font-size:12px;color:var(--violet-light);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;" onmouseover="this.style.background='rgba(81,112,255,0.2)'" onmouseout="this.style.background='rgba(81,112,255,0.1)'">Career paths after BSc Life Science</button>
+      <button onclick="askBot(this.textContent)" style="background:rgba(81,112,255,0.1);border:0.5px solid rgba(81,112,255,0.25);border-radius:100px;padding:6px 14px;font-size:12px;color:var(--violet-light);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;" onmouseover="this.style.background='rgba(81,112,255,0.2)'" onmouseout="this.style.background='rgba(81,112,255,0.1)'">How to get internship at RGCB?</button>
+      <button onclick="askBot(this.textContent)" style="background:rgba(81,112,255,0.1);border:0.5px solid rgba(81,112,255,0.25);border-radius:100px;padding:6px 14px;font-size:12px;color:var(--violet-light);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;" onmouseover="this.style.background='rgba(81,112,255,0.2)'" onmouseout="this.style.background='rgba(81,112,255,0.1)'">Latest innovations in life science</button>
+      <button onclick="askBot(this.textContent)" style="background:rgba(81,112,255,0.1);border:0.5px solid rgba(81,112,255,0.25);border-radius:100px;padding:6px 14px;font-size:12px;color:var(--violet-light);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;" onmouseover="this.style.background='rgba(81,112,255,0.2)'" onmouseout="this.style.background='rgba(81,112,255,0.1)'">CSIR NET vs GATE — which first?</button>
+    </div>
+
+    <!-- Chat messages -->
+    <div id="chatMessages" style="padding:1.25rem 1.5rem;min-height:200px;max-height:380px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;gap:10px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--mint));display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">🧬</div>
+        <div style="background:var(--surface2);border:0.5px solid var(--border);border-radius:0 14px 14px 14px;padding:10px 14px;max-width:85%;">
+          <p style="font-size:13px;color:var(--text);line-height:1.6;">Hi! I'm the Bio360 AI Guide 👋 I can help you with career guidance, entrance exam strategy, internship tips, and the latest in life science. What's on your mind?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div style="padding:1rem 1.5rem;border-top:0.5px solid var(--border);display:flex;gap:10px;">
+      <input id="chatInput" type="text" placeholder="Ask about careers, exams, internships..." style="flex:1;background:var(--surface2);border:0.5px solid var(--border);border-radius:100px;padding:10px 18px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;" onkeydown="if(event.key==='Enter')sendChat()" onfocus="this.style.borderColor='rgba(81,112,255,0.5)'" onblur="this.style.borderColor='rgba(81,112,255,0.15)'">
+      <button onclick="sendChat()" style="background:var(--violet);border:none;border-radius:100px;width:40px;height:40px;cursor:pointer;font-size:16px;transition:all 0.2s;flex-shrink:0;" onmouseover="this.style.background='var(--violet-dim)'" onmouseout="this.style.background='var(--violet)'">→</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const responses = [
+  {
+    keys: ['career','job','after bsc','scope','future','option'],
+    reply: `Great question! After BSc Life Science, you have many exciting paths 🚀\n\n• 🔬 Research — MSc → PhD → Research scientist\n• 🏥 Healthcare — MLT, clinical research, pharma\n• 💻 Bioinformatics — genomics, drug discovery, AI in biology\n• 🎓 Teaching — SET/NET → lecturer/professor\n• 🏭 Industry — QC, production in biotech/pharma companies\n• 🌍 Abroad PhD — TOEFL/IELTS → CRG, IRB Barcelona, MPI\n\nBio360 tip: Start building skills in R/Python + bioinformatics early — it opens the most doors! Join our community for career webinars.`
+  },
+  {
+    keys: ['entrance','exam','csir','gate','dbt','jrf','which exam','best exam'],
+    reply: `Here's a quick guide to choose your entrance exam 🎯\n\n• 🏆 CSIR NET — Best if you want to teach + do research. Gives JRF fellowship (₹31,000/month!)\n• ⚙️ GATE BT — Best for PSU jobs + MTech + some PhD admissions\n• 🧬 DBT-JRF — Specifically for biotechnology research careers\n• 🌍 TOEFL/IELTS — If targeting PhD abroad (Europe/USA)\n\nRecommendation for Kerala BSc students:\n→ Final year: Start CSIR NET prep\n→ After MSc: GATE or DBT-JRF\n\nCheck Bio360's Entrance Roadmap section for detailed prep guides!`
+  },
+  {
+    keys: ['csir','net','csir net'],
+    reply: `CSIR NET Life Science — Complete Guide 📋\n\n• Eligibility: MSc Life Science (BSc final year can apply)\n• Pattern: 3 parts — A (General aptitude), B (MCQ), C (Analytical)\n• Marks: 200 total | Cutoff ~120-130 for JRF\n• Held: June & December every year\n• Fellowship: JRF = ₹31,000/month, SRF = ₹35,000/month\n\nPrep strategy:\n→ Start with NCERT + standard textbooks\n→ Focus on Cell Biology, Genetics, Biochemistry (highest weightage)\n→ Solve 10 years PYQs — available on Bio360 Drive!\n→ Give 6 months minimum serious prep`
+  },
+  {
+    keys: ['gate','gate bt','gate biotechnology'],
+    reply: `GATE Biotechnology (BT) Guide ⚙️\n\n• Eligibility: BSc/BE/BTech in relevant fields\n• Pattern: 65 questions | 100 marks | 3 hours\n• Sections: Engineering Mathematics + Core Biotech\n• Score valid: 3 years\n\nTop uses of GATE score:\n→ MTech admission (IITs, NITs)\n→ PSU jobs (IOCL, HPCL, DRDO)\n→ PhD in some institutes\n\nHigh weightage topics:\n• Recombinant DNA technology\n• Bioprocess engineering\n• Immunology & Microbiology\n• Bioinformatics\n\nStart prep 8-10 months before exam!`
+  },
+  {
+    keys: ['rgcb','internship','niist','ncbs','iisc','iiser','jncasr','prestigious','institute','research intern'],
+    reply: `How to crack internships at top institutes 🏛️\n\n🎯 Target institutes in Kerala & India:\n• RGCB Thiruvananthapuram\n• NIIST Thiruvananthapuram\n• NCBS Bangalore\n• IISc Bangalore\n• IISER (Pune, Kolkata, TVM)\n• JNCASR Bangalore\n\n📧 Cold email strategy:\n1. Find PI's email on institute website\n2. Subject: "Summer Internship Request — BSc Biotechnology"\n3. Attach: 1-page CV + brief motivation (3 lines)\n4. Mention specific lab work you're interested in\n\n✅ What helps:\n• CGPA above 8.0\n• Any skill (R, Python, lab techniques)\n• Genuine research interest shown in email\n\nApply October-December for summer internships!`
+  },
+  {
+    keys: ['innovation','latest','new','crispr','ai','technology','discovery','research'],
+    reply: `Latest innovations in Life Science 🔬✨\n\n• 🧬 CRISPR-Cas9 upgrades — base editing & prime editing now more precise than ever\n• 🤖 AlphaFold 3 — AI predicting protein-DNA-RNA interactions, revolutionizing drug discovery\n• 🧫 Organoids — mini-organs grown in labs for disease modeling\n• 💉 mRNA technology — beyond COVID vaccines, now for cancer therapy\n• 🦠 Phage therapy — using viruses to kill antibiotic-resistant bacteria\n• 🌱 Synthetic biology — engineering microbes to produce medicines & clean fuel\n• 🧠 Brain organoids — studying neurological diseases in a dish\n\nFun fact: Kerala's RGCB is actively working on cancer genomics and infectious disease research!`
+  },
+  {
+    keys: ['phd','abroad','europe','barcelona','germany','crg','irb','mpi','international'],
+    reply: `PhD Abroad — Road to International Research 🌍\n\n Popular destinations for Life Science:\n• 🇪🇸 Spain — CRG Barcelona, IRB Barcelona (excellent for cell/molecular biology)\n• 🇩🇪 Germany — MPI institutes, fully funded, no tuition\n• 🇳🇱 Netherlands — Excellent bioinformatics programs\n• 🇺🇸 USA — NIH, Ivy League (highly competitive)\n\n📋 Requirements:\n• MSc degree (some accept BSc with research experience)\n• TOEFL ≥90 or IELTS ≥6.5\n• Strong research statement\n• 2-3 recommendation letters\n• Publications/posters = big bonus\n\n⏰ Timeline:\n→ 3rd year BSc: Start building research experience\n→ MSc: Publish or present at conferences\n→ Apply: September-December for next year intake`
+  },
+  {
+    keys: ['study','tip','score','cgpa','marks','exam prep','how to study','rank'],
+    reply: `Study tips to score high in Kerala University 📚\n\n• 📅 Semester planning: Divide syllabus into 4 weeks, cover 1 module/week\n• 📝 PYQ first: Always solve last 5 years questions — patterns repeat!\n• 🧠 Active recall: Close book, write what you remember — better than re-reading\n• 👥 Study groups: Teach your classmates — best way to retain\n• ⏰ Spaced repetition: Revise day 1, day 3, day 7, day 21\n\nFor FYUGP specifically:\n→ Internal marks matter a lot — don't miss assignments\n→ Practicals: Know your procedures cold\n→ Viva: Prepare definitions + 2-mark answers\n\nAll PYQs available free on Bio360 Drive! 🎯`
+  },
+  {
+    keys: ['bioinformatics','python','coding','programming','r programming','data'],
+    reply: `Getting started with Bioinformatics 💻\n\nStep-by-step path:\n1. 🐍 Learn Python basics (2-3 months) — check Bio360 Skill Courses!\n2. 📊 Learn R for statistics and plotting\n3. 🧬 BioPython — parse sequences, work with NCBI databases\n4. 🗂️ Tools: BLAST, Clustal, MEGA, PyMOL\n5. 🏗️ Projects: Sequence analysis, phylogenetic tree, protein structure\n\nFree resources on Bio360:\n→ Bioinformatics in Python playlist\n→ Biostatistics video\n\nJob roles you can target:\n• Genomics analyst\n• Drug discovery support\n• Clinical bioinformatician\n• Research assistant in computational biology`
+  },
+  {
+    keys: ['bio360','community','join','whatsapp','telegram','about'],
+    reply: `About Bio360 Community 🧬\n\nBio360 is Kerala's first independent Life Science student community — built by BSc students, for BSc students!\n\nWhat you get by joining:\n• 📚 Free PYQs & notes (Microbiology, Biochem, Biotech, Botany, Zoology...)\n• 🛠️ Skill courses (Bioinformatics, Biostatistics)\n• 🎓 Study guides (4 curated YouTube courses)\n• 🚀 Entrance exam roadmaps\n• 🤝 Network of students across Kerala\n• 📢 Webinars & events\n\nAll completely FREE! 🎉\n\nJoin via WhatsApp or Telegram using the buttons below ↓`
+  }
+];
+
+function getReply(msg) {
+  const lower = msg.toLowerCase();
+  for (const r of responses) {
+    if (r.keys.some(k => lower.includes(k))) return r.reply;
+  }
+  return `Thanks for your question! 🧬\n\nI can help you with:\n• Career paths after BSc Life Science\n• Entrance exams (CSIR NET, GATE, DBT-JRF)\n• Internships at RGCB, NCBS, IISc\n• Latest innovations in life science\n• Study tips & bioinformatics\n• PhD abroad guidance\n\nTry asking something like "Which entrance exam is best for me?" or "How to get internship at RGCB?" 😊`;
+}
+
+function addMessage(text, isUser) {
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.style.cssText = `display:flex;gap:10px;align-items:flex-start;${isUser ? 'flex-direction:row-reverse;' : ''}`;
+  const avatar = document.createElement('div');
+  avatar.style.cssText = `width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;${isUser ? 'background:var(--violet);color:white;font-weight:700;' : 'background:linear-gradient(135deg,var(--violet),var(--mint));'}`;
+  avatar.textContent = isUser ? 'U' : '🧬';
+  const bubble = document.createElement('div');
+  bubble.style.cssText = `border:0.5px solid var(--border);border-radius:${isUser ? '14px 0 14px 14px' : '0 14px 14px 14px'};padding:10px 14px;max-width:85%;${isUser ? 'background:rgba(81,112,255,0.15);' : 'background:var(--surface2);'}`;
+  bubble.innerHTML = `<p style="font-size:13px;color:var(--text);line-height:1.6;white-space:pre-wrap;">${text}</p>`;
+  div.appendChild(avatar);
+  div.appendChild(bubble);
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  addMessage(msg, true);
+  setTimeout(() => {
+    addMessage(getReply(msg), false);
+  }, 600);
+}
+
+function askBot(text) {
+  document.getElementById('chatInput').value = text;
+  sendChat();
+}
+</script>
+
+<div class="full-divider"></div>
+
+<!-- BLOG -->
+<section id="blog">
+  <p class="section-label">Blog</p>
+  <h2 class="section-title">Insights for the<br>curious scientist</h2>
+  <p class="section-sub">Career paths, study strategies, science explainers, and field guides — written by students who get it.</p>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <p class="blog-cat">Exam Prep</p>
+      <h3 class="blog-title">CSIR NET Life Science — complete beginner roadmap 2025</h3>
+      <p class="blog-excerpt">Everything you need to start preparing for CSIR NET as a BSc student — timeline, resources, and strategy.</p>
+      <span class="blog-read">Read article</span>
+    </div>
+    <div class="blog-card">
+      <p class="blog-cat">Career</p>
+      <h3 class="blog-title">Life after BSc Life Science — 10 career paths in India</h3>
+      <p class="blog-excerpt">From research to industry, here are ten realistic, well-paying career paths for life science graduates in India.</p>
+      <span class="blog-read">Read article</span>
+    </div>
+    <div class="blog-card">
+      <p class="blog-cat">Skills</p>
+      <h3 class="blog-title">How to start bioinformatics as a BSc student in Kerala</h3>
+      <p class="blog-excerpt">No coding background needed. Here's the exact path to go from zero to job-ready in bioinformatics.</p>
+      <span class="blog-read">Read article</span>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- JOIN CTA -->
+<div class="join-section" id="community">
+  <div class="join-inner">
+    <p class="section-label" style="margin-bottom:1rem;">Join the community</p>
+    <h2>Built for students.<br>Powered by students.</h2>
+    <p>Join hundreds of BSc Life Science students across Kerala. Get resources, join skill sessions, and grow your network — all for free.</p>
+    <div class="join-platforms">
+      <a href="#" class="join-btn join-wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="#" class="join-btn join-tg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram
+      </a>
+      <a href="#" class="join-btn join-ig">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><img src="logo.png" alt="Bio360" style="height:28px;opacity:0.7;"></div>
+  <div class="footer-copy">© 2025 Bio360 Community. Kerala, India.</div>
+  <div class="footer-links">
+    <a href="#">Resources</a>
+    <a href="#">Blog</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
