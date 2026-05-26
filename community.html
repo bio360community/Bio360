@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community — Bio360 | Kerala Life Science Student Network</title>
+<meta name="description" content="Join Bio360's live community: daily quiz, leaderboard, study groups, collaboration board, and AI career assistant for Kerala BSc Life Science students.">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --j:#00C896;--jd:#009970;--cy:#22D3EE;--am:#F59E0B;--ro:#FB7185;--vi:#818CF8;
+  --ink:#060B12;--s1:#0f1a27;--s2:#111D2C;--s3:#172236;--s4:#1E2D42;
+  --tx:#EDF2F7;--td:#94A3B8;--tf:#3d5166;
+  --b1:rgba(0,200,150,0.14);--b2:rgba(255,255,255,0.06);--b3:rgba(255,255,255,0.03);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Satoshi', sans-serif;background:var(--ink);color:var(--tx);overflow-x:hidden;line-height:1.62;font-feature-settings:'ss01';-webkit-font-smoothing:antialiased;}
+
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.bgg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,200,150,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,150,.02) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,black,transparent);}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);}
+.o1{width:600px;height:600px;background:rgba(0,200,150,.06);top:-200px;right:-200px;animation:d1 22s ease-in-out infinite;}
+.o2{width:400px;height:400px;background:rgba(34,211,238,.04);bottom:15%;left:-150px;animation:d2 26s ease-in-out infinite;}
+@keyframes d1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,40px)}}
+@keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(6,11,18,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--b2);}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Cabinet Grotesk', sans-serif;font-weight:700;font-size:1.2rem;color:var(--tx);text-decoration:none;}
+.lm{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--j),var(--cy));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:var(--ink);font-family:'Cabinet Grotesk', sans-serif;box-shadow:0 0 20px rgba(0,200,150,.3);}
+.logo em{color:var(--j);font-style:italic;}
+.navl{display:flex;gap:2rem;list-style:none;}
+.navl a{color:var(--td);text-decoration:none;font-size:14px;transition:color .2s;position:relative;padding-bottom:2px;}
+.navl a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--j);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
+.navl a:hover{color:var(--tx);}
+.navl a:hover::after,.navl a.active::after{transform:scaleX(1);}
+.navl a.active{color:var(--tx);}
+.nc{touch-action:manipulation;background:var(--j);color:var(--ink);border:none;cursor:pointer;padding:9px 22px;border-radius:8px;font-family:'Satoshi', sans-serif;font-size:13px;font-weight:600;transition:all .2s;text-decoration:none;}
+.nc:hover{background:var(--cy);transform:translateY(-1px);}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:240px 1fr 300px;gap:0;min-height:100vh;padding-top:60px;}
+
+/* SIDEBAR LEFT */
+.sidebar-l{position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;background:var(--s1);border-right:1px solid var(--b2);padding:1.5rem 0;display:flex;flex-direction:column;gap:4px;}
+.sidebar-l::-webkit-scrollbar{width:4px;}
+.sidebar-l::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
+.sn-item{display:flex;align-items:center;gap:10px;padding:.65rem 1.25rem;font-size:14px;color:var(--td);cursor:pointer;transition:all .2s;text-decoration:none;border-left:2px solid transparent;}
+.sn-item:hover{color:var(--tx);background:var(--b3);}
+.sn-item.active{color:var(--j);background:rgba(0,200,150,.06);border-left-color:var(--j);}
+.sn-ico{font-size:16px;flex-shrink:0;width:20px;text-align:center;}
+.sn-badge{margin-left:auto;background:rgba(251,113,133,.15);color:var(--ro);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace;}
+.sn-grp{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--tf);padding:.75rem 1.25rem .25rem;font-family:'JetBrains Mono',monospace;}
+
+/* MAIN FEED */
+.main-feed{padding:2rem;overflow-y:auto;}
+.feed-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;}
+.feed-title{font-family:'Cabinet Grotesk', sans-serif;font-size:1.4rem;font-weight:700;}
+.feed-tabs{display:flex;gap:6px;}
+.ftab{touch-action:manipulation;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;border:1px solid var(--b2);background:transparent;color:var(--td);font-family:'Satoshi', sans-serif;}
+.ftab:hover{border-color:var(--b1);color:var(--tx);}
+.ftab.on{background:rgba(0,200,150,.1);border-color:rgba(0,200,150,.3);color:var(--j);}
+
+/* COMPOSE */
+.compose{background:var(--s2);border:1px solid var(--b2);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;gap:10px;align-items:flex-start;}
+.comp-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--j),var(--cy));display:flex;align-items:center;justify-content:center;font-family:'Cabinet Grotesk', sans-serif;font-size:14px;font-weight:700;color:var(--ink);flex-shrink:0;}
+.comp-area{flex:1;background:var(--s3);border:1px solid var(--b2);border-radius:8px;padding:.75rem 1rem;font-family:'Satoshi', sans-serif;font-size:14px;color:var(--td);resize:none;outline:none;transition:border-color .2s;min-height:80px;}
+.comp-area:focus{border-color:var(--j);color:var(--tx);}
+.comp-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.75rem;}
+.comp-tools{display:flex;gap:8px;}
+.comp-tool{padding:5px 10px;border-radius:6px;font-size:12px;background:var(--b3);border:1px solid var(--b2);color:var(--td);cursor:pointer;transition:all .2s;}
+.comp-tool:hover{border-color:var(--b1);color:var(--tx);}
+.comp-post{touch-action:manipulation;background:var(--j);color:var(--ink);border:none;cursor:pointer;padding:8px 18px;border-radius:6px;font-family:'Satoshi', sans-serif;font-size:13px;font-weight:600;transition:all .2s;}
+.comp-post:hover{background:var(--cy);}
+
+/* POST CARD */
+.post{background:var(--s2);border:1px solid var(--b2);border-radius:12px;padding:1.25rem;margin-bottom:10px;transition:border-color .2s;}
+.post:hover{border-color:var(--b1);}
+.post-hdr{display:flex;align-items:flex-start;gap:10px;margin-bottom:.75rem;}
+.post-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cabinet Grotesk', sans-serif;font-size:14px;font-weight:700;color:var(--ink);flex-shrink:0;}
+.post-meta{flex:1;}
+.post-name{font-size:14px;font-weight:600;}
+.post-info{font-size:11px;color:var(--tf);font-family:'JetBrains Mono',monospace;margin-top:1px;}
+.post-badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-left:8px;}
+.pb-csir{background:rgba(0,200,150,.1);color:var(--j);}
+.pb-bio{background:rgba(129,140,248,.1);color:var(--vi);}
+.pb-intern{background:rgba(245,158,11,.1);color:var(--am);}
+.pb-amb{background:rgba(251,113,133,.1);color:var(--ro);}
+.post-text{font-size:14px;color:var(--td);line-height:1.6;margin-bottom:1rem;}
+.post-text strong{color:var(--tx);}
+.post-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.75rem;}
+.ptag{font-size:11px;padding:3px 8px;border-radius:4px;background:var(--b3);border:1px solid var(--b2);color:var(--td);}
+.post-actions{display:flex;gap:12px;border-top:1px solid var(--b2);padding-top:.75rem;}
+.pa{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--tf);cursor:pointer;transition:color .2s;padding:4px 0;}
+.pa:hover{color:var(--j);}
+
+/* QUIZ WIDGET */
+.quiz-widget{background:var(--s2);border:1px solid var(--b2);border-radius:12px;padding:1.25rem;margin-bottom:10px;border-top:2px solid var(--j);}
+.qw-hdr{display:flex;align-items:center;gap:8px;margin-bottom:1rem;font-size:11px;font-weight:600;color:var(--j);letter-spacing:.1em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.qdot{width:6px;height:6px;border-radius:50%;background:var(--j);animation:pdot 2s infinite;}
+@keyframes pdot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,200,150,.5)}50%{opacity:.7;box-shadow:0 0 0 8px rgba(0,200,150,0)}}
+.q-text{font-family:'Cabinet Grotesk', sans-serif;font-size:1.05rem;font-weight:600;line-height:1.4;margin-bottom:1rem;}
+.q-opts{display:flex;flex-direction:column;gap:7px;}
+.q-opt{touch-action:manipulation;padding:.7rem 1rem;border:1px solid var(--b2);border-radius:8px;font-size:13px;cursor:pointer;transition:all .2s;background:var(--b3);}
+.q-opt:hover{border-color:var(--b1);background:rgba(0,200,150,.05);color:var(--j);}
+.q-opt.correct{border-color:var(--j);background:rgba(0,200,150,.1);color:var(--j);}
+.q-opt.wrong{border-color:var(--ro);background:rgba(251,113,133,.08);color:var(--ro);}
+.q-foot{display:flex;align-items:center;justify-content:space-between;margin-top:.75rem;font-size:11px;color:var(--tf);font-family:'JetBrains Mono',monospace;}
+
+/* SIDEBAR RIGHT */
+.sidebar-r{position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;border-left:1px solid var(--b2);padding:1.5rem;display:flex;flex-direction:column;gap:1.25rem;}
+.sidebar-r::-webkit-scrollbar{width:4px;}
+.sidebar-r::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
+.sw{background:var(--s2);border:1px solid var(--b2);border-radius:12px;padding:1.25rem;}
+.sw-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--j);font-family:'JetBrains Mono',monospace;margin-bottom:.9rem;display:flex;align-items:center;gap:6px;}
+.sw-title .qdot{width:5px;height:5px;}
+
+/* Leaderboard */
+.lb{display:flex;flex-direction:column;gap:0;}
+.lbr{display:flex;align-items:center;gap:8px;padding:.55rem 0;border-bottom:1px solid var(--b2);}
+.lbr:last-child{border:none;}
+.lbr-rank{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tf);width:18px;}
+.lbr-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cabinet Grotesk', sans-serif;font-size:11px;font-weight:700;color:var(--ink);flex-shrink:0;}
+.lbr-name{font-size:12px;flex:1;}
+.lbr-pts{font-size:11px;color:var(--j);font-family:'JetBrains Mono',monospace;}
+.lbr-crown{font-size:12px;}
+
+/* Study groups */
+.sg-item{background:var(--b3);border:1px solid var(--b2);border-radius:8px;padding:.75rem;margin-bottom:8px;cursor:pointer;transition:border-color .2s;}
+.sg-item:hover{border-color:var(--b1);}
+.sg-item:last-child{margin-bottom:0;}
+.sg-name{font-size:13px;font-weight:500;margin-bottom:3px;}
+.sg-meta{font-size:11px;color:var(--tf);font-family:'JetBrains Mono',monospace;}
+.sg-btn{touch-action:manipulation;display:block;text-align:center;padding:6px;border-radius:6px;background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.2);color:var(--j);font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;margin-top:6px;}
+.sg-btn:hover{background:rgba(0,200,150,.2);}
+
+/* Internship alert */
+.ia-card{border-radius:10px;padding:1rem;background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.15);margin-bottom:8px;}
+.ia-card:last-child{margin-bottom:0;}
+.ia-tag{font-size:10px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--j);letter-spacing:.08em;margin-bottom:4px;}
+.ia-title{font-family:'Cabinet Grotesk', sans-serif;font-size:13px;font-weight:600;margin-bottom:3px;}
+.ia-org{font-size:11px;color:var(--td);}
+.ia-dl{font-size:10px;color:var(--am);font-family:'JetBrains Mono',monospace;margin-top:5px;}
+
+.dv{position:relative;z-index:1;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.07),transparent);max-width:1100px;margin:0 auto;}
+footer{position:relative;z-index:1;border-top:1px solid var(--b2);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;max-width:none;}
+.fl{display:flex;gap:1.5rem;}
+.fl a{font-size:12px;color:var(--tf);text-decoration:none;transition:color .2s;}
+.fl a:hover{color:var(--j);}
+.fc{font-size:11px;color:var(--tf);font-family:'JetBrains Mono',monospace;}
+
+@media(max-width:960px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar-l,.sidebar-r{display:none;}
+  .main-feed{padding:5rem 1.25rem 2rem;}
+}
+
+/* ── COMMUNITY MOBILE ── */
+@media(max-width:960px){
+  .layout{grid-template-columns:1fr;padding-top:56px;}
+  .sidebar-l,.sidebar-r{display:none;}
+  .main-feed{padding:1rem 1.1rem 5rem;}
+  .feed-hdr{flex-direction:column;align-items:flex-start;}
+  .feed-tabs{flex-wrap:wrap;gap:5px;}
+}
+@media(max-width:640px){
+  .compose{gap:8px;}
+  .comp-area{min-height:60px;font-size:13px;}
+  .q-text{font-size:.95rem;}
+  .post-text{font-size:13px;}
+  .post-actions{gap:8px;font-size:11px;}
+  .feed-title{font-size:1.2rem;}
+}
+/* Bottom nav for mobile community */
+.mobile-bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(6,11,18,.97);border-top:1px solid var(--b2);padding:.65rem 0;z-index:90;justify-content:space-around;align-items:center;}
+.mbn-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:var(--td);text-decoration:none;padding:.25rem .5rem;transition:color .2s;font-family:'JetBrains Mono',monospace;letter-spacing:.03em;}
+.mbn-item.active,.mbn-item:hover{color:var(--j);}
+.mbn-ico{font-size:18px;}
+@media(max-width:960px){
+  .mobile-bottom-nav{display:flex;}
+  nav .hamburger{display:none;}
+}
+@media(max-width:768px){
+  .hamburger{display:flex;}
+  nav{backdrop-filter:none;background:rgba(6,11,18,.97);}
+}
+/* ── REDUCED MOTION ── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+}
+/* ── HAMBURGER ── */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--td);transition:all .3s;border-radius:2px;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);}
+.mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(6,11,18,.98);border-bottom:1px solid var(--b2);z-index:99;padding:1rem 1.25rem;flex-direction:column;gap:0;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--td);text-decoration:none;font-size:15px;padding:.9rem 0;border-bottom:1px solid var(--b2);transition:color .2s;}
+.mobile-menu a:last-child{border:none;}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--j);}
+@media(max-width:768px){
+  .hamburger{display:flex;}
+}
+
+/* ── TOUCH/COARSE POINTER: cursor off ── */
+@media(pointer:coarse){
+  body{cursor:auto!important;}
+  #cursor,#cursor-ring{display:none!important;}
+}
+
+/* ── MOBILE: kill expensive blur + orbs ── */
+@media(max-width:768px){
+  .orb,.o1,.o2,.o3{display:none!important;}
+  nav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(6,11,18,.97)!important;}
+  .hero-stats{backdrop-filter:none!important;background:rgba(17,29,44,.95)!important;}
+  .ai-section{backdrop-filter:none!important;}
+  .b-card,.pc,.rc,.bc,.sw,.fa-card,.feat-card,.track-card,.collab-card,.opp-card,.proof-card,.amb-card{will-change:auto;}
+}
+
+/* ── MOBILE: reduce simultaneous animations ── */
+@media(max-width:768px){
+  .bdot,.live-dot,.qdot{animation:none!important;opacity:1;}
+  .sday{transition:none!important;}
+  .reveal{transition:opacity .4s ease,transform .4s ease;}
+  .ticker-track{animation-duration:28s!important;}
+  .orb1,.orb2,.orb3{animation:none!important;}
+}
+
+/* ── BATTERY SAVER / REDUCED MOTION ── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+  .ticker-track{animation:none!important;}
+  #bgcanvas{display:none!important;}
+  .orb,.o1,.o2,.o3{display:none!important;}
+}
+
+/* ── PERF HINTS (desktop) ── */
+@media(min-width:769px){
+  #bgcanvas{will-change:transform;contain:strict;}
+  .ticker-track{will-change:transform;contain:layout;}
+  nav{contain:layout style;}
+}
+
+</style>
+</head>
+<body>
+<div class="bg"><div class="bgg"></div><div class="orb o1"></div><div class="orb o2"></div></div>
+
+<nav>
+  <a href="index.html" class="logo"><div class="lm">B</div>Bio<em>360</em></a>
+  <ul class="navl">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="features.html">Features</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="community.html" class="active">Community</a></li>
+  </ul>
+  <a href="login.html" class="nc">Join Free →</a>
+  <button class="hamburger" id="hamBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="features.html">Features</a>
+  <a href="blog.html">Blog</a>
+  <a href="community.html" class="active">Community</a>
+  <a href="https://chat.whatsapp.com/FyyK1AwAe7CCdOgs1SPbVs" target="_blank" style="color:var(--j);font-weight:600;">Join WhatsApp Free →</a>
+</nav>
+
+<div class="layout">
+
+  <!-- LEFT SIDEBAR -->
+  <div class="sidebar-l">
+    <div class="sn-grp">Navigate</div>
+    <a href="#feed" class="sn-item active"><span class="sn-ico">🏠</span> Feed</a>
+    <a href="#" class="sn-item"><span class="sn-ico">📝</span> Daily Quiz <span class="sn-badge">LIVE</span></a>
+    <a href="#" class="sn-item"><span class="sn-ico">🏆</span> Leaderboard</a>
+    <a href="#" class="sn-item"><span class="sn-ico">📄</span> PYQ Library</a>
+    <a href="#" class="sn-item"><span class="sn-ico">🔭</span> Internships</a>
+
+    <div class="sn-grp">Community</div>
+    <a href="#" class="sn-item"><span class="sn-ico">🤝</span> Study Groups</a>
+    <a href="#" class="sn-item"><span class="sn-ico">🧬</span> Collaborations</a>
+    <a href="#" class="sn-item"><span class="sn-ico">💬</span> Discussions</a>
+    <a href="#" class="sn-item"><span class="sn-ico">🌟</span> Achievements</a>
+
+    <div class="sn-grp">Career</div>
+    <a href="#" class="sn-item"><span class="sn-ico">🤖</span> AI Guide</a>
+    <a href="#" class="sn-item"><span class="sn-ico">🗺️</span> Learning Tracks</a>
+    <a href="blog.html" class="sn-item"><span class="sn-ico">📖</span> Blog</a>
+
+    <div style="margin-top:auto;padding:1.25rem 1rem;">
+      <a href="https://chat.whatsapp.com/FyyK1AwAe7CCdOgs1SPbVs" target="_blank" style="display:block;text-align:center;background:var(--j);color:var(--ink);padding:10px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='#22D3EE'" onmouseout="this.style.background='#00C896'">
+        Join WhatsApp Group →
+      </a>
+    </div>
+  </div>
+
+  <!-- MAIN FEED -->
+  <div class="main-feed" id="feed">
+    <div class="feed-hdr">
+      <div class="feed-title">Community Feed</div>
+      <div class="feed-tabs">
+        <button class="ftab on">All</button>
+        <button class="ftab">Discussions</button>
+        <button class="ftab">Resources</button>
+        <button class="ftab">Collabs</button>
+      </div>
+    </div>
+
+    <!-- COMPOSE -->
+    <div class="compose">
+      <div class="comp-av">Y</div>
+      <div style="flex:1;">
+        <textarea class="comp-area" placeholder="Share a resource, ask a question, or start a discussion..."></textarea>
+        <div class="comp-footer">
+          <div class="comp-tools">
+            <button class="comp-tool">📎 File</button>
+            <button class="comp-tool">🏷️ Tag</button>
+            <button class="comp-tool">🔗 Link</button>
+          </div>
+          <button class="comp-post">Post →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAILY QUIZ WIDGET -->
+    <div class="quiz-widget">
+      <div class="qw-hdr"><div class="qdot"></div>DAILY QUIZ · Question 7 of 10 · +10 pts</div>
+      <div class="q-text">Which enzyme is responsible for the synthesis of RNA from a DNA template during transcription?</div>
+      <div class="q-opts">
+        <div class="q-opt" onclick="answerQ(this,false)">A. DNA Polymerase III</div>
+        <div class="q-opt" onclick="answerQ(this,false)">B. Primase</div>
+        <div class="q-opt" onclick="answerQ(this,true)">C. RNA Polymerase</div>
+        <div class="q-opt" onclick="answerQ(this,false)">D. Reverse Transcriptase</div>
+      </div>
+      <div class="q-foot">
+        <span>⏱ 45s remaining</span>
+        <span>🔥 14-day streak active</span>
+      </div>
+    </div>
+
+    <!-- POSTS -->
+    <div class="post">
+      <div class="post-hdr">
+        <div class="post-av" style="background:linear-gradient(135deg,#F59E0B,#FB7185)">R</div>
+        <div class="post-meta">
+          <div class="post-name">Rahul K. <span class="post-badge pb-csir">CSIR Prep</span></div>
+          <div class="post-info">BSc Microbiology · MG University · 2 hours ago</div>
+        </div>
+      </div>
+      <div class="post-text">
+        Just found the best approach for CSIR NET Unit 3 — <strong>don't read the textbook first</strong>. Go through the PYQs from 2018–2024, identify recurring concepts, then deep-dive only those. Saves 60% of study time. Sharing my annotated question list in the WhatsApp group tonight 🔥
+      </div>
+      <div class="post-tags"><span class="ptag">CSIR NET</span><span class="ptag">Study Strategy</span><span class="ptag">Unit 3</span></div>
+      <div class="post-actions">
+        <div class="pa" onclick="this.style.color='var(--j)'">❤️ 24 Likes</div>
+        <div class="pa">💬 8 Comments</div>
+        <div class="pa">🔖 Save</div>
+        <div class="pa">↗ Share</div>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-hdr">
+        <div class="post-av" style="background:linear-gradient(135deg,#00C896,#22D3EE)">S</div>
+        <div class="post-meta">
+          <div class="post-name">Sufail A. <span class="post-badge pb-bio">Bioinformatics</span><span class="post-badge pb-amb" style="margin-left:4px">Founder</span></div>
+          <div class="post-info">BSc Biotechnology · University of Calicut · 5 hours ago</div>
+        </div>
+      </div>
+      <div class="post-text">
+        Just completed a phylogenetic analysis of <strong>Ideonella sakaiensis</strong> PETase enzyme using MEGA11. The clustering pattern when compared to cutinases is genuinely fascinating — it suggests convergent evolution rather than horizontal gene transfer. Posting the tree and methodology on the collab board. Any bioinformatics people want to extend this?
+      </div>
+      <div class="post-tags"><span class="ptag">Bioinformatics</span><span class="ptag">Research</span><span class="ptag">Collaboration Needed</span></div>
+      <div class="post-actions">
+        <div class="pa" onclick="this.style.color='var(--j)'">❤️ 41 Likes</div>
+        <div class="pa">💬 15 Comments</div>
+        <div class="pa">🔖 Save</div>
+        <div class="pa">↗ Share</div>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-hdr">
+        <div class="post-av" style="background:linear-gradient(135deg,#818CF8,#FB7185)">F</div>
+        <div class="post-meta">
+          <div class="post-name">Fathima R. <span class="post-badge pb-intern">Internships</span></div>
+          <div class="post-info">BSc Microbiology · MG University · 1 day ago</div>
+        </div>
+      </div>
+      <div class="post-text">
+        <strong>Internship Alert!</strong> RGCB (Rajiv Gandhi Centre for Biotechnology, Thiruvananthapuram) just opened summer project positions for BSc Life Science students. Stipend: ₹5,000/month. 2-month project. Deadline is June 10. Applied yesterday — they respond fast if you have a research statement. Sharing the email template I used 👇
+      </div>
+      <div class="post-tags"><span class="ptag">RGCB</span><span class="ptag">Internship</span><span class="ptag">Kerala</span><span class="ptag">Deadline Alert</span></div>
+      <div class="post-actions">
+        <div class="pa" onclick="this.style.color='var(--j)'">❤️ 67 Likes</div>
+        <div class="pa">💬 23 Comments</div>
+        <div class="pa">🔖 Save</div>
+        <div class="pa">↗ Share</div>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-hdr">
+        <div class="post-av" style="background:linear-gradient(135deg,#22D3EE,#818CF8)">N</div>
+        <div class="post-meta">
+          <div class="post-name">Neethu S.</div>
+          <div class="post-info">BSc Biochemistry · Kannur University · 2 days ago</div>
+        </div>
+      </div>
+      <div class="post-text">
+        Our CSIR NET June 2025 study group now has 5 members — we meet every Sunday 7pm on Zoom, covering 2 units per session with group MCQ solving after. Still space for 1-2 serious people who can commit. DM me or comment below.
+      </div>
+      <div class="post-tags"><span class="ptag">CSIR NET</span><span class="ptag">Study Group</span><span class="ptag">Open Invite</span></div>
+      <div class="post-actions">
+        <div class="pa" onclick="this.style.color='var(--j)'">❤️ 31 Likes</div>
+        <div class="pa">💬 12 Comments</div>
+        <div class="pa">🔖 Save</div>
+        <div class="pa">↗ Share</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:1.5rem;font-size:13px;color:var(--tf);">
+      <a href="https://chat.whatsapp.com/FyyK1AwAe7CCdOgs1SPbVs" target="_blank" style="color:var(--j);text-decoration:none;">Join the WhatsApp group to see all posts and participate →</a>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDEBAR -->
+  <div class="sidebar-r">
+
+    <!-- Leaderboard -->
+    <div class="sw">
+      <div class="sw-title"><div class="qdot"></div>TOP THIS WEEK</div>
+      <div class="lb" id="commLb">
+        <div class="lbr"><span class="lbr-rank">01</span><div class="lbr-av" style="background:linear-gradient(135deg,#F59E0B,#FB7185)">R</div><div style="flex:1"><div class="lbr-name">Rahul K.</div><div style="font-size:10px;color:var(--tf);font-family:'JetBrains Mono',monospace">MG Univ.</div></div><span class="lbr-crown">👑</span><span class="lbr-pts">2,840</span></div>
+        <div class="lbr"><span class="lbr-rank">02</span><div class="lbr-av" style="background:linear-gradient(135deg,#818CF8,#22D3EE)">F</div><div style="flex:1"><div class="lbr-name">Fathima M.</div><div style="font-size:10px;color:var(--tf);font-family:'JetBrains Mono',monospace">MG Univ.</div></div><span class="lbr-pts">2,410</span></div>
+        <div class="lbr"><span class="lbr-rank">03</span><div class="lbr-av" style="background:linear-gradient(135deg,#00C896,#22D3EE)">S</div><div style="flex:1"><div class="lbr-name">Sufail A.</div><div style="font-size:10px;color:var(--tf);font-family:'JetBrains Mono',monospace">Calicut Univ.</div></div><span class="lbr-pts">2,190</span></div>
+        <div class="lbr"><span class="lbr-rank">04</span><div class="lbr-av" style="background:linear-gradient(135deg,#FB7185,#F59E0B)">N</div><div style="flex:1"><div class="lbr-name">Neethu S.</div><div style="font-size:10px;color:var(--tf);font-family:'JetBrains Mono',monospace">Kannur Univ.</div></div><span class="lbr-pts">1,920</span></div>
+        <div class="lbr"><span class="lbr-rank">05</span><div class="lbr-av" style="background:linear-gradient(135deg,#22D3EE,#818CF8)">A</div><div style="flex:1"><div class="lbr-name">Arjun P.</div><div style="font-size:10px;color:var(--tf);font-family:'JetBrains Mono',monospace">Kannur Univ.</div></div><span class="lbr-pts">1,740</span></div>
+      </div>
+      <a href="#" style="display:block;text-align:center;margin-top:.75rem;font-size:12px;color:var(--j);text-decoration:none;font-family:'JetBrains Mono',monospace;">Full leaderboard →</a>
+    </div>
+
+    <!-- Study Groups -->
+    <div class="sw">
+      <div class="sw-title">ACTIVE STUDY GROUPS</div>
+      <div class="sg-item">
+        <div class="sg-name">CSIR NET June 2025</div>
+        <div class="sg-meta">👥 5/6 members · Sundays 7pm</div>
+        <div class="sg-btn">Request to Join</div>
+      </div>
+      <div class="sg-item">
+        <div class="sg-name">Bioinformatics Beginners</div>
+        <div class="sg-meta">👥 8/10 members · Saturdays 6pm</div>
+        <div class="sg-btn">Request to Join</div>
+      </div>
+      <div class="sg-item">
+        <div class="sg-name">Sem 4 Microbiology</div>
+        <div class="sg-meta">👥 12 members · Exam mode 🔥</div>
+        <div class="sg-btn">Join Now</div>
+      </div>
+      <a href="#" style="display:block;text-align:center;margin-top:.75rem;font-size:12px;color:var(--j);text-decoration:none;font-family:'JetBrains Mono',monospace;padding:.65rem;border-radius:8px;border:1px solid rgba(0,200,150,.2);background:rgba(0,200,150,.05);">+ Create Study Group</a>
+    </div>
+
+    <!-- Internship Radar -->
+    <div class="sw">
+      <div class="sw-title"><div class="qdot"></div>INTERNSHIP RADAR</div>
+      <div class="ia-card">
+        <div class="ia-tag">NEW · RESEARCH</div>
+        <div class="ia-title">JNCASR Summer Programme</div>
+        <div class="ia-org">Bangalore · ₹10,000/month</div>
+        <div class="ia-dl">⏰ Deadline: Mar 15 · 8 days left</div>
+      </div>
+      <div class="ia-card" style="background:rgba(129,140,248,.06);border-color:rgba(129,140,248,.15);">
+        <div class="ia-tag" style="color:var(--vi)">HOT · GOVT</div>
+        <div class="ia-title">DBT Internship 2025</div>
+        <div class="ia-org">New Delhi · ₹8,000/month</div>
+        <div class="ia-dl" style="color:var(--am)">⏰ Deadline: Apr 30 · 54 days left</div>
+      </div>
+      <div id="internRadar"></div>
+<a href="features.html" style="display:block;text-align:center;margin-top:.75rem;font-size:12px;color:var(--j);text-decoration:none;font-family:'JetBrains Mono',monospace;">View all opportunities →</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:'Cabinet Grotesk', sans-serif;font-size:1.1rem;font-weight:700;color:var(--td);">Bio<em style="color:var(--j);font-style:italic;">360</em></div>
+  <div class="fc">© 2025 Bio360 Community · Kerala, India</div>
+  <div class="fl"><a href="index.html">Home</a><a href="features.html">Features</a><a href="blog.html">Blog</a><a href="mailto:Bio360community@gmail.com">Contact</a></div>
+</footer>
+
+<script>
+let answered=false;
+function answerQ(el,correct){
+  if(answered)return; answered=true;
+  document.querySelectorAll('.q-opt').forEach(o=>{
+    if(o.dataset.correct==='true'||o===el&&correct) o.classList.add(correct&&o===el?'correct':'');
+  });
+  if(correct){el.classList.add('correct');}
+  else{el.classList.add('wrong');document.querySelectorAll('.q-opt')[2].classList.add('correct');}
+}
+document.querySelectorAll('.feed-tabs .ftab').forEach(t=>{
+  t.addEventListener('click',()=>{document.querySelectorAll('.feed-tabs .ftab').forEach(x=>x.classList.remove('on'));t.classList.add('on');});
+});
+// Countdown timer
+const t=document.querySelector('.q-foot span');
+// ── REAL DATA ──
+async function loadCommunityData(){
+  // Leaderboard
+  const lb = await getLeaderboard(5);
+  const lbEl = document.getElementById('lbWidget');
+  if(lbEl && lb.length){
+    lbEl.innerHTML = lb.map((r,i)=>`
+      <div class="lbr">
+        <span class="lbr-rank">0${r.rank||i+1}</span>
+        <div class="lbr-av" style="background:${avatarGradient(r.name)}">${initials(r.name)}</div>
+        <div style="flex:1">
+          <div class="lbr-name">${r.name}</div>
+          <div style="font-size:10px;color:var(--tf);font-family:'JetBrains Mono',monospace">${shortCollege(r.college)}</div>
+        </div>
+        ${i===0?'<span class="lbr-crown">👑</span>':''}
+        <span class="lbr-pts">${(r.xp||0).toLocaleString()}</span>
+      </div>`).join('');
+  }
+
+  // Internship radar
+  const interns = await getInternships(2);
+  const iaEl = document.getElementById('internRadar');
+  if(iaEl && interns.length){
+    iaEl.innerHTML = interns.map(i=>`
+      <div class="ia-card">
+        <div class="ia-tag">NEW · ${(i.type||'RESEARCH').toUpperCase()}</div>
+        <div class="ia-title">${i.title}</div>
+        <div class="ia-org">${i.organization} · ${i.stipend||'See link'}</div>
+        <div class="ia-dl">⏰ ${daysUntil(i.deadline)}</div>
+      </div>`).join('');
+  }
+
+  // Member count
+  const count = await getMemberCount();
+  const cEl = document.getElementById('communityCount');
+  if(cEl) cEl.textContent = count + '+ members';
+}
+loadCommunityData();
+
+let s=45;
+const iv=setInterval(()=>{s--;if(s<=0){clearInterval(iv);if(t)t.textContent='⏱ Time up!';}else if(t)t.textContent=`⏱ ${s}s remaining`;},1000);
+
+const hamBtn=document.getElementById('hamBtn');
+const mobileMenu=document.getElementById('mobileMenu');
+if(hamBtn){hamBtn.addEventListener('click',()=>{hamBtn.classList.toggle('open');mobileMenu.classList.toggle('open');});}
+document.querySelectorAll('.mobile-menu a').forEach(a=>{a.addEventListener('click',()=>{hamBtn&&hamBtn.classList.remove('open');mobileMenu&&mobileMenu.classList.remove('open');});});
+
+</script>
+
+<nav class="mobile-bottom-nav">
+  <a href="index.html" class="mbn-item"><span class="mbn-ico">🏠</span>Home</a>
+  <a href="#" class="mbn-item active"><span class="mbn-ico">📝</span>Quiz</a>
+  <a href="#" class="mbn-item"><span class="mbn-ico">🏆</span>Rank</a>
+  <a href="#" class="mbn-item"><span class="mbn-ico">📄</span>PYQs</a>
+  <a href="#" class="mbn-item"><span class="mbn-ico">🤖</span>AI</a>
+</nav>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+
+<script>
+// ── COMMUNITY: real leaderboard + internships + feed ──
+async function loadCommunityData(){
+  // Right sidebar leaderboard
+  const lb = await getLeaderboard(5);
+  const lbEl = document.getElementById('lbWidget');
+  if(lbEl && lb.length){
+    const max = lb[0].xp||1;
+    lbEl.innerHTML = lb.map((r,i)=>`
+      <div class="lbr">
+        <span class="lbr-rank">0${r.rank||i+1}</span>
+        <div class="lbr-av" style="background:${avatarGradient(r.name)}">${initials(r.name)}</div>
+        <div style="flex:1">
+          <div class="lbr-name">${r.name}</div>
+          <div style="font-size:10px;color:var(--tf);font-family:'JetBrains Mono',monospace">${shortCollege(r.college)}</div>
+        </div>
+        ${i===0?'<span class="lbr-crown">👑</span>':''}
+        <span class="lbr-pts">${(r.xp||0).toLocaleString()}</span>
+      </div>`).join('');
+  }
+
+  // Internship radar
+  const interns = await getInternships(2);
+  const iaEl = document.getElementById('internRadar');
+  if(iaEl && interns.length){
+    iaEl.innerHTML = interns.map(i=>`
+      <div class="ia-card">
+        <div class="ia-tag">NEW · ${(i.type||'RESEARCH').toUpperCase()}</div>
+        <div class="ia-title">${i.title}</div>
+        <div class="ia-org">${i.organization} · ${i.stipend||'See link'}</div>
+        <div class="ia-dl">⏰ ${daysUntil(i.deadline)}</div>
+      </div>`).join('');
+  }
+
+  // Live member count in feed header
+  const count = await getMemberCount();
+  const cEl = document.getElementById('communityCount');
+  if(cEl) cEl.textContent = count + '+ members';
+}
+
+document.addEventListener('DOMContentLoaded', loadCommunityData);
+</script>
+<script src="cmdbar.js"></script>
+</body>
+</html>
