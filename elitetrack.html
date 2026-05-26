@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Track — Global Scholarships for Kerala Life Science Students | Bio360</title>
+<meta name="description" content="Erasmus Mundus, DAAD, Fulbright, Chevening and 10+ global scholarships for Indian life science students — eligibility, SOPs, deadlines, readiness score.">
+<link rel="canonical" href="https://bio360community.github.io/Bio360/elitetrack.html">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --j:#00C896;--cy:#22D3EE;--am:#F59E0B;--ro:#FB7185;--vi:#818CF8;
+  --ink:#060B12;--s1:#0f1a27;--s2:#111D2C;--s3:#172236;--s4:#1E2D42;
+  --tx:#EDF2F7;--td:#94A3B8;--tf:#3d5166;
+  --b1:rgba(0,200,150,.14);--b2:rgba(255,255,255,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Satoshi',sans-serif;background:var(--ink);color:var(--tx);overflow-x:hidden;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.bgg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,200,150,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,150,.02) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,black,transparent);}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);}
+.o1{width:600px;height:600px;background:rgba(129,140,248,.06);top:-200px;right:-200px;animation:d1 24s ease-in-out infinite;}
+.o2{width:400px;height:400px;background:rgba(0,200,150,.05);bottom:15%;left:-150px;animation:d2 28s ease-in-out infinite;}
+@keyframes d1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,40px)}}
+@keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
+@media(max-width:768px){.orb{display:none;}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(6,11,18,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--b2);}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:1.2rem;color:var(--tx);text-decoration:none;}
+.lm{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--j),var(--cy));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:var(--ink);}
+.logo em{color:var(--j);font-style:italic;}
+.nl{display:flex;gap:2rem;list-style:none;}
+.nl a{color:var(--td);text-decoration:none;font-size:14px;transition:color .2s;position:relative;padding-bottom:2px;}
+.nl a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--j);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
+.nl a:hover{color:var(--tx);} .nl a:hover::after,.nl a.active::after{transform:scaleX(1);} .nl a.active{color:var(--tx);}
+.nc{touch-action:manipulation;background:var(--j);color:var(--ink);border:none;cursor:pointer;padding:9px 22px;border-radius:8px;font-family:'Satoshi',sans-serif;font-size:13px;font-weight:700;transition:all .2s;text-decoration:none;}
+.nc:hover{background:var(--cy);}
+@media(max-width:768px){.nl{display:none;}.nc{padding:8px 14px;font-size:12px;}}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:8rem 2.5rem 5rem;max-width:1100px;margin:0 auto;text-align:center;}
+.elite-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.25);border-radius:6px;padding:6px 16px;font-size:12px;font-weight:600;color:var(--vi);margin-bottom:2rem;letter-spacing:.08em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+h1{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:1rem;}
+h1 .g{color:var(--j);} h1 .v{color:var(--vi);}
+.hero-sub{color:var(--td);font-size:1.05rem;font-weight:300;max-width:560px;margin:0 auto 3rem;line-height:1.7;}
+
+/* READINESS SCORE */
+.score-card{background:var(--s2);border:1px solid var(--b2);border-radius:16px;padding:2rem;max-width:600px;margin:0 auto 2rem;position:relative;overflow:hidden;}
+.score-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--vi),transparent);}
+.score-title{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--vi);font-family:'JetBrains Mono',monospace;margin-bottom:1rem;}
+.score-row{display:flex;align-items:center;gap:1.5rem;}
+.score-ring{position:relative;width:80px;height:80px;flex-shrink:0;}
+.score-ring svg{transform:rotate(-90deg);}
+.score-ring circle{fill:none;stroke-width:6;stroke-linecap:round;}
+.score-ring .track{stroke:rgba(255,255,255,.06);}
+.score-ring .fill{stroke:var(--vi);stroke-dasharray:220;stroke-dashoffset:220;transition:stroke-dashoffset 1.2s ease;}
+.score-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.score-pct{font-family:'Cabinet Grotesk',sans-serif;font-size:1.4rem;font-weight:800;color:var(--tx);line-height:1;}
+.score-lbl{font-size:9px;color:var(--tf);font-family:'JetBrains Mono',monospace;letter-spacing:.08em;}
+.score-bars{flex:1;display:flex;flex-direction:column;gap:8px;}
+.sb-row{display:flex;align-items:center;gap:8px;}
+.sb-label{font-size:11px;color:var(--td);width:100px;flex-shrink:0;}
+.sb-track{flex:1;height:5px;background:var(--s3);border-radius:3px;overflow:hidden;}
+.sb-fill{height:100%;border-radius:3px;transition:width 1s ease;}
+.sb-val{font-size:11px;color:var(--td);font-family:'JetBrains Mono',monospace;width:30px;text-align:right;}
+.score-tip{font-size:12px;color:var(--td);margin-top:1rem;padding-top:1rem;border-top:1px solid var(--b2);text-align:left;}
+.score-tip strong{color:var(--vi);}
+
+/* SECTION */
+.sec{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:5rem 2.5rem;}
+.lbl{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--j);display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+.lbl::before{content:'';display:block;width:20px;height:1px;background:var(--j);}
+.lbl.v{color:var(--vi);}
+.lbl.v::before{background:var(--vi);}
+.st{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:.75rem;}
+.ss{color:var(--td);font-size:1rem;font-weight:300;max-width:520px;margin-bottom:2.5rem;line-height:1.7;}
+.dv{position:relative;z-index:1;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.07),transparent);max-width:1100px;margin:0 auto;}
+
+/* FILTER */
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem;}
+.ftag{touch-action:manipulation;padding:7px 16px;border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;border:1px solid var(--b2);background:transparent;color:var(--td);font-family:'Satoshi',sans-serif;}
+.ftag:hover{border-color:var(--b1);color:var(--tx);}
+.ftag.on{background:rgba(129,140,248,.1);border-color:rgba(129,140,248,.3);color:var(--vi);}
+
+/* SCHOLARSHIP CARDS */
+.sch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
+.sch-card{background:var(--s2);border:1px solid var(--b2);border-radius:16px;overflow:hidden;transition:all .25s;cursor:pointer;}
+.sch-card:hover{transform:translateY(-4px);border-color:var(--b1);box-shadow:0 0 30px rgba(0,200,150,.08);}
+.sch-header{padding:1.5rem 1.5rem 1rem;display:flex;align-items:flex-start;gap:12px;}
+.sch-flag{font-size:2rem;flex-shrink:0;}
+.sch-hinfo{flex:1;}
+.sch-name{font-family:'Cabinet Grotesk',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:3px;line-height:1.3;}
+.sch-org{font-size:12px;color:var(--td);font-family:'JetBrains Mono',monospace;}
+.sch-diff{font-size:10px;font-weight:600;padding:3px 10px;border-radius:5px;font-family:'JetBrains Mono',monospace;align-self:flex-start;}
+.d-high{background:rgba(251,113,133,.1);color:var(--ro);}
+.d-med{background:rgba(245,158,11,.1);color:var(--am);}
+.d-low{background:rgba(0,200,150,.1);color:var(--j);}
+.sch-body{padding:0 1.5rem 1.25rem;}
+.sch-amount{font-family:'Cabinet Grotesk',sans-serif;font-size:1.2rem;font-weight:800;color:var(--j);margin-bottom:.75rem;}
+.sch-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
+.chip{font-size:11px;padding:3px 9px;border-radius:5px;background:rgba(255,255,255,.04);border:1px solid var(--b2);color:var(--td);font-family:'JetBrains Mono',monospace;}
+.sch-meta{display:flex;flex-direction:column;gap:5px;padding-top:1rem;border-top:1px solid var(--b2);}
+.sm-row{display:flex;gap:8px;font-size:12px;color:var(--td);}
+.sm-lbl{color:var(--tf);width:80px;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:11px;}
+.sch-link{display:block;margin-top:1rem;text-align:center;background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2);color:var(--vi);border-radius:8px;padding:9px;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;touch-action:manipulation;}
+.sch-link:hover{background:rgba(129,140,248,.2);}
+
+/* EXPAND DETAILS */
+.sch-expand{display:none;padding:1rem 1.5rem 1.5rem;border-top:1px solid var(--b2);animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.sch-expand.open{display:block;}
+.exp-title{font-size:12px;font-weight:600;color:var(--vi);font-family:'JetBrains Mono',monospace;letter-spacing:.08em;margin-bottom:.5rem;}
+.exp-list{display:flex;flex-direction:column;gap:4px;margin-bottom:1rem;}
+.exp-item{font-size:12px;color:var(--td);display:flex;gap:6px;}
+.exp-item::before{content:'→';color:var(--vi);flex-shrink:0;}
+
+/* SOP BUILDER */
+.sop-wrap{background:var(--s2);border:1px solid rgba(129,140,248,.2);border-radius:16px;overflow:hidden;}
+.sop-header{background:rgba(129,140,248,.06);padding:1.5rem;border-bottom:1px solid rgba(129,140,248,.1);}
+.sop-header h3{font-family:'Cabinet Grotesk',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:.25rem;}
+.sop-header p{font-size:13px;color:var(--td);}
+.sop-steps{padding:1.5rem;display:flex;flex-direction:column;gap:12px;}
+.sop-step{background:var(--s3);border:1px solid var(--b2);border-radius:10px;padding:1rem 1.25rem;cursor:pointer;transition:border-color .2s;}
+.sop-step:hover,.sop-step.active{border-color:rgba(129,140,248,.3);}
+.sop-step.done{border-color:rgba(0,200,150,.3);background:rgba(0,200,150,.04);}
+.ss-top{display:flex;align-items:center;gap:10px;}
+.ss-num{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;flex-shrink:0;background:rgba(129,140,248,.15);color:var(--vi);}
+.ss-num.done{background:rgba(0,200,150,.15);color:var(--j);}
+.ss-title{font-size:14px;font-weight:600;flex:1;}
+.ss-status{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--tf);}
+.ss-body{display:none;margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--b2);}
+.ss-body.open{display:block;}
+.ss-body p{font-size:13px;color:var(--td);line-height:1.65;margin-bottom:.75rem;}
+.ss-body textarea{width:100%;background:var(--ink);border:1px solid var(--b2);border-radius:8px;padding:.75rem 1rem;font-family:'Satoshi',sans-serif;font-size:13px;color:var(--tx);resize:vertical;min-height:80px;outline:none;transition:border-color .2s;}
+.ss-body textarea:focus{border-color:rgba(129,140,248,.4);}
+.ss-body textarea::placeholder{color:var(--tf);}
+.ss-save{touch-action:manipulation;background:rgba(129,140,248,.15);color:var(--vi);border:1px solid rgba(129,140,248,.25);border-radius:7px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;margin-top:.5rem;transition:all .2s;font-family:'Satoshi',sans-serif;}
+.ss-save:hover{background:rgba(129,140,248,.25);}
+
+/* CV TIPS */
+.cv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.cv-card{background:var(--s2);border:1px solid var(--b2);border-radius:12px;padding:1.5rem;transition:border-color .2s;}
+.cv-card:hover{border-color:var(--b1);}
+.cv-ico{font-size:1.75rem;margin-bottom:.75rem;}
+.cv-title{font-family:'Cabinet Grotesk',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.5rem;}
+.cv-tip{font-size:13px;color:var(--td);line-height:1.65;}
+.cv-example{background:var(--s3);border-radius:7px;padding:.6rem .85rem;margin-top:.75rem;font-size:12px;color:var(--j);font-family:'JetBrains Mono',monospace;line-height:1.6;}
+
+/* LOR */
+.lor-timeline{display:flex;flex-direction:column;gap:0;position:relative;}
+.lor-timeline::before{content:'';position:absolute;left:16px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--vi),rgba(129,140,248,.1));}
+.lor-item{padding:0 0 2rem 3.5rem;position:relative;}
+.lor-dot{position:absolute;left:10px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--s3);border:2px solid rgba(129,140,248,.4);}
+.lor-dot.now{background:var(--vi);border-color:var(--vi);box-shadow:0 0 10px rgba(129,140,248,.4);}
+.lor-when{font-size:10px;color:var(--vi);font-family:'JetBrains Mono',monospace;letter-spacing:.08em;margin-bottom:.3rem;}
+.lor-title{font-family:'Cabinet Grotesk',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.4rem;}
+.lor-desc{font-size:13px;color:var(--td);line-height:1.65;}
+
+/* SUCCESS STORIES */
+.alumni-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
+.alumni-card{background:var(--s2);border:1px solid var(--b2);border-radius:12px;padding:1.5rem;transition:border-color .2s;}
+.alumni-card:hover{border-color:var(--b1);}
+.alumni-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cabinet Grotesk',sans-serif;font-size:1.2rem;font-weight:800;color:var(--ink);margin-bottom:.75rem;}
+.alumni-name{font-family:'Cabinet Grotesk',sans-serif;font-size:1rem;font-weight:700;margin-bottom:2px;}
+.alumni-college{font-size:11px;color:var(--tf);font-family:'JetBrains Mono',monospace;margin-bottom:.6rem;}
+.alumni-award{display:inline-flex;align-items:center;gap:6px;background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2);border-radius:5px;padding:3px 10px;font-size:12px;color:var(--vi);font-weight:600;margin-bottom:.6rem;}
+.alumni-quote{font-size:13px;color:var(--td);line-height:1.6;font-style:italic;}
+
+/* CTA */
+.cta-box{background:var(--s2);border:1px solid rgba(129,140,248,.2);border-radius:16px;padding:3rem;text-align:center;position:relative;overflow:hidden;}
+.cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--vi),transparent);}
+.cta-box h2{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.75rem;}
+.cta-box p{color:var(--td);font-size:1rem;max-width:460px;margin:0 auto 2rem;font-weight:300;line-height:1.7;}
+.btn-v{touch-action:manipulation;display:inline-flex;align-items:center;gap:8px;background:var(--vi);color:white;padding:13px 28px;border-radius:8px;font-family:'Cabinet Grotesk',sans-serif;font-size:15px;font-weight:700;text-decoration:none;transition:all .2s;cursor:pointer;border:none;}
+.btn-v:hover{background:#6366f1;transform:translateY(-2px);box-shadow:0 8px 30px rgba(129,140,248,.3);}
+.btn-s{touch-action:manipulation;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--tx);padding:13px 28px;border-radius:8px;border:1px solid var(--b2);font-family:'Cabinet Grotesk',sans-serif;font-size:15px;font-weight:500;text-decoration:none;transition:all .2s;}
+.btn-s:hover{border-color:var(--vi);color:var(--vi);}
+
+/* footer */
+footer{position:relative;z-index:1;border-top:1px solid var(--b2);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;max-width:1100px;margin:0 auto;}
+.fl{display:flex;gap:1.5rem;} .fl a{font-size:12px;color:var(--tf);text-decoration:none;transition:color .2s;} .fl a:hover{color:var(--j);}
+.fc{font-size:11px;color:var(--tf);font-family:'JetBrains Mono',monospace;}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+@media(max-width:640px){
+  .hero{padding:6.5rem 1.1rem 3rem;}
+  .sec{padding:3rem 1.1rem;}
+  .sch-grid,.cv-grid,.alumni-grid{grid-template-columns:1fr;}
+  .score-row{flex-direction:column;align-items:flex-start;}
+  .cta-box{padding:2rem 1.25rem;}
+  footer{padding:1.5rem 1.1rem;flex-direction:column;gap:.75rem;}
+}
+</style>
+</head>
+<body>
+<div class="bg"><div class="bgg"></div><div class="orb o1"></div><div class="orb o2"></div></div>
+
+<nav>
+  <a href="index.html" class="logo"><div class="lm">B</div>Bio<em>360</em></a>
+  <ul class="nl">
+    <li><a href="index.html">Home</a></li><li><a href="features.html">Features</a></li>
+    <li><a href="blog.html">Blog</a></li><li><a href="community.html">Community</a></li>
+    <li><a href="skillos.html">Skill OS</a></li>
+    <li><a href="elitetrack.html" class="active">Elite Track</a></li>
+  </ul>
+  <a href="login.html" class="nc">Join Free →</a>
+  <button class="hamburger" id="hamBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="features.html">Features</a>
+  <a href="blog.html">Blog</a>
+  <a href="community.html">Community</a>
+  <a href="skillos.html">Skill OS</a>
+  <a href="elitetrack.html" class="active">Elite Track</a>
+  <a href="https://chat.whatsapp.com/FyyK1AwAe7CCdOgs1SPbVs" target="_blank" style="color:var(--j);font-weight:600;">Join WhatsApp Free →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="elite-badge">🌍 Elite Track — Global Pathways</div>
+  <h1>From <span class="g">Kerala</span> to the<br><span class="v">World's Best</span> Labs</h1>
+  <p class="hero-sub">Scholarships, SOP guidance, CV tips, LOR strategy — everything Kerala life science students need to reach Erasmus, DAAD, Fulbright and beyond.</p>
+
+  <!-- READINESS SCORE -->
+  <div class="score-card">
+    <div class="score-title">🎯 Your Scholarship Readiness Score</div>
+    <div class="score-row">
+      <div class="score-ring">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle class="track" cx="40" cy="40" r="34"/>
+          <circle class="fill" id="scoreFill" cx="40" cy="40" r="34"/>
+        </svg>
+        <div class="score-num"><div class="score-pct" id="scorePct">--</div><div class="score-lbl">SCORE</div></div>
+      </div>
+      <div class="score-bars">
+        <div class="sb-row"><div class="sb-label">CGPA</div><div class="sb-track"><div class="sb-fill" style="width:0%;background:linear-gradient(to right,var(--j),var(--cy))" data-w="75%" id="sb1"></div></div><div class="sb-val" id="sbv1">7.5</div></div>
+        <div class="sb-row"><div class="sb-label">Research Exp.</div><div class="sb-track"><div class="sb-fill" style="width:0%;background:linear-gradient(to right,var(--vi),var(--cy))" data-w="40%" id="sb2"></div></div><div class="sb-val" id="sbv2">Low</div></div>
+        <div class="sb-row"><div class="sb-label">Language</div><div class="sb-track"><div class="sb-fill" style="width:0%;background:linear-gradient(to right,var(--am),var(--j))" data-w="60%" id="sb3"></div></div><div class="sb-val" id="sbv3">IELTS?</div></div>
+        <div class="sb-row"><div class="sb-label">SOP Ready</div><div class="sb-track"><div class="sb-fill" style="width:0%;background:linear-gradient(to right,var(--ro),var(--vi))" data-w="20%" id="sb4"></div></div><div class="sb-val" id="sbv4">Draft</div></div>
+      </div>
+    </div>
+    <div class="score-tip"><strong>Next step:</strong> Gain research experience (internship at RGCB or JNCASR) — this alone adds +25 points to your readiness score.</div>
+  </div>
+</div>
+
+<div class="dv"></div>
+
+<!-- SCHOLARSHIPS -->
+<section class="sec">
+  <p class="lbl v">Global Scholarships</p>
+  <h2 class="st">15 Scholarships Open<br>to Indian Students</h2>
+  <p class="ss">Every scholarship below is open to Indian life science students. Eligibility, amounts, deadlines — all verified.</p>
+  <div class="filter-row">
+    <button class="ftag on" onclick="filterSch(this,'all')">All</button>
+    <button class="ftag" onclick="filterSch(this,'europe')">🇪🇺 Europe</button>
+    <button class="ftag" onclick="filterSch(this,'usa')">🇺🇸 USA</button>
+    <button class="ftag" onclick="filterSch(this,'uk')">🇬🇧 UK</button>
+    <button class="ftag" onclick="filterSch(this,'germany')">🇩🇪 Germany</button>
+    <button class="ftag" onclick="filterSch(this,'india')">🇮🇳 India (National)</button>
+  </div>
+  <div class="sch-grid" id="schGrid"></div>
+</section>
+
+<div class="dv"></div>
+
+<!-- SOP BUILDER -->
+<section class="sec">
+  <p class="lbl v">SOP Builder</p>
+  <h2 class="st">Build Your Statement<br>of Purpose — Step by Step</h2>
+  <p class="ss">Not a generator. A guided storytelling system that produces a scholarship-winning SOP through structured prompts.</p>
+  <div class="sop-wrap">
+    <div class="sop-header">
+      <h3>🖊️ SOP Roadmap — 5 Sections</h3>
+      <p>Complete each section. Your answers auto-save locally. Export as text when done.</p>
+    </div>
+    <div class="sop-steps" id="sopSteps"></div>
+  </div>
+</section>
+
+<div class="dv"></div>
+
+<!-- CV TIPS -->
+<section class="sec">
+  <p class="lbl v">Academic CV</p>
+  <h2 class="st">CV Tips for Research &<br>Scholarship Applications</h2>
+  <div class="cv-grid">
+    <div class="cv-card"><div class="cv-ico">📋</div><div class="cv-title">Structure Order</div><div class="cv-tip">Research CVs differ from industry CVs. Always lead with Education → Research Experience → Publications → Conferences → Skills.</div><div class="cv-example">Education (GPA, year)<br>Research Experience<br>Publications/Posters<br>Skills & Certifications</div></div>
+    <div class="cv-card"><div class="cv-ico">🔬</div><div class="cv-title">Research Experience</div><div class="cv-tip">Each role needs 3 bullet points: what you did → technique/tool used → outcome or result. Quantify where possible.</div><div class="cv-example">• Conducted PCR analysis on 45 bacterial isolates using gel electrophoresis to confirm gene presence</div></div>
+    <div class="cv-card"><div class="cv-ico">📊</div><div class="cv-title">CGPA Presentation</div><div class="cv-tip">Show CGPA out of 10 AND convert to 4.0 scale for international applications. Include class rank if in top 20%.</div><div class="cv-example">CGPA: 8.4/10 (3.5/4.0)<br>Class Rank: 3/60 (Top 5%)</div></div>
+    <div class="cv-card"><div class="cv-ico">🏆</div><div class="cv-title">Awards & Recognition</div><div class="cv-tip">Include university ranks, merit scholarships, quiz wins, CSIR NET qualification. These signal academic performance to global reviewers.</div><div class="cv-example">CSIR NET LS Qualified (June 2024)<br>University Gold Medalist 2023</div></div>
+    <div class="cv-card"><div class="cv-ico">💻</div><div class="cv-title">Technical Skills</div><div class="cv-tip">Group by category. Don't just list — indicate proficiency level. For bioinformatics roles, list specific tools.</div><div class="cv-example">Bioinformatics: BLAST, MEGA11, Biopython<br>Lab: PCR, gel electrophoresis, cell culture<br>Programming: Python (intermediate), R (basic)</div></div>
+    <div class="cv-card"><div class="cv-ico">📏</div><div class="cv-title">Length & Format</div><div class="cv-tip">Research/scholarship CVs: 2 pages maximum for BSc, 3 for MSc. Use consistent fonts. PDF only. No photos for European applications.</div><div class="cv-example">Font: Times New Roman 11pt or Calibri 11pt<br>Margins: 2.5cm all sides<br>Format: PDF · 2 pages max</div></div>
+  </div>
+</section>
+
+<div class="dv"></div>
+
+<!-- LOR TIMELINE -->
+<section class="sec">
+  <p class="lbl v">LOR Guidance</p>
+  <h2 class="st">How to Get Strong<br>Recommendation Letters</h2>
+  <p class="ss">Most students ask at the wrong time, in the wrong way. Here's the complete timeline and approach.</p>
+  <div class="lor-timeline">
+    <div class="lor-item"><div class="lor-dot now"></div><div class="lor-when">NOW — BUILD RELATIONSHIP</div><div class="lor-title">Do excellent work in lab/class</div><div class="lor-desc">Professors write strong LORs for students they know well. Join a lab, be consistent, ask intelligent questions. A professor who knows your work writes 10× better letters than one who just knows your grade.</div></div>
+    <div class="lor-item"><div class="lor-dot"></div><div class="lor-when">3 MONTHS BEFORE DEADLINE</div><div class="lor-title">Send a formal LOR request email</div><div class="lor-desc">Email subject: "LOR Request for [Scholarship] — [Your Name]". Attach your CV, scholarship details, SOP draft, and a bullet list of your contributions to their lab/class. Give them everything they need.</div></div>
+    <div class="lor-item"><div class="lor-dot"></div><div class="lor-when">6 WEEKS BEFORE</div><div class="lor-title">Send a reminder with materials</div><div class="lor-desc">Send a polite reminder with the exact deadline, submission link/instructions, and offer to meet to discuss any questions. Never assume they've started.</div></div>
+    <div class="lor-item"><div class="lor-dot"></div><div class="lor-when">2 WEEKS BEFORE</div><div class="lor-title">Final confirmation</div><div class="lor-desc">Confirm receipt of LOR or check status. Thank them in advance. After submission, always send a personal thank-you email regardless of outcome.</div></div>
+  </div>
+  <div style="background:rgba(129,140,248,.07);border:1px solid rgba(129,140,248,.2);border-radius:10px;padding:1rem 1.25rem;margin-top:1rem;">
+    <strong style="color:var(--vi);font-size:13px;">LOR Request Email Template →</strong>
+    <p style="font-size:13px;color:var(--td);margin-top:.5rem;line-height:1.65;">Subject: Letter of Recommendation Request — [Scholarship Name] · Dear Dr. [Name], I am applying for the [Scholarship] and would be honoured if you could write a letter of recommendation supporting my application. I have attached my CV, a draft SOP, and a summary of my contributions to [lab/project]. The deadline is [date] and the submission link is [URL]. I would be happy to discuss further at your convenience.</p>
+  </div>
+</section>
+
+<div class="dv"></div>
+
+<!-- SUCCESS STORIES -->
+<section class="sec">
+  <p class="lbl v">Inspiration</p>
+  <h2 class="st">Kerala Students Who<br>Made It Global</h2>
+  <div class="alumni-grid">
+    <div class="alumni-card"><div class="alumni-av" style="background:linear-gradient(135deg,#818CF8,#22D3EE)">F</div><div class="alumni-name">Farzana N.</div><div class="alumni-college">MG University → Wageningen, Netherlands</div><div class="alumni-award">🇳🇱 Erasmus Mundus</div><div class="alumni-quote">"Bio360's SOP guidance helped me structure my research story. I got into Wageningen's MSc Biotechnology with a full Erasmus scholarship."</div></div>
+    <div class="alumni-card"><div class="alumni-av" style="background:linear-gradient(135deg,#00C896,#22D3EE)">A</div><div class="alumni-name">Arjun P.</div><div class="alumni-college">Kannur University → IISER Pune</div><div class="alumni-award">🇮🇳 CSIR NET JRF</div><div class="alumni-quote">"Qualified CSIR NET JRF in my first attempt using the 6-month plan from Bio360. Now doing PhD at IISER with ₹31,000/month fellowship."</div></div>
+    <div class="alumni-card"><div class="alumni-av" style="background:linear-gradient(135deg,#F59E0B,#FB7185)">R</div><div class="alumni-name">Rahul M.</div><div class="alumni-college">Calicut University → TU Munich, Germany</div><div class="alumni-award">🇩🇪 DAAD Scholarship</div><div class="alumni-quote">"DAAD research scholarship for MSc Computational Biology at TUM. Germany has zero tuition — just needed IELTS and a strong research background."</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="position:relative;z-index:1;padding:0 2.5rem 5rem;max-width:1100px;margin:0 auto;">
+  <div class="cta-box">
+    <h2>Ready to go global?<br><span style="color:var(--vi)">Start your journey today.</span></h2>
+    <p>Join 12+ Kerala life science students building toward global research careers. Free PYQs, CSIR NET prep, internship tracker, and now — Elite Track.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="login.html" class="btn-v">Join Bio360 Free →</a>
+      <a href="skillos.html" class="btn-s">Explore Skill OS →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:'Cabinet Grotesk',sans-serif;font-size:1.1rem;font-weight:800;color:var(--td);">Bio<em style="color:var(--j);font-style:italic;">360</em></div>
+  <div class="fc">© 2025 Bio360 Community · Kerala, India</div>
+  <div class="fl"><a href="index.html">Home</a><a href="community.html">Community</a><a href="skillos.html">Skill OS</a><a href="mailto:Bio360community@gmail.com">Contact</a></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="cmdbar.js"></script>
+<script>
+// ── SCHOLARSHIPS DATA ──
+const SCHOLARSHIPS = [
+  {flag:'🇪🇺',name:'Erasmus Mundus Joint Masters',org:'European Commission',region:'europe',amount:'€1,400/month + full tuition waiver',diff:'high',chips:['Masters','Research','Life Science','2 years'],cgpa:'7.5+',english:'IELTS 6.5+',deadline:'Jan–Feb',docs:'SOP, CV, 3 LORs, transcripts',link:'https://erasmus-plus.ec.europa.eu/opportunities/individuals/students/erasmus-mundus-joint-masters',detail:['Covers tuition + living allowance + travel costs','Open to students worldwide including India','Apply to specific programmes (e.g., EMLex, IMSB, EuroinkasBiomedicine)','High competition — ~10% acceptance rate for Indian applicants','Strong research experience and publications significantly help']},
+  {flag:'🇩🇪',name:'DAAD Research Grants',org:'German Academic Exchange Service',region:'germany',amount:'€850–1,200/month + tuition',diff:'med',chips:['Research','Masters','PhD','Germany'],cgpa:'7.0+',english:'IELTS 6.0+ or German B2',deadline:'Oct–Nov',docs:'Research proposal, CV, 2 LORs, transcripts',link:'https://daad.de/en/study-and-research-in-germany/scholarships/',detail:['Germany has no tuition fees at public universities','DAAD covers living costs, insurance, travel','Strong preference for research-oriented applications','Can be used for MSc, PhD, or standalone research stays','German language not required for English-taught programmes']},
+  {flag:'🇺🇸',name:'Fulbright-Nehru Master\'s Fellowships',org:'US-India Educational Foundation',region:'usa',amount:'Full funding + stipend',diff:'high',chips:['Masters','USA','Research','Competitive'],cgpa:'8.0+',english:'GRE + TOEFL 90+',deadline:'July',docs:'Essays, CV, 3 LORs, GRE scores',link:'https://usief.org.in/Fellowships.aspx',detail:['Extremely competitive — ~200 awards annually for all India','Covers tuition, living, health, travel','For students who want to study in the USA','Strong leadership and social impact component','Research and academic excellence both required']},
+  {flag:'🇬🇧',name:'Chevening Scholarship',org:'UK Foreign Commonwealth Office',region:'uk',amount:'Full tuition + £1,093/month',diff:'high',chips:['Masters','UK','Leadership','1 year'],cgpa:'Upper Second Class (7.5+)',english:'IELTS 6.5+',deadline:'Nov',docs:'4 essays, 2 LORs, 2yr work experience',link:'https://chevening.org/scholarships/',detail:['Requires 2 years of work experience after BSc','Strong leadership narrative is essential','Covers all of UK Masters (1 year)','Prestigious — Chevening alumni network globally', 'Earlier applications have better outcomes']},
+  {flag:'🇳🇱',name:'Holland Scholarship',org:'Dutch Universities / Dutch Government',region:'europe',amount:'€5,000 one-time grant',diff:'low',chips:['Netherlands','Masters','Bachelor','Any Field'],cgpa:'7.0+',english:'IELTS 6.0+',deadline:'Jan–May',docs:'Application form, transcripts, motivation letter',link:'https://studyinholland.nl/scholarships/holland-scholarship',detail:['Available at most Dutch universities','Wageningen University — one of world\'s top for life sciences','€5,000 is supplementary (not full scholarship)','Netherlands universities are English-medium','Lower competition compared to Erasmus Mundus']},
+  {flag:'🇸🇪',name:'Swedish Institute Scholarships (SISGP)',org:'Swedish Institute',region:'europe',amount:'SEK 11,000/month + tuition',diff:'high',chips:['Sweden','Masters','Leadership','Sustainability'],cgpa:'7.5+',english:'IELTS 6.5+',deadline:'Feb',docs:'CV, SOP, 2 LORs, leadership evidence',link:'https://si.se/en/apply/scholarships/',detail:['Full scholarship — tuition + living + travel','Karolinska Institutet & Uppsala University — world class in biosciences','Strong leadership and sustainability focus in selection','Sweden has excellent research infrastructure','High competition for Indian applicants']},
+  {flag:'🇨🇭',name:'Swiss Government Excellence Scholarship',org:'Swiss Federal Commission',region:'europe',amount:'CHF 1,920/month + tuition',diff:'high',chips:['Switzerland','PhD','Research','PostDoc'],cgpa:'8.0+',english:'IELTS 7.0+',deadline:'Nov',docs:'Research proposal, CV, 3 LORs, acceptance letter',link:'https://sbfi.admin.ch/sbfi/en/home/education/scholarships-and-grants.html',detail:['Requires a host professor who accepts you first','Best for PhD and postdoc — not typically for BSc → Masters direct','ETH Zurich, EPFL — world top 10 universities','Research proposal quality is the key selection criterion','Stipend is generous — CHF 1,920 (~₹1.8 lakh/month)']},
+  {flag:'🇯🇵',name:'MEXT Japanese Government Scholarship',org:'Japanese Ministry of Education',region:'europe',amount:'¥144,000/month + tuition',diff:'med',chips:['Japan','Masters','PhD','Research'],cgpa:'7.0+',english:'TOEFL 79+ or Japanese N2',deadline:'May–Jun',docs:'Research plan, CV, transcripts, LORs',link:'https://www.studyinjapan.go.jp/en/smap-stopj-applications-research.html',detail:['Covers tuition, living, travel — fully funded','Japanese language learning supported','Strong in molecular biology, biochemistry research','Apply through Embassy of Japan in New Delhi','Good option for students interested in Japanese research culture']},
+  {flag:'🇮🇳',name:'CSIR-UGC NET JRF Fellowship',org:'CSIR, Govt. of India',region:'india',amount:'₹31,000/month (JRF) + HRA',diff:'med',chips:['India','PhD','Fellowship','Life Science'],cgpa:'55%+ (SC/ST: 50%)',english:'Not required',deadline:'June + December',docs:'Application form, transcripts, ID proof',link:'https://csirhrdg.res.in',detail:['Most important fellowship for Indian life science PhD students','Allows you to join any CSIR/UGC recognised lab/university','JRF → SRF: ₹35,000/month after 2 years','Top 6% qualify JRF; top 15% qualify LS (Lectureship)','Bihar, UP, Calicut — high success regions with dedicated prep communities']},
+  {flag:'🇮🇳',name:'DBT-JRF (Biotechnology Fellowship)',org:'Dept. of Biotechnology, Govt. India',region:'india',amount:'₹31,000/month + HRA',diff:'med',chips:['India','PhD','Biotech','Fellowship'],cgpa:'55%+ in Life Science',english:'Not required',deadline:'September',docs:'DBT-BET application, transcripts',link:'https://dbt-jrf.co.in',detail:['Specifically for Biotechnology research','Valid at DBT-funded labs and recognised universities','Lower competition than CSIR NET — smaller candidate pool','Good alternative or complement to CSIR NET strategy','Same stipend as CSIR-JRF']},
+  {flag:'🇮🇳',name:'ICMR-JRF (Medical Research Fellowship)',org:'Indian Council of Medical Research',region:'india',amount:'₹31,000/month + HRA',diff:'med',chips:['India','PhD','Medical','Biomedical'],cgpa:'55%+ in Life Science',english:'Not required',deadline:'February',docs:'ICMR application portal, transcripts',link:'https://icmr.gov.in',detail:['Best for students interested in biomedical/clinical research','Valid at ICMR institutes and approved medical institutions','Includes disease biology, epidemiology, public health','Separate exam from CSIR NET — different syllabus emphasis','Growing in prestige due to ICMR\'s expanded research budget']},
+  {flag:'🇮🇳',name:'DST-INSPIRE Fellowship',org:'Department of Science & Technology',region:'india',amount:'₹80,000/month (PhD level)',diff:'high',chips:['India','PhD','Top Performers','Elite'],cgpa:'Top 1% or Gold Medal',english:'Not required',deadline:'Rolling',docs:'Merit certificate, recommendation, research plan',link:'https://online-inspire.gov.in',detail:['Only for top 1% of BSc graduates (by marks or medals)','₹80,000/month — significantly higher than JRF stipend','Allows joining IISc, TIFR, IITs, IISERs','Prestigious and competitive — requires exceptional academic record','No separate exam — merit-based selection']},
+  {flag:'🇨🇦',name:'Vanier Canada Graduate Scholarship',org:'Government of Canada',region:'usa',amount:'CAD 50,000/year (3 years)',diff:'high',chips:['Canada','PhD','Research','Leadership'],cgpa:'8.5+ equivalent',english:'IELTS 7.0+',deadline:'November',docs:'Research proposal, CV, LORs, leadership evidence',link:'https://vanier.gc.ca',detail:['One of Canada\'s most prestigious PhD scholarships','Must be nominated by a Canadian university','Requires a supervisor at a Canadian university first','Life science research very well funded in Canada','Strong combination of research excellence + leadership required']},
+  {flag:'🇦🇺',name:'Australia Awards Scholarship',org:'Australian Government',region:'europe',amount:'Full tuition + AUD 30,000/year living',diff:'med',chips:['Australia','Masters','PhD','Developing Nations'],cgpa:'7.0+',english:'IELTS 6.5+',deadline:'April–July',docs:'Application form, SOP, 2 LORs, CV',link:'https://australiaawards.gov.au',detail:['Indian students eligible (India is priority country)','Full tuition + living allowance + return airfare','Available for Masters and PhD programmes','Australian universities strong in biomedical science','Relatively lower competition vs. European scholarships']},
+  {flag:'🇸🇬',name:'NUS Research Scholarship',org:'National University of Singapore',region:'europe',amount:'SGD 2,700/month + tuition waiver',diff:'high',chips:['Singapore','PhD','Research','Biomedical'],cgpa:'8.0+',english:'IELTS 6.5+',deadline:'Jan + Aug',docs:'Research proposal, CV, 3 LORs, GRE (optional)',link:'https://nus.edu.sg/admissions/graduate/scholarships/',detail:['NUS ranked #1 in Asia in Life Sciences','Research scholarship covers full PhD duration (4 years)','Singapore is a global biomedical research hub (Biopolis)','Strong industry + academia linkages','Gateway to Southeast Asian biotech sector']},
+];
+
+function schCard(s){
+  const diffClass=s.diff==='high'?'d-high':s.diff==='med'?'d-med':'d-low';
+  const diffLabel=s.diff==='high'?'Highly Competitive':s.diff==='med'?'Moderate':'Accessible';
+  return `<div class="sch-card" data-region="${s.region}">
+    <div class="sch-header">
+      <div class="sch-flag">${s.flag}</div>
+      <div class="sch-hinfo">
+        <div class="sch-name">${s.name}</div>
+        <div class="sch-org">${s.org}</div>
+      </div>
+      <div class="sch-diff ${diffClass}">${diffLabel}</div>
+    </div>
+    <div class="sch-body">
+      <div class="sch-amount">${s.amount}</div>
+      <div class="sch-chips">${s.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>
+      <div class="sch-meta">
+        <div class="sm-row"><span class="sm-lbl">Min CGPA</span><span>${s.cgpa}</span></div>
+        <div class="sm-row"><span class="sm-lbl">Language</span><span>${s.english}</span></div>
+        <div class="sm-row"><span class="sm-lbl">Deadline</span><span>${s.deadline}</span></div>
+        <div class="sm-row"><span class="sm-lbl">Documents</span><span>${s.docs}</span></div>
+      </div>
+      <div class="sch-expand" id="exp-${s.name.replace(/\s+/g,'_')}">
+        <div class="exp-title">KEY DETAILS</div>
+        <div class="exp-list">${s.detail.map(d=>`<div class="exp-item">${d}</div>`).join('')}</div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:1rem;">
+        <button onclick="toggleExp('${s.name.replace(/\s+/g,'_')}')" style="flex:1;background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.15);color:var(--vi);border-radius:7px;padding:8px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;touch-action:manipulation;" onmouseover="this.style.background='rgba(129,140,248,.18)'" onmouseout="this.style.background='rgba(129,140,248,.08)'">Details ▾</button>
+        <a href="${s.link}" target="_blank" class="sch-link" style="flex:1;margin-top:0;">Apply →</a>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleExp(key){
+  const el=document.getElementById('exp-'+key);
+  el.classList.toggle('open');
+}
+
+function filterSch(btn,region){
+  document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const filtered=region==='all'?SCHOLARSHIPS:SCHOLARSHIPS.filter(s=>s.region===region);
+  document.getElementById('schGrid').innerHTML=filtered.map(schCard).join('');
+}
+
+// Init scholarships
+document.getElementById('schGrid').innerHTML=SCHOLARSHIPS.map(schCard).join('');
+
+// ── SOP BUILDER ──
+const SOP_STEPS=[
+  {title:'Academic Background',prompt:'Describe your academic journey — your degree, university, CGPA, and the specific subjects or courses that shaped your scientific thinking.',ph:'I am completing my BSc Biotechnology at the University of Calicut with a CGPA of 8.4/10. My coursework in Molecular Biology and Genetics has given me a strong foundation in...'},
+  {title:'Research Experience & Interests',prompt:'What research have you done? What scientific questions excite you? Be specific — mention techniques, organisms, datasets, or problems you have worked on.',ph:'During my internship at RGCB Thiruvananthapuram, I worked on characterising plastic-degrading bacteria using 16S rRNA sequencing. This experience sparked my interest in...'},
+  {title:'Why This Programme / Scholarship',prompt:'Why specifically this programme, university, or scholarship? Mention professors, labs, resources, or curriculum features that align with your research goals.',ph:'The MSc Bioinformatics programme at Wageningen University is uniquely positioned for my goals because of Professor X\'s lab working on plant genomics, and the access to...'},
+  {title:'Career Vision',prompt:'Where do you see yourself in 10 years? What scientific problem do you want to solve? How does this programme accelerate that vision?',ph:'My long-term goal is to establish a computational biology research group focused on developing bioinformatics tools for detecting antimicrobial resistance in...'},
+  {title:'Impact Statement',prompt:'How will this scholarship investment in you create impact — for science, for India, for the field? Be specific and humble, not generic.',ph:'As a first-generation researcher from Kerala, I aim to bring advanced bioinformatics methods back to the emerging biotech ecosystem in South India. My research will...'},
+];
+
+const sopStepsEl=document.getElementById('sopSteps');
+sopStepsEl.innerHTML=SOP_STEPS.map((s,i)=>{
+  const saved=localStorage.getItem('sop_'+i)||'';
+  const done=saved.length>20;
+  return `<div class="sop-step${done?' done':''}" id="sopStep${i}">
+    <div class="ss-top" onclick="toggleSop(${i})">
+      <div class="ss-num${done?' done':''}">${done?'✓':(i+1)}</div>
+      <div class="ss-title">${s.title}</div>
+      <div class="ss-status">${done?'Complete':'Click to expand'}</div>
+    </div>
+    <div class="ss-body${i===0?' open':''}" id="sopBody${i}">
+      <p>${s.prompt}</p>
+      <textarea id="sopTa${i}" placeholder="${s.ph}" rows="4">${saved}</textarea>
+      <button class="ss-save" onclick="saveSop(${i})">Save ✓</button>
+    </div>
+  </div>`;
+}).join('');
+
+function toggleSop(i){
+  const b=document.getElementById('sopBody'+i);
+  b.classList.toggle('open');
+}
+function saveSop(i){
+  const val=document.getElementById('sopTa'+i).value;
+  localStorage.setItem('sop_'+i,val);
+  const step=document.getElementById('sopStep'+i);
+  const done=val.length>20;
+  step.className='sop-step'+(done?' done':'');
+  step.querySelector('.ss-num').className='ss-num'+(done?' done':'');
+  step.querySelector('.ss-num').textContent=done?'✓':(i+1);
+  step.querySelector('.ss-status').textContent=done?'Complete':'Click to expand';
+  if(done&&i<SOP_STEPS.length-1){
+    setTimeout(()=>{
+      document.getElementById('sopBody'+i).classList.remove('open');
+      document.getElementById('sopBody'+(i+1)).classList.add('open');
+    },400);
+  }
+}
+
+// ── READINESS SCORE ANIMATION ──
+const user=JSON.parse(localStorage.getItem('bio360_user')||'{}');
+setTimeout(()=>{
+  const fillEl=document.getElementById('scoreFill');
+  const pctEl=document.getElementById('scorePct');
+  const target=62; // demo score
+  const circumference=2*Math.PI*34;
+  const offset=circumference-(target/100)*circumference;
+  fillEl.style.strokeDashoffset=offset;
+  let n=0;
+  const t=setInterval(()=>{n+=2;if(n>=target){n=target;clearInterval(t);}pctEl.textContent=n+'%';},20);
+  // Animate bars
+  document.querySelectorAll('.sb-fill').forEach(el=>{
+    setTimeout(()=>el.style.width=el.dataset.w,200);
+  });
+},300);
+</script>
+<style>
+.hamburger{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;background:none;border:none;cursor:pointer;padding:0;}
+.hamburger span{display:block;height:2px;background:var(--tx);border-radius:2px;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(6,11,18,.98);border-bottom:1px solid rgba(255,255,255,.06);z-index:99;padding:1rem 1.25rem;flex-direction:column;gap:0;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--td);text-decoration:none;font-size:15px;padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.06);transition:color .2s;}
+.mobile-menu a:last-child{border:none;}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--j);}
+@media(max-width:768px){.hamburger{display:flex;}}
+</style>
+<script>
+const hamBtn=document.getElementById('hamBtn');
+const mobileMenu=document.getElementById('mobileMenu');
+if(hamBtn){hamBtn.addEventListener('click',()=>{hamBtn.classList.toggle('open');mobileMenu.classList.toggle('open');});}
+document.querySelectorAll('.mobile-menu a').forEach(a=>{a.addEventListener('click',()=>{hamBtn&&hamBtn.classList.remove('open');mobileMenu&&mobileMenu.classList.remove('open');});});
+</script>
+</body>
+</html>
