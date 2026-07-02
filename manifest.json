@@ -1,0 +1,27 @@
+{
+  "name": "Bio360 — Life Science Community",
+  "short_name": "Bio360",
+  "description": "Kerala's first life science student network. PYQs, CSIR prep, career tracks, and AI tools.",
+  "start_url": "/Bio360/index.html",
+  "scope": "/Bio360/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#060B12",
+  "theme_color": "#00C896",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "science"],
+  "lang": "en"
+}
