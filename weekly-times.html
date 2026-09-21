@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bio360 Weekly Times — Life Science News & Opportunities | June 2026</title>
+<meta name="description" content="Latest life science jobs, internships, fellowships and research opportunities curated for Indian biology students and researchers.">
+<link rel="canonical" href="https://bio360community.github.io/Bio360/weekly-times.html">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --j:#00C896;--cy:#22D3EE;--am:#F59E0B;--ro:#FB7185;--vi:#818CF8;
+  --ink:#060B12;--s1:#0f1a27;--s2:#111D2C;--s3:#172236;
+  --tx:#EDF2F7;--td:#94A3B8;--tf:#3d5166;
+  --b1:rgba(0,200,150,0.14);--b2:rgba(255,255,255,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Satoshi',sans-serif;background:var(--ink);color:var(--tx);overflow-x:hidden;line-height:1.65;-webkit-font-smoothing:antialiased;}
+
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.bgg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,200,150,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,150,.02) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,black,transparent);}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);}
+.o1{width:600px;height:600px;background:rgba(0,200,150,.06);top:-200px;right:-200px;animation:d1 22s ease-in-out infinite;}
+.o2{width:400px;height:400px;background:rgba(34,211,238,.04);bottom:15%;left:-150px;animation:d2 26s ease-in-out infinite;}
+@keyframes d1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,40px)}}
+@keyframes d2{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
+@media(max-width:768px){.orb{display:none;}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(6,11,18,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--b2);}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:1.2rem;color:var(--tx);text-decoration:none;}
+.lm{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--j),var(--cy));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:var(--ink);}
+.logo em{color:var(--j);font-style:italic;}
+.nl{display:flex;gap:2rem;list-style:none;}
+.nl a{color:var(--td);text-decoration:none;font-size:14px;transition:color .2s;position:relative;padding-bottom:2px;}
+.nl a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--j);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
+.nl a:hover{color:var(--tx);}
+.nl a:hover::after,.nl a.active::after{transform:scaleX(1);}
+.nl a.active{color:var(--tx);}
+.nc{touch-action:manipulation;background:var(--j);color:var(--ink);border:none;cursor:pointer;padding:9px 22px;border-radius:8px;font-family:'Satoshi',sans-serif;font-size:13px;font-weight:700;transition:all .2s;text-decoration:none;}
+.nc:hover{background:var(--cy);transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;-webkit-tap-highlight-color:transparent;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--td);transition:all .3s;border-radius:2px;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);}
+.mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(6,11,18,.98);border-bottom:1px solid var(--b2);z-index:99;padding:1rem 1.25rem;flex-direction:column;gap:0;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--td);text-decoration:none;font-size:15px;padding:.9rem 0;border-bottom:1px solid var(--b2);transition:color .2s;-webkit-tap-highlight-color:transparent;}
+.mobile-menu a:last-child{border:none;}
+.mobile-menu a.active,.mobile-menu a:hover{color:var(--j);}
+@media(max-width:768px){
+  nav{padding:.75rem 1rem;}
+  .nl{display:none;}
+  .nc{display:none!important;}
+  #cb-trigger{display:none!important;}
+  .hamburger{display:flex!important;}
+}
+
+/* ── MASTHEAD ── */
+.masthead{position:relative;z-index:1;padding:7rem 2.5rem 0;max-width:1100px;margin:0 auto;}
+.masthead-inner{border-bottom:1px solid var(--b2);padding-bottom:2rem;margin-bottom:2.5rem;}
+.wt-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;}
+.wt-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.25);border-radius:5px;color:var(--j);}
+.wt-dot{width:5px;height:5px;background:var(--j);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.wt-live{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--j);letter-spacing:.08em;}
+.wt-title{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(2.6rem,7vw,5rem);font-weight:900;line-height:.95;letter-spacing:-.04em;margin-bottom:.75rem;}
+.wt-title em{font-style:italic;color:var(--j);}
+.wt-sub{font-size:14px;color:var(--td);font-family:'JetBrains Mono',monospace;letter-spacing:.04em;}
+.masthead-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.wt-issue{display:flex;gap:2rem;}
+.wt-meta-item{display:flex;flex-direction:column;gap:2px;}
+.wt-meta-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--tf);}
+.wt-meta-val{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx);}
+.wt-divider{width:1px;height:30px;background:var(--b2);}
+.wt-stats{display:flex;gap:1.5rem;}
+.wt-stat{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--td);display:flex;align-items:center;gap:6px;}
+.wt-stat strong{color:var(--j);}
+
+/* ── FEATURED STRIP ── */
+.featured-strip{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2.5rem 1.5rem;}
+.strip-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--tf);margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+.strip-label::after{content:'';flex:1;height:1px;background:var(--b2);}
+.featured-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:12px;}
+.fc-main{background:var(--s2);border:1px solid var(--b2);border-radius:14px;padding:2rem;position:relative;overflow:hidden;cursor:pointer;transition:all .25s;}
+.fc-main::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--j),var(--cy));}
+.fc-main:hover{border-color:var(--b1);box-shadow:0 0 30px rgba(0,200,150,.1);transform:translateY(-2px);}
+.fc-main .tag-pill{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:4px;background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.2);color:var(--j);display:inline-block;margin-bottom:1rem;}
+.fc-main h2{font-family:'Cabinet Grotesk',sans-serif;font-size:1.5rem;font-weight:800;line-height:1.2;letter-spacing:-.02em;margin-bottom:.75rem;}
+.fc-main p{font-size:13px;color:var(--td);line-height:1.7;margin-bottom:1.25rem;}
+.fc-main .meta-row{display:flex;align-items:center;justify-content:space-between;}
+.fc-main .org{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tf);}
+.fc-main .salary{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--j);font-weight:600;}
+.fc-stack{display:flex;flex-direction:column;gap:12px;}
+.fc-side{background:var(--s2);border:1px solid var(--b2);border-radius:14px;padding:1.25rem 1.5rem;cursor:pointer;transition:all .25s;flex:1;}
+.fc-side:hover{border-color:var(--b1);transform:translateY(-2px);}
+.fc-side .tag-pill{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:4px;display:inline-block;margin-bottom:.6rem;}
+.fc-side h3{font-family:'Cabinet Grotesk',sans-serif;font-size:.95rem;font-weight:700;line-height:1.3;margin-bottom:.35rem;}
+.fc-side .fc-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tf);display:flex;justify-content:space-between;margin-top:.5rem;}
+
+/* ── SECTION WRAPPER ── */
+.section-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2.5rem;}
+.sec-hdr{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;padding-top:2.5rem;}
+.sec-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.sec-title{font-family:'Cabinet Grotesk',sans-serif;font-size:1.1rem;font-weight:700;}
+.sec-rule{flex:1;height:1px;background:var(--b2);}
+.sec-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--tf);letter-spacing:.08em;}
+
+/* ── OPPORTUNITY CARDS ── */
+.opp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px;margin-bottom:1rem;}
+.opp-card{background:var(--s2);border:1px solid var(--b2);border-radius:12px;padding:1.25rem 1.5rem;display:flex;gap:1rem;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.opp-card:hover{border-color:var(--b1);background:rgba(17,29,44,.9);transform:translateX(3px);}
+.opp-ico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid var(--b2);}
+.opp-body{flex:1;min-width:0;}
+.opp-title{font-family:'Cabinet Grotesk',sans-serif;font-size:.9rem;font-weight:700;line-height:1.3;margin-bottom:.3rem;}
+.opp-org{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--td);margin-bottom:.5rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.opp-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.otag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;padding:3px 7px;border-radius:4px;}
+.otag.green{background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.2);color:var(--j);}
+.otag.amber{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:var(--am);}
+.otag.violet{background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2);color:var(--vi);}
+.otag.rose{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);color:var(--ro);}
+.otag.cyan{background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.2);color:var(--cy);}
+.opp-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;flex-shrink:0;}
+.opp-pay{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--j);font-weight:600;white-space:nowrap;}
+.opp-dead{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tf);white-space:nowrap;margin-top:auto;}
+.opp-arr{font-size:14px;color:var(--tf);transition:color .2s;}
+.opp-card:hover .opp-arr{color:var(--j);}
+
+/* ── TICKER ── */
+.ticker-wrap{position:relative;z-index:1;background:rgba(0,200,150,.04);border-top:1px solid rgba(0,200,150,.1);border-bottom:1px solid rgba(0,200,150,.1);overflow:hidden;padding:.6rem 0;margin:2.5rem 0;}
+.ticker-inner{display:flex;align-items:center;gap:0;white-space:nowrap;animation:tick 40s linear infinite;}
+.ticker-inner:hover{animation-play-state:paused;}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.t-item{display:inline-flex;align-items:center;gap:.75rem;padding:0 2.5rem;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--td);}
+.t-item strong{color:var(--j);}
+.t-sep{color:var(--b2);}
+
+/* ── MODAL OVERLAY ── */
+.overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);padding:1rem;align-items:flex-start;justify-content:center;overflow-y:auto;}
+.overlay.open{display:flex;}
+.modal{background:var(--s2);border:1px solid var(--b2);border-radius:20px;max-width:700px;width:100%;margin:auto;position:relative;animation:mIn .3s ease both;}
+@keyframes mIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:1.25rem;right:1.25rem;width:36px;height:36px;border-radius:50%;background:var(--s3);border:1px solid var(--b2);color:var(--td);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:1;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.modal-close:hover{background:rgba(251,113,133,.15);color:var(--ro);}
+.modal-hero{padding:2.5rem 2.5rem 1.5rem;}
+.modal-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:4px;display:inline-flex;align-items:center;gap:6px;margin-bottom:1rem;}
+.modal-title{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(1.4rem,4vw,1.9rem);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:1rem;}
+.modal-meta-row{display:flex;gap:1rem;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tf);}
+.modal-meta-row span{display:flex;align-items:center;gap:5px;}
+.modal-body{padding:1.5rem 2.5rem 2.5rem;border-top:1px solid var(--b2);}
+.modal-body p{font-size:14px;color:var(--td);line-height:1.8;margin-bottom:1rem;}
+.modal-body p strong{color:var(--tx);}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1.25rem 0;}
+.detail-box{background:var(--s3);border-radius:10px;padding:1rem;}
+.detail-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--tf);margin-bottom:4px;}
+.detail-val{font-size:14px;color:var(--tx);font-weight:500;}
+.apply-btn{display:inline-flex;align-items:center;gap:8px;background:var(--j);color:var(--ink);padding:12px 24px;border-radius:9px;font-family:'Satoshi',sans-serif;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:all .2s;text-decoration:none;touch-action:manipulation;margin-top:1rem;}
+.apply-btn:hover{background:var(--cy);transform:translateY(-1px);}
+.share-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--td);padding:12px 18px;border-radius:9px;font-family:'Satoshi',sans-serif;font-size:14px;font-weight:600;border:1px solid var(--b2);cursor:pointer;transition:all .2s;margin-top:1rem;margin-left:.5rem;}
+.share-btn:hover{border-color:var(--b1);color:var(--tx);}
+
+/* ── CALLOUT BOX ── */
+.callout-box{background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.15);border-radius:12px;padding:1.25rem 1.5rem;margin:2.5rem 0 0;display:flex;align-items:center;gap:1rem;}
+.cb-ico{font-size:24px;flex-shrink:0;}
+.cb-text{font-size:13px;color:var(--tx);line-height:1.65;}
+.cb-text a{color:var(--j);text-decoration:none;font-weight:600;}
+.cb-text a:hover{text-decoration:underline;}
+
+/* ── FOOTER ── */
+.dv{position:relative;z-index:1;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.07),transparent);max-width:1100px;margin:3rem auto 0;}
+footer{position:relative;z-index:1;border-top:1px solid var(--b2);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;max-width:1100px;margin:0 auto;}
+.fl{display:flex;gap:1.5rem;}
+.fl a{font-size:12px;color:var(--tf);text-decoration:none;transition:color .2s;}
+.fl a:hover{color:var(--j);}
+.fc{font-size:11px;color:var(--tf);font-family:'JetBrains Mono',monospace;}
+
+/* ── MOBILE ── */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+@media(max-width:768px){
+  .masthead,.featured-strip,.section-wrap{padding-left:1.1rem;padding-right:1.1rem;}
+  .masthead{padding-top:5.5rem;}
+  .wt-title{font-size:clamp(2.2rem,11vw,3.5rem);}
+  .featured-grid{grid-template-columns:1fr;}
+  .fc-stack{flex-direction:column;}
+  .masthead-meta{flex-direction:column;align-items:flex-start;gap:1rem;}
+  .wt-stats{display:none;}
+  .opp-grid{grid-template-columns:1fr;}
+  .detail-grid{grid-template-columns:1fr;}
+  .modal-hero{padding:1.75rem 1.25rem 1.25rem;}
+  .modal-body{padding:1.25rem 1.25rem 1.75rem;}
+  .modal-close{top:.75rem;right:.75rem;}
+  footer{padding:1.5rem 1.1rem;flex-direction:column;gap:.75rem;}
+  .callout-box{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div class="bg"><div class="bgg"></div><div class="orb o1"></div><div class="orb o2"></div></div>
+
+<nav>
+  <a href="index.html" class="logo"><div class="lm">B</div>Bio<em>360</em></a>
+  <ul class="nl">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="features.html">Features</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="skillos.html">Skill OS</a></li>
+    <li><a href="elitetrack.html">Elite Track</a></li>
+  </ul>
+  <a href="login.html" class="nc">Join Free →</a>
+  <button class="hamburger" id="hamBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="features.html">Features</a>
+  <a href="blog.html" class="active">Blog</a>
+  <a href="community.html">Community</a>
+  <a href="skillos.html">Skill OS</a>
+  <a href="elitetrack.html">Elite Track</a>
+  <a href="https://chat.whatsapp.com/FyyK1AwAe7CCdOgs1SPbVs" target="_blank" style="color:var(--j);font-weight:600;">Join WhatsApp Free →</a>
+</nav>
+
+<!-- ═══════════════ MASTHEAD ═══════════════ -->
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="wt-eyebrow">
+      <span class="wt-badge">📰 Weekly Digest</span>
+      <span class="wt-dot"></span>
+      <span class="wt-live">New every week</span>
+    </div>
+    <h1 class="wt-title">Bio360<br><em>Weekly</em><br>Times</h1>
+    <p style="font-size:13px;color:var(--td);font-family:'JetBrains Mono',monospace;margin-top:.75rem;letter-spacing:.03em;">Jobs · Fellowships · Research · Internships — curated for Indian life science students</p>
+  </div>
+  <div class="masthead-meta">
+    <div class="wt-issue">
+      <div class="wt-meta-item">
+        <span class="wt-meta-label">Issue</span>
+        <span class="wt-meta-val">#Vol.01 — June 2026</span>
+      </div>
+      <div class="wt-divider"></div>
+      <div class="wt-meta-item">
+        <span class="wt-meta-label">Published</span>
+        <span class="wt-meta-val">06 Jun 2026</span>
+      </div>
+      <div class="wt-divider"></div>
+      <div class="wt-meta-item">
+        <span class="wt-meta-label">Curated by</span>
+        <span class="wt-meta-val">Bio360 Team</span>
+      </div>
+    </div>
+    <div class="wt-stats">
+      <span class="wt-stat"><strong>20+</strong> opportunities</span>
+      <span class="wt-stat"><strong>8</strong> categories</span>
+      <span class="wt-stat"><strong>India-wide</strong> listings</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ TICKER ═══════════════ -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="t-item"><strong>🔥 HOT</strong> ₹1,35,000/mo Fellowship at JNCASR <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>💼 WALK-IN</strong> Ipca Laboratories — Multiple Openings <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>🏛️ GOVT</strong> WII Life Science Job ₹90,000/mo <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>🌍 GLOBAL</strong> Syngene–iBAB AI in Life Sciences Certificate <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>🎓 MSc ADMISSIONS</strong> Tata Memorial Centre — 15 Seats Open <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>🔬 RESEARCH</strong> AIIMS JRF with PhD Opportunity <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>🚀 EVENT</strong> LEAF 2026 Life Science Career Fair — Register Now <span class="t-sep">·</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="t-item"><strong>🔥 HOT</strong> ₹1,35,000/mo Fellowship at JNCASR <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>💼 WALK-IN</strong> Ipca Laboratories — Multiple Openings <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>🏛️ GOVT</strong> WII Life Science Job ₹90,000/mo <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>🌍 GLOBAL</strong> Syngene–iBAB AI in Life Sciences Certificate <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>🎓 MSc ADMISSIONS</strong> Tata Memorial Centre — 15 Seats Open <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>🔬 RESEARCH</strong> AIIMS JRF with PhD Opportunity <span class="t-sep">·</span></span>
+    <span class="t-item"><strong>🚀 EVENT</strong> LEAF 2026 Life Science Career Fair — Register Now <span class="t-sep">·</span></span>
+  </div>
+</div>
+
+<!-- ═══════════════ FEATURED ═══════════════ -->
+<div class="featured-strip">
+  <div class="strip-label">⭐ Top Picks This Week</div>
+  <div class="featured-grid">
+
+    <!-- BIG FEATURE -->
+    <div class="fc-main" onclick="openModal('jncasr-fellowship')">
+      <span class="tag-pill">🏆 High Value</span>
+      <h2>₹1,35,000/mo Assistant Professor Fellowship at JNCASR</h2>
+      <p>One of India's most prestigious fellowships for early-career faculty. JNCASR (Jawaharlal Nehru Centre for Advanced Scientific Research), Bangalore offers exceptional research infrastructure, world-class mentorship, and a highly competitive stipend for Assistant Professors across life science disciplines.</p>
+      <div class="meta-row">
+        <span class="org">📍 JNCASR · Bangalore</span>
+        <span class="salary">₹1,35,000 / month</span>
+      </div>
+    </div>
+
+    <!-- SIDE STACK -->
+    <div class="fc-stack">
+      <div class="fc-side" onclick="openModal('wii-job')">
+        <span class="tag-pill" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:var(--am);">🏛️ Govt Job</span>
+        <h3>WII Life Science Research Job — ₹90,000/mo</h3>
+        <div class="fc-meta">
+          <span>Wildlife Institute of India · Dehradun</span>
+          <span style="color:var(--am);">₹90,000/mo</span>
+        </div>
+      </div>
+      <div class="fc-side" onclick="openModal('tmc-msc')">
+        <span class="tag-pill" style="background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.2);color:var(--cy);">🎓 MSc Admissions</span>
+        <h3>MSc Admissions 2026 at Tata Memorial Centre — 15 Seats</h3>
+        <div class="fc-meta">
+          <span>TMC · Mumbai</span>
+          <span style="color:var(--cy);">Biomedical / Life Sci</span>
+        </div>
+      </div>
+      <div class="fc-side" onclick="openModal('leaf-2026')">
+        <span class="tag-pill" style="background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);color:var(--ro);">🚀 Event</span>
+        <h3>LEAF 2026 — Life Science Career Fair & Placement Mela</h3>
+        <div class="fc-meta">
+          <span>India-wide · Hybrid</span>
+          <span style="color:var(--ro);">Registrations Open</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ GOVT & RESEARCH JOBS ═══════════════ -->
+<div class="section-wrap">
+  <div class="sec-hdr">
+    <div class="sec-icon" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);">🏛️</div>
+    <span class="sec-title">Government & Research Jobs</span>
+    <span class="sec-rule"></span>
+    <span class="sec-count">7 listings</span>
+  </div>
+  <div class="opp-grid">
+
+    <div class="opp-card" onclick="openModal('nipb-job')">
+      <div class="opp-ico">🌾</div>
+      <div class="opp-body">
+        <div class="opp-title">Research Associate — ICAR-NIPB</div>
+        <div class="opp-org">ICAR-NIPB · New Delhi</div>
+        <div class="opp-tags"><span class="otag green">Research</span><span class="otag amber">Govt</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">₹67,000/mo</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('aiims-jrf')">
+      <div class="opp-ico">🏥</div>
+      <div class="opp-body">
+        <div class="opp-title">JRF Vacancy with PhD Opportunity — AIIMS</div>
+        <div class="opp-org">AIIMS New Delhi</div>
+        <div class="opp-tags"><span class="otag green">JRF</span><span class="otag violet">PhD</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Fellowship</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('aiims-bhopal')">
+      <div class="opp-ico">🔬</div>
+      <div class="opp-body">
+        <div class="opp-title">Govt Research Job — AIIMS Bhopal</div>
+        <div class="opp-org">AIIMS Bhopal · Madhya Pradesh</div>
+        <div class="opp-tags"><span class="otag amber">Govt</span><span class="otag green">Biotech</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">₹67,200/mo</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('icar-nbpgr')">
+      <div class="opp-ico">🌿</div>
+      <div class="opp-body">
+        <div class="opp-title">Life Science Job — ICAR-NBPGR</div>
+        <div class="opp-org">ICAR-NBPGR · New Delhi</div>
+        <div class="opp-tags"><span class="otag amber">Govt</span><span class="otag green">Plant Science</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Govt Pay</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('iit-delhi')">
+      <div class="opp-ico">🎓</div>
+      <div class="opp-body">
+        <div class="opp-title">Research Position — IIT Delhi</div>
+        <div class="opp-org">IIT Delhi · New Delhi</div>
+        <div class="opp-tags"><span class="otag violet">Research</span><span class="otag cyan">Life Sci</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Fellowship</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('niser-micro')">
+      <div class="opp-ico">🧫</div>
+      <div class="opp-body">
+        <div class="opp-title">Microbiology Research Job — NISER</div>
+        <div class="opp-org">NISER · Bhubaneswar</div>
+        <div class="opp-tags"><span class="otag green">Microbiology</span><span class="otag violet">Walk-In</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Fellowship</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('univ-lucknow')">
+      <div class="opp-ico">🏛️</div>
+      <div class="opp-body">
+        <div class="opp-title">Research Job — University of Lucknow</div>
+        <div class="opp-org">University of Lucknow · UP</div>
+        <div class="opp-tags"><span class="otag amber">Academic</span><span class="otag green">Research</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Stipend</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ FELLOWSHIPS & TRAINING ═══════════════ -->
+<div class="section-wrap">
+  <div class="sec-hdr">
+    <div class="sec-icon" style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2);">🎯</div>
+    <span class="sec-title">Fellowships, Internships & Training</span>
+    <span class="sec-rule"></span>
+    <span class="sec-count">8 listings</span>
+  </div>
+  <div class="opp-grid">
+
+    <div class="opp-card" onclick="openModal('iiser-apprentice')">
+      <div class="opp-ico">🧪</div>
+      <div class="opp-body">
+        <div class="opp-title">Paid Apprenticeship Training — IISER Tirupati</div>
+        <div class="opp-org">IISER Tirupati · Andhra Pradesh</div>
+        <div class="opp-tags"><span class="otag green">Paid</span><span class="otag cyan">BSc Biology</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Stipend</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('iiser-msc-fellow')">
+      <div class="opp-ico">🔭</div>
+      <div class="opp-body">
+        <div class="opp-title">MSc Biotechnology Fellowship — IISER Tirupati</div>
+        <div class="opp-org">IISER Tirupati · Andhra Pradesh</div>
+        <div class="opp-tags"><span class="otag violet">MSc</span><span class="otag green">Fellowship</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Fellowship</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('iiser-berhampur')">
+      <div class="opp-ico">🧬</div>
+      <div class="opp-body">
+        <div class="opp-title">Junior Research Fellow — IISER Berhampur</div>
+        <div class="opp-org">IISER Berhampur · Odisha</div>
+        <div class="opp-tags"><span class="otag violet">JRF</span><span class="otag cyan">PG Level</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">JRF Pay</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('swani-intern')">
+      <div class="opp-ico">🦠</div>
+      <div class="opp-body">
+        <div class="opp-title">Microbiology Internship — Swani Spices</div>
+        <div class="opp-org">Swani Spices · Food Industry</div>
+        <div class="opp-tags"><span class="otag amber">Urgent</span><span class="otag green">Microbiology</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Stipend</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('jain-univ-intern')">
+      <div class="opp-ico">🎓</div>
+      <div class="opp-body">
+        <div class="opp-title">Life Sciences Internship — Jain University</div>
+        <div class="opp-org">Jain University · Bangalore</div>
+        <div class="opp-tags"><span class="otag cyan">Internship</span><span class="otag green">Research</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Stipend</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('bric-training')">
+      <div class="opp-ico">🏗️</div>
+      <div class="opp-body">
+        <div class="opp-title">Govt Research Training Program — BRIC</div>
+        <div class="opp-org">BRIC · India</div>
+        <div class="opp-tags"><span class="otag amber">Govt</span><span class="otag violet">Training</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Funded</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('bricnipgr-trainee')">
+      <div class="opp-ico">🌱</div>
+      <div class="opp-body">
+        <div class="opp-title">Student Trainee — BRIC-NIPGR</div>
+        <div class="opp-org">BRIC-NIPGR · New Delhi</div>
+        <div class="opp-tags"><span class="otag cyan">Student</span><span class="otag green">Genomics</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Stipend</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('niftem-pdf')">
+      <div class="opp-ico">🍃</div>
+      <div class="opp-body">
+        <div class="opp-title">Post Doctoral Fellowship — NIFTEM</div>
+        <div class="opp-org">NIFTEM · Haryana</div>
+        <div class="opp-tags"><span class="otag rose">PhD Required</span><span class="otag amber">PostDoc</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">PostDoc Pay</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ INDUSTRY JOBS ═══════════════ -->
+<div class="section-wrap">
+  <div class="sec-hdr">
+    <div class="sec-icon" style="background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.2);">🏢</div>
+    <span class="sec-title">Industry & Pharma Jobs</span>
+    <span class="sec-rule"></span>
+    <span class="sec-count">7 listings</span>
+  </div>
+  <div class="opp-grid">
+
+    <div class="opp-card" onclick="openModal('biocon')">
+      <div class="opp-ico">💊</div>
+      <div class="opp-body">
+        <div class="opp-title">Regulatory Affairs — Biocon</div>
+        <div class="opp-org">Biocon · Bangalore</div>
+        <div class="opp-tags"><span class="otag green">Pharma</span><span class="otag cyan">Reg Affairs</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Industry Pay</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('ipca-walkin')">
+      <div class="opp-ico">🚶</div>
+      <div class="opp-body">
+        <div class="opp-title">Walk-In — Ipca Laboratories (Freshers)</div>
+        <div class="opp-org">Ipca Laboratories · Pan India</div>
+        <div class="opp-tags"><span class="otag rose">Walk-In</span><span class="otag green">Freshers OK</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Entry Level</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('intas-biotech')">
+      <div class="opp-ico">🧬</div>
+      <div class="opp-body">
+        <div class="opp-title">Biotechnology Jobs — Intas Pharmaceuticals</div>
+        <div class="opp-org">Intas Pharma · Pan India</div>
+        <div class="opp-tags"><span class="otag green">Pharma</span><span class="otag amber">Multiple Roles</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Industry Pay</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('medpace-cro')">
+      <div class="opp-ico">🩺</div>
+      <div class="opp-body">
+        <div class="opp-title">Clinical Research — Medpace (Freshers)</div>
+        <div class="opp-org">Medpace · CRO · Pan India</div>
+        <div class="opp-tags"><span class="otag cyan">Clinical</span><span class="otag green">Freshers OK</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">CRO Pay</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('icon-medical')">
+      <div class="opp-ico">📋</div>
+      <div class="opp-body">
+        <div class="opp-title">Medical Coding — ICON plc</div>
+        <div class="opp-org">ICON · Bangalore & Chennai</div>
+        <div class="opp-tags"><span class="otag violet">Med Coding</span><span class="otag cyan">CRO</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Industry Pay</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('novartis-msc')">
+      <div class="opp-ico">🌍</div>
+      <div class="opp-body">
+        <div class="opp-title">MSc Life Science Jobs — Novartis</div>
+        <div class="opp-org">Novartis · Global Pharma</div>
+        <div class="opp-tags"><span class="otag green">Global</span><span class="otag violet">MSc Level</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Global Pay</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('fortrea-clin')">
+      <div class="opp-ico">🔍</div>
+      <div class="opp-body">
+        <div class="opp-title">Clinical Research Role — Fortrea</div>
+        <div class="opp-org">Fortrea · CRO · Pan India</div>
+        <div class="opp-tags"><span class="otag cyan">Clinical</span><span class="otag green">Life Sci</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">CRO Pay</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ ACADEMIC & SPECIAL ═══════════════ -->
+<div class="section-wrap">
+  <div class="sec-hdr">
+    <div class="sec-icon" style="background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.2);">🧠</div>
+    <span class="sec-title">Academic, Training & Special Opportunities</span>
+    <span class="sec-rule"></span>
+    <span class="sec-count">5 listings</span>
+  </div>
+  <div class="opp-grid">
+
+    <div class="opp-card" onclick="openModal('syngene-ibab')">
+      <div class="opp-ico">🤖</div>
+      <div class="opp-body">
+        <div class="opp-title">AI in Life Sciences Certificate — Syngene–iBAB</div>
+        <div class="opp-org">Syngene International + iBAB</div>
+        <div class="opp-tags"><span class="otag violet">AI + Bio</span><span class="otag green">Certificate</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Industry</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('gra-training')">
+      <div class="opp-ico">📜</div>
+      <div class="opp-body">
+        <div class="opp-title">Global Regulatory Affairs Training — GRA</div>
+        <div class="opp-org">Industry Training Program</div>
+        <div class="opp-tags"><span class="otag amber">Reg Affairs</span><span class="otag cyan">Hands-On</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Paid Program</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('bionest-jiit')">
+      <div class="opp-ico">💡</div>
+      <div class="opp-body">
+        <div class="opp-title">BioNEST Incubation — Jaypee Institute</div>
+        <div class="opp-org">BioNEST-JIIT · Noida</div>
+        <div class="opp-tags"><span class="otag rose">Startup</span><span class="otag green">Incubation</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Funding</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('srm-research')">
+      <div class="opp-ico">🔬</div>
+      <div class="opp-body">
+        <div class="opp-title">Research Roles — SRM University</div>
+        <div class="opp-org">SRM University · Tamil Nadu</div>
+        <div class="opp-tags"><span class="otag violet">Academic</span><span class="otag green">Life Sci</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Stipend</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+    <div class="opp-card" onclick="openModal('inst-nano')">
+      <div class="opp-ico">⚛️</div>
+      <div class="opp-body">
+        <div class="opp-title">Interdisciplinary Research — INST Mohali</div>
+        <div class="opp-org">Institute of Nano Science & Technology</div>
+        <div class="opp-tags"><span class="otag cyan">Nano Bio</span><span class="otag violet">Interdisciplinary</span></div>
+      </div>
+      <div class="opp-right">
+        <span class="opp-pay">Fellowship</span>
+        <span class="opp-arr">→</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CALLOUT -->
+  <div class="callout-box">
+    <span class="cb-ico">🎯</span>
+    <div class="cb-text">
+      Want internships and fellowships specific to <strong>Kerala biology students</strong>? Visit <a href="elitetrack.html">Bio360 Elite Track</a> for KSCSTE, RGCB, NIIST, and Erasmus opportunities curated just for you. Or browse <a href="community.html">Community</a> for PYQs and daily quizzes.
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ MODALS ═══════════════ -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+<div class="modal" id="modal">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-hero">
+    <div class="modal-tag" id="m-tag"></div>
+    <div class="modal-title" id="m-title"></div>
+    <div class="modal-meta-row" id="m-meta"></div>
+  </div>
+  <div class="modal-body">
+    <div id="m-body"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem;">
+      <a href="https://biotecnika.org" target="_blank" class="apply-btn">Apply / View Details →</a>
+      <button class="share-btn" onclick="shareJob()">Share 📤</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="dv"></div>
+<footer>
+  <div class="fl">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="elitetrack.html">Elite Track</a>
+    <a href="community.html">Community</a>
+    <a href="mailto:Bio360community@gmail.com">Contact</a>
+  </div>
+  <span class="fc">© 2026 Bio360 · Weekly Times Vol.01 · Source: BioTecNika</span>
+</footer>
+
+<script src="cmdbar.js"></script>
+<script src="supabase.js"></script>
+<script>
+// ── Hamburger ──
+const hamBtn=document.getElementById('hamBtn');
+const mobileMenu=document.getElementById('mobileMenu');
+if(hamBtn){hamBtn.addEventListener('click',()=>{hamBtn.classList.toggle('open');mobileMenu.classList.toggle('open');});}
+document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>{hamBtn?.classList.remove('open');mobileMenu?.classList.remove('open');}));
+
+// ── Modal Data ──
+const JOBS = {
+  'jncasr-fellowship':{
+    tag:'🏆 High Value Fellowship',tagC:'rgba(0,200,150,.1)',tagBr:'rgba(0,200,150,.25)',tagTx:'var(--j)',
+    title:'₹1,35,000/mo Assistant Professor Fellowship at JNCASR',
+    org:'JNCASR, Bangalore',loc:'Bangalore, Karnataka',pay:'₹1,35,000/month',type:'Fellowship',deadline:'Closing Soon',
+    body:`<p>JNCASR (Jawaharlal Nehru Centre for Advanced Scientific Research) is offering a prestigious fellowship for Assistant Professors across life science and biotechnology disciplines. This is one of India's most coveted academic positions for early-career scientists.</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-label">Stipend</div><div class="detail-val" style="color:var(--j)">₹1,35,000/month</div></div>
+      <div class="detail-box"><div class="detail-label">Location</div><div class="detail-val">Bangalore, KA</div></div>
+      <div class="detail-box"><div class="detail-label">Type</div><div class="detail-val">Fellowship</div></div>
+      <div class="detail-box"><div class="detail-label">Deadline</div><div class="detail-val" style="color:var(--am)">Closing Soon</div></div>
+    </div>
+    <p><strong>Why apply:</strong> JNCASR offers world-class research infrastructure, a collaborative interdisciplinary environment, and exceptional career growth for early-career faculty. Strong publication record required.</p>`
+  },
+  'wii-job':{
+    tag:'🏛️ Govt Job',tagC:'rgba(245,158,11,.1)',tagBr:'rgba(245,158,11,.25)',tagTx:'var(--am)',
+    title:'Life Science Research Job at WII — ₹90,000/mo',
+    org:'Wildlife Institute of India',loc:'Dehradun, Uttarakhand',pay:'₹90,000/month',type:'Government',deadline:'Before Deadline',
+    body:`<p>The Wildlife Institute of India (WII) is hiring life science candidates for research and conservation science projects. This is a rare government opportunity combining field ecology with lab-based wildlife biology.</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-label">Salary</div><div class="detail-val" style="color:var(--j)">₹90,000/month</div></div>
+      <div class="detail-box"><div class="detail-label">Location</div><div class="detail-val">Dehradun, UK</div></div>
+      <div class="detail-box"><div class="detail-label">Type</div><div class="detail-val">Govt Research</div></div>
+      <div class="detail-box"><div class="detail-label">Field</div><div class="detail-val">Conservation / Ecology</div></div>
+    </div>
+    <p><strong>Ideal for:</strong> MSc/PhD candidates in Zoology, Ecology, Wildlife Biology, or related Life Sciences with interest in conservation research.</p>`
+  },
+  'tmc-msc':{
+    tag:'🎓 MSc Admissions',tagC:'rgba(34,211,238,.1)',tagBr:'rgba(34,211,238,.25)',tagTx:'var(--cy)',
+    title:'MSc Admissions 2026 — Tata Memorial Centre (15 Seats)',
+    org:'Tata Memorial Centre',loc:'Mumbai, Maharashtra',pay:'Fellowship + Stipend',type:'PG Admissions',deadline:'Apply Now',
+    body:`<p>Tata Memorial Centre (TMC), India's premier cancer research institution, is opening MSc admissions for life science and biomedical programs. Only 15 seats are available — intense competition expected.</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-label">Seats</div><div class="detail-val" style="color:var(--ro)">Only 15</div></div>
+      <div class="detail-box"><div class="detail-label">Location</div><div class="detail-val">Mumbai</div></div>
+      <div class="detail-box"><div class="detail-label">Program</div><div class="detail-val">MSc Biomedical / Life Sci</div></div>
+      <div class="detail-box"><div class="detail-label">Stipend</div><div class="detail-val" style="color:var(--j)">Available</div></div>
+    </div>
+    <p><strong>Why it matters:</strong> A TMC degree opens doors to clinical research, cancer biology, and global biomedical careers. Applications are highly competitive — strong CSIR NET / GATE scores help.</p>`
+  },
+  'leaf-2026':{
+    tag:'🚀 Event',tagC:'rgba(251,113,133,.1)',tagBr:'rgba(251,113,133,.25)',tagTx:'var(--ro)',
+    title:'LEAF 2026 — Life Science Career Fair & Placement Mela',
+    org:'BioTecNika / Industry Partners',loc:'India-wide (Hybrid)',pay:'Free to Register',type:'Career Event',deadline:'Register Now',
+    body:`<p>LEAF 2026 (Life Science Eareer Fair) is India's premier life science placement and networking event. Connect directly with recruiters, industry leaders, mentors, and research institutes across India.</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-label">Format</div><div class="detail-val">Hybrid (Online + Offline)</div></div>
+      <div class="detail-box"><div class="detail-label">Cost</div><div class="detail-val" style="color:var(--j)">Free Registration</div></div>
+      <div class="detail-box"><div class="detail-label">Who</div><div class="detail-val">All Life Sci students</div></div>
+      <div class="detail-box"><div class="detail-label">Status</div><div class="detail-val" style="color:var(--ro)">Registrations Open</div></div>
+    </div>
+    <p><strong>Don't miss:</strong> Direct recruiter interactions, CV reviews, mock interviews, and on-the-spot offer letters. Ideal for BSc/MSc/PhD candidates across India.</p>`
+  },
+  'nipb-job':{
+    tag:'🌾 Research Job',tagC:'rgba(0,200,150,.1)',tagBr:'rgba(0,200,150,.25)',tagTx:'var(--j)',
+    title:'Research Associate — ICAR-NIPB, ₹67,000/mo',
+    org:'ICAR-NIPB / ICAR-IARI',loc:'New Delhi',pay:'₹67,000/month',type:'Research',deadline:'Before Last Date',
+    body:`<p>ICAR-IARI (Indian Agricultural Research Institute) is recruiting Research Associates for advanced agricultural and life science projects through the National Institute of Plant Biotechnology (NIPB).</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-label">Salary</div><div class="detail-val" style="color:var(--j)">₹67,000/month</div></div>
+      <div class="detail-box"><div class="detail-label">Location</div><div class="detail-val">New Delhi</div></div>
+      <div class="detail-box"><div class="detail-label">Type</div><div class="detail-val">Research Associate</div></div>
+      <div class="detail-box"><div class="detail-label">Field</div><div class="detail-val">Plant Biotech / Agri Sci</div></div>
+    </div>
+    <p><strong>Eligibility:</strong> MSc/PhD in Biotechnology, Molecular Biology, Plant Science, or related fields. Prior research experience in plant genomics is a plus.</p>`
+  },
+  'aiims-jrf':{
+    tag:'🏥 JRF + PhD',tagC:'rgba(129,140,248,.1)',tagBr:'rgba(129,140,248,.25)',tagTx:'var(--vi)',
+    title:'JRF Vacancy with PhD Opportunity — AIIMS New Delhi',
+    org:'AIIMS New Delhi',loc:'New Delhi',pay:'JRF Fellowship',type:'JRF / PhD',deadline:'Apply Soon',
+    body:`<p>All India Institute of Medical Sciences (AIIMS), New Delhi is one of India's top medical research institutions. This JRF position comes with a PhD opportunity in life sciences / biomedical research.</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-label">Position</div><div class="detail-val">Junior Research Fellow</div></div>
+      <div class="detail-box"><div class="detail-label">Location</div><div class="detail-val">New Delhi</div></div>
+      <div class="detail-box"><div class="detail-label">PhD</div><div class="detail-val" style="color:var(--vi)">Opportunity Included</div></div>
+      <div class="detail-box"><div class="detail-label">Fellowship</div><div class="detail-val" style="color:var(--j)">DST/ICMR Norms</div></div>
+    </div>
+    <p><strong>Ideal for:</strong> MSc Life Science / Biotechnology candidates who want to pursue a PhD at one of India's most prestigious medical schools.</p>`
+  },
+  'aiims-bhopal':{
+    tag:'🏛️ Govt Job',tagC:'rgba(245,158,11,.1)',tagBr:'rgba(245,158,11,.25)',tagTx:'var(--am)',
+    title:'Govt Research Job — AIIMS Bhopal, ₹67,200/mo',
+    org:'AIIMS Bhopal',loc:'Bhopal, Madhya Pradesh',pay:'₹67,200/month',type:'Government',deadline:'Apply Now',
+    body:`<p>AIIMS Bhopal is hiring biotechnology and life science candidates for government-funded scientific research projects. This is a stable government job with strong career progression at a premier medical institution.</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-label">Salary</div><div class="detail-val" style="color:var(--j)">₹67,200/month</div></div>
+      <div class="detail-box"><div class="detail-label">Location</div><div class="detail-val">Bhopal, MP</div></div>
+      <div class="detail-box"><div class="detail-label">Sector</div><div class="detail-val">Government</div></div>
+      <div class="detail-box"><div class="detail-label">Field</div><div class="detail-val">Biotech / Life Sci</div></div>
+    </div>
+    <p><strong>Eligibility:</strong> BSc/MSc in Biotechnology, Microbiology, Life Sciences. Previous lab experience preferred.</p>`
+  },
+  'biocon':{
+    tag:'💊 Industry Job',tagC:'rgba(0,200,150,.1)',tagBr:'rgba(0,200,150,.25)',tagTx:'var(--j)',
+    title:'Regulatory Affairs — Biocon',
+    org:'Biocon',loc:'Bangalore, Karnataka',pay:'Industry Package',type:'Industry',deadline:'Apply Online',
+    body:`<p>Biocon, one of India's largest biopharma companies, is recruiting regulatory affairs professionals for pharma compliance, dossier preparation, and documentation roles. Excellent opportunity for life sciences graduates seeking industry careers.</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-label">Company</div><div class="detail-val">Biocon</div></div>
+      <div class="detail-box"><div class="detail-label">Location</div><div class="detail-val">Bangalore</div></div>
+      <div class="detail-box"><div class="detail-label">Role</div><div class="detail-val">Regulatory Affairs</div></div>
+      <div class="detail-box"><div class="detail-label">Apply</div><div class="detail-val">Online</div></div>
+    </div>
+    <p><strong>Skills needed:</strong> Knowledge of CDSCO/FDA regulations, CTD dossier preparation, pharmacovigilance basics. MSc Pharma / Life Sciences preferred.</p>`
+  },
+  'ipca-walkin':{
+    tag:'🚶 Walk-In',tagC:'rgba(251,113,133,.1)',tagBr:'rgba(251,113,133,.25)',tagTx:'var(--ro)',
+    title:'Walk-In Interview — Ipca Laboratories (Freshers Welcome)',
+    org:'Ipca Laboratories',loc:'Pan India',pay:'Entry Level Package',type:'Walk-In',deadline:'Scheduled Soon',
+    body:`<p>Ipca Laboratories is conducting walk-in hiring for freshers across multiple departments including quality control, production, R&D, and analysis. No prior experience required for most roles.</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-label">Format</div><div class="detail-val">Walk-In Interview</div></div>
+      <div class="detail-box"><div class="detail-label">Company</div><div class="detail-val">Ipca Laboratories</div></div>
+      <div class="detail-box"><div class="detail-label">Experience</div><div class="detail-val" style="color:var(--j)">Freshers OK</div></div>
+      <div class="detail-box"><div class="detail-label">Depts</div><div class="detail-val">QC / Production / R&D</div></div>
+    </div>
+    <p><strong>Bring:</strong> Updated CV, all academic marksheets and certificates, ID proof. Dress formally. Visit BioTecNika for exact date and venue details.</p>`
+  },
+  'iiser-apprentice':{
+    tag:'🧪 Paid Apprenticeship',tagC:'rgba(0,200,150,.1)',tagBr:'rgba(0,200,150,.25)',tagTx:'var(--j)',
+    title:'Paid Apprenticeship Training — IISER Tirupati',
+    org:'IISER Tirupati',loc:'Tirupati, Andhra Pradesh',pay:'Stipend Paid',type:'Apprenticeship',deadline:'Apply Now',
+    body:`<p>IISER Tirupati invites BSc Biology graduates for a paid apprenticeship training program. Gain hands-on research exposure in state-of-the-art labs at a premier research institution.</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-label">Eligibility</div><div class="detail-val">BSc Biology / Life Sci</div></div>
+      <div class="detail-box"><div class="detail-label">Location</div><div class="detail-val">Tirupati, AP</div></div>
+      <div class="detail-box"><div class="detail-label">Stipend</div><div class="detail-val" style="color:var(--j)">Paid</div></div>
+      <div class="detail-box"><div class="detail-label">Duration</div><div class="detail-val">Training Program</div></div>
+    </div>
+    <p><strong>Perfect for:</strong> Kerala BSc biology freshers looking for their first research exposure before applying to MSc programs or CSIR NET.</p>`
+  },
+  'syngene-ibab':{
+    tag:'🤖 AI + Biology',tagC:'rgba(129,140,248,.1)',tagBr:'rgba(129,140,248,.25)',tagTx:'var(--vi)',
+    title:'AI in Life Sciences Certificate — Syngene-iBAB',
+    org:'Syngene International + iBAB',loc:'Bangalore (Online/Hybrid)',pay:'Certificate Program',type:'Training',deadline:'Apply Now',
+    body:`<p>This specialized certificate program by Syngene and iBAB covers how AI is transforming biotechnology, genomics, drug discovery, and healthcare. Future-ready skills for the next wave of bio careers.</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-label">Partners</div><div class="detail-val">Syngene + iBAB</div></div>
+      <div class="detail-box"><div class="detail-label">Mode</div><div class="detail-val">Online / Hybrid</div></div>
+      <div class="detail-box"><div class="detail-label">Skills</div><div class="detail-val">AI, ML, Bioinformatics</div></div>
+      <div class="detail-box"><div class="detail-label">Output</div><div class="detail-val" style="color:var(--vi)">Industry Certificate</div></div>
+    </div>
+    <p><strong>Why it matters:</strong> AI skills are now among the most in-demand in pharma and biotech globally. This certificate gives you a verifiable credential from a recognized industry partner.</p>`
+  },
+  'leaf-2026':{tag:'🚀 Event',tagC:'rgba(251,113,133,.1)',tagBr:'rgba(251,113,133,.25)',tagTx:'var(--ro)',title:'LEAF 2026 — Life Science Career Fair',org:'BioTecNika',loc:'India-wide',pay:'Free',type:'Event',deadline:'Register Now',body:`<p>India's biggest life science career event. Recruiters, placements, mentors all in one place. Free to register.</p>`},
+};
+
+// Fallback data for cards not in full JOBS object
+const FALLBACK_JOB = (id) => ({
+  tag:'📋 Opportunity',tagC:'rgba(0,200,150,.1)',tagBr:'rgba(0,200,150,.2)',tagTx:'var(--j)',
+  title: document.querySelector(`[onclick="openModal('${id}')"] .opp-title, [onclick="openModal('${id}')"] h2, [onclick="openModal('${id}')"] h3`)?.textContent || 'View Opportunity',
+  org:'', loc:'India',pay:'See Details',type:'Opportunity',deadline:'Apply Soon',
+  body:`<p>Visit <strong>BioTecNika</strong> (biotecnika.org) for full details, eligibility criteria, application links, and deadline information for this opportunity.</p>
+  <p>BioTecNika updates listings daily — bookmark their site and join their WhatsApp group for real-time alerts.</p>`
+});
+
+function openModal(id){
+  const job = JOBS[id] || FALLBACK_JOB(id);
+  const el = (s) => document.getElementById(s);
+  el('m-tag').innerHTML = job.tag;
+  el('m-tag').style.cssText = `background:${job.tagC};border:1px solid ${job.tagBr};color:${job.tagTx};`;
+  el('m-title').textContent = job.title;
+  el('m-meta').innerHTML = `<span>📍 ${job.loc}</span><span>💰 ${job.pay}</span><span>📅 ${job.deadline}</span>`;
+  el('m-body').innerHTML = job.body || '';
+  el('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+function shareJob(){
+  const title = document.getElementById('m-title').textContent;
+  if(navigator.share){
+    navigator.share({title:'Bio360 Weekly Times',text:title,url:window.location.href});
+  } else {
+    navigator.clipboard?.writeText(window.location.href);
+    alert('Link copied!');
+  }
+}
+</script>
+</body>
+</html>
